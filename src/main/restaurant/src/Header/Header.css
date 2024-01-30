@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+#header {
+    position: fixed;
+    display: flex;
+    padding: 0 30px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    z-index: 5;
+    background-color: rgba(0, 0, 0, 0.5); /* 검은색 배경에 투명도 추가 */
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo-text {
+    font-size: 2.8rem;
+    font-weight: bold;
+    display: inline-block;
+    font-family: 'Gowun Batang', serif;
+}
+
+.header-menu {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.header-menu-list {
+    display: flex;
+    margin: 0 auto;
+}
+
+.header-menu-list li {
+    padding: 0 50px;
+}
+
+.header-menu-list .menu {
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 50px 0;
+    display: inline-block;
+}
+
+.all-menu-btn {
+    width: 40px;
+    height: 40px;
+}

@@ -1,0 +1,67 @@
+1. 주제
+예약기능이 있는 레스토랑 홈페이지
+
+2. 기능
+예약기능, 회원가입, 관리자페이지(예약, 회원 관리), 이메일인증, 포인트, 챗봇
+
+추가사항: 브라우저API(언어번역, 알림기능)
+
+3. 컴포넌트 설계
+
+1) 기본페이지
+- Header.jsx
+로고 About Menu Contact
+
+-Footer.jsx
+로고 위치 전화번호 만든사람 아이콘
+
+- Main.jsx
+MainSlide(메인 이미지 슬라이드: 화면 전체 크기)
+MainIntro(레스토랑 소개글, 간단한 메뉴 소개)
+MainInfo(레스토랑 위치, 영업시간, 전화번호, 약도)
+
+- About.jsx(레스토랑 소개, 쉐프 소개)
+탭 기능으로 정보 제공
+AboutRestaurant
+AboutChef
+
+- Menu.jsx(런치, 디너)
+탭 기능으로 정보 제공
+런치, 디너 시간 정보
+Brunch, Dinner
+
+- Contact.jsx(위치, 공지사항, 문의)
+탭 기능으로 정보 제공
+Notice
+Map
+Question
+
+- SideMenu.jsx(예약, 문의)
+버튼으로 Contact 탭으로 이동
+
+2) 기능 페이지
+- Login.jsx(로그인, 회원가입)
+
+- Profile.jsx(회원페이지)
+MyReservation(회원 예약 정보)
+ProfileInfo(회원정보: 이메일, 전화번호 등)
+
+- Reservation(예약페이지)
+FirstStep(날짜, 인원, 시간 선택)
+SecondStep(예약자 정보 입력)
+ThirdStep(예약 내용 확인)
+
+3) 관리자 페이지
+- Admin
+AdminUser
+AdminReservation
+
+4. DB 설계
+- 관리자
+- 회원
+- 예약정보
+- 남은 자리 정보
+- 문의 사항(추가사항)
+
+
+
