@@ -34,12 +34,16 @@
     justify-content: center;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* 검은색 배경에 투명도 추가 */
-    border-bottom: 1px solid var(--color-primary);
 }
 
 .header-menu-list {
     display: flex;
     margin: 0 auto;
+}
+
+.menu-list-container {
+    position: relative;
+    display: flex;
 }
 
 .header-menu-list li {
@@ -63,6 +67,8 @@
 
 .header-menu-more-container {
     overflow: hidden;
+    background: none;
+    border-top: 1px solid var(--color-primary);
 }
 
 .header-menu-more {
@@ -70,7 +76,7 @@
     width: 100%;
     min-height: 250px;
     background-color: rgba(0, 0, 0, 0.5);
-    animation: slideDown 1s ease;
+    animation: slideDown 0.5s ease;
     z-index: 0;
 }
 
@@ -101,7 +107,7 @@
     gap: 20px;
     top: 150px;
     z-index: 1;
-    animation: showList 2s ease;
+    animation: showList 1s ease;
 }
 
 @keyframes showList {
