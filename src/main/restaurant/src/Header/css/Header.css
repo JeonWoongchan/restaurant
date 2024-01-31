@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+#header {
+    position: fixed;
+    /* display: flex;
+    justify-content: space-between; */
+    align-items: center;
+    width: 100%;
+    z-index: 5;
+}
+
+.header-logo {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    max-width: 170px;
+    height: 30px;
+    top: 49px;
+    margin-left: 30px;
+    z-index: 5;
+}
+
+.header-logo-text {
+    font-size: 2.8rem;
+    font-weight: bold;
+    display: inline-block;
+    font-family: 'Gowun Batang', serif;
+}
+
+.header-menu {
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 검은색 배경에 투명도 추가 */
+    border-bottom: 1px solid var(--color-primary);
+}
+
+.header-menu-list {
+    display: flex;
+    margin: 0 auto;
+}
+
+.header-menu-list li {
+    padding: 0 100px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.header-menu-list .menu {
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 50px 0;
+    display: inline-block;
+}
+
+.header-menu-list .menu:hover {
+    /* border-bottom: solid 1px var(--color-primary); */
+    color: var(--color-primary);
+}
+
+.header-menu-more-container {
+    overflow: hidden;
+}
+
+.header-menu-more {
+    position: relative;
+    width: 100%;
+    min-height: 250px;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: slideDown 1s ease;
+    z-index: 0;
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-300px); /* 시작 위치: 위에서 아래로 내려옴 */
+    }
+    100% {
+        transform: translateY(0); /* 종료 위치: 원래 위치 */
+    }
+}
+
+.header-menu-more .more-menu-area {
+    width: 1000px;
+    height: 250px;
+    margin: 0 auto;
+}
+
+.more-menu-list-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.more-menu-list {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    top: 150px;
+    z-index: 1;
+    animation: showList 2s ease;
+}
+
+@keyframes showList {
+    0% {
+        opacity: 0
+    }
+    100% {
+        transform: 1
+    }
+}
+
+.more-menu-list .more-menu {
+    font-size: 1.1rem;
+    text-align: left;
+}
+
+.header-menu-list .more-menu:hover {
+    /* border-bottom: solid 1px var(--color-primary); */
+    color: var(--color-primary);
+}
+
+.header-btn {
+    position: absolute;
+    max-width: 170px;
+    right: 30px;
+    height: 40px;
+    top: 44px;
+}
+
+.all-menu-btn {
+    width: 40px;
+    height: 40px;
+    color: var(--color-white);
+    cursor: pointer;
+}
