@@ -22,30 +22,30 @@ class CustomerJpaRepositoryTest {
 
     @Test
     public  void  testMember() {
-        Customer member = new Customer("memberA");
-        Customer saved = customerJpaRepository.save(member);
+        Customer customer = new Customer("memberA");
+        Customer saved = customerJpaRepository.save(customer);
 
         Customer findMember = customerJpaRepository.find(saved.getId());
 
-        assertThat(findMember.getId()).isEqualTo(member.getId());
-        assertThat(findMember.getUsername()).isEqualTo(member.getUsername());
-        assertThat(findMember).isEqualTo(member);
+        assertThat(findMember.getId()).isEqualTo(customer.getId());
+        assertThat(findMember.getUsername()).isEqualTo(customer.getUsername());
+        assertThat(findMember).isEqualTo(customer);
     }
     @Test
     public  void basicCRUD() {
-        Customer member1 = new Customer("member1");
-        Customer member2 = new Customer("member2");
+        Customer customer1 = new Customer("customer1");
+        Customer customer2 = new Customer("customer2");
 
 
-        customerJpaRepository.save(member1);
-        customerJpaRepository.save(member2);
+        customerJpaRepository.save(customer1);
+        customerJpaRepository.save(customer2);
 
         // 단건조회 검증
-        Customer findMember1 = customerJpaRepository.findById(member1.getId()).get();
-        Customer findMember2 = customerJpaRepository.findById(member2.getId()).get();
+        Customer findCustomer1 = customerJpaRepository.findById(customer1.getId()).get();
+        Customer findCustomer2 = customerJpaRepository.findById(customer2.getId()).get();
 
-        assertThat(findMember1).isEqualTo(member1);
-        assertThat(findMember2).isEqualTo(member2);
+        assertThat(findCustomer1).isEqualTo(customer1);
+        assertThat(findCustomer2).isEqualTo(customer2);
 
 
         List<Customer> all = customerJpaRepository.findAll();
@@ -56,42 +56,42 @@ class CustomerJpaRepositoryTest {
         long count = customerJpaRepository.count();
         assertThat(count).isEqualTo(2);
 
-        customerJpaRepository.delete(member1);
-        customerJpaRepository.delete(member2);
+        customerJpaRepository.delete(customer1);
+        customerJpaRepository.delete(customer2);
 
         long deletedcount = customerJpaRepository.count();
         assertThat(deletedcount).isEqualTo(0);
     }
     @Test
-    public void findByUsernameAndAgeGreaterThen() {
-        Customer m1 = new Customer("AAA", 10);
-        Customer m2 = new Customer("AAA", 20);
+    public void findByUsernameAndPointGreaterThen() {
+        Customer c1 = new Customer("AAA","1234","AAA@naver.com","010-1111-1111",1 );
+        Customer c2 = new Customer("AAA","1234","AAA@naver.com","010-1111-1111",5 );
 
 
-        customerJpaRepository.save(m1);
-        customerJpaRepository.save(m2);
+        customerJpaRepository.save(c1);
+        customerJpaRepository.save(c2);
 
 
-        List<Customer> result = customerJpaRepository.findByUsernameAndAgeGreaterThen("AAA", 15);
+        List<Customer> result = customerJpaRepository.findByUsernameAndPointGreaterThen("AAA", 15);
 
-        assertThat(result.get(0).getAge()).isEqualTo(20);
+        assertThat(result.get(0).getPoint()).isEqualTo(1);
         assertThat(result.get(0).getUsername()).isEqualTo("AAA");
         assertThat(result.size()).isEqualTo(1);
     }
 
     @Test
     public  void testNamed() {
-        Customer m1 = new Customer("AAA", 10);
-        Customer m2 = new Customer("AAA", 20);
+        Customer c1 = new Customer("AAA","1234","AAA@naver.com","010-1111-1111",1 );
+        Customer c2 = new Customer("AAA","1234","AAA@naver.com","010-1111-1111",5 );
 
 
-        customerJpaRepository.save(m1);
-        customerJpaRepository.save(m2);
+        customerJpaRepository.save(c1);
+        customerJpaRepository.save(c2);
 
 
         List<Customer> result = customerJpaRepository.findByUsername("AAA");
         Customer findMember = result.get(0);
-        assertThat(findMember).isEqualTo(m1);
+        assertThat(findMember).isEqualTo(c1);
 
 
     }
@@ -100,21 +100,21 @@ class CustomerJpaRepositoryTest {
     public  void paging() {
 
 
-        customerJpaRepository.save(new Customer("member1",10));
-        customerJpaRepository.save(new Customer("member2",10));
-        customerJpaRepository.save(new Customer("member3",10));
-        customerJpaRepository.save(new Customer("member4",10));
-        customerJpaRepository.save(new Customer("member5",10));
-        customerJpaRepository.save(new Customer("member6",10));
+        customerJpaRepository.save(new Customer("customer1","1234","AAA@naver.com","010-1111-1111",10));
+        customerJpaRepository.save(new Customer("customer1","1234","AAA@naver.com","010-1111-1111",10 ));
+        customerJpaRepository.save(new Customer("customer1","1234","AAA@naver.com","010-1111-1111",10));
+        customerJpaRepository.save(new Customer("customer1","1234","AAA@naver.com","010-1111-1111",10 ));
+        customerJpaRepository.save(new Customer("customer1","1234","AAA@naver.com","010-1111-1111",10 ));
+        customerJpaRepository.save(new Customer("customer1","1234","AAA@naver.com","010-1111-1111",10 ));
 
-        int age =10;
+        int point =10;
         int offset = 0;
         int limit = 3;
 
         //when
 
-        List<Customer> members = customerJpaRepository.findByPage(age, offset, limit);
-        long totalCount = customerJpaRepository.totalCount(age);
+        List<Customer> members = customerJpaRepository.findByPage(point, offset, limit);
+        long totalCount = customerJpaRepository.totalCount(point);
 
         // 페이지 계산 공식
         // totalPage = totalcount /size...

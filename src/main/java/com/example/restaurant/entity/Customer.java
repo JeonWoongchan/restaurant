@@ -11,7 +11,7 @@ import lombok.*;
 @Table(name = "Customer")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"id", "username", "age"})
+@ToString(of = {"id", "username", "password","email","phone_number","point"})
 public class Customer {
 
     @Id
@@ -20,31 +20,30 @@ public class Customer {
     private Long id;
 
     private String username;
-    private int age;
+    private String password;
+    private String email;
+    private String phone_number;
+    private int point;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id")
-    private Team team;
+
+
 
     public Customer(String username) {
         this.username = username;
     }
 
-    public Customer(String username, int age, Team team) {
+
+    public Customer(String username, String password, String email, String phone_number, int point) {
+
         this.username = username;
-        this.age = age;
-        if (team != null) {
-            changeTeam(team);
-        }
+        this.password = password;
+        this.email = email;
+        this.phone_number = phone_number;
+        this.point = point;
     }
 
-    public Customer(String username, int age) {
+    public Customer(String username, int point) {
         this.username = username;
-        this.age = age;
-    }
-
-    public void changeTeam(Team team) {
-        this.team = team;
-        team.getMembers().add(this);
+        this.point = point;
     }
 }
