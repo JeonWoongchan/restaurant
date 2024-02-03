@@ -1,5 +1,6 @@
 /* Grobal */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
     /* App Colors */
@@ -19,7 +20,7 @@
 }
 
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 h1,
@@ -48,4 +49,8 @@ button {
 
 button:focus {
     outline: 1px solid var(--color-accent);
+}
+
+.section-container {
+    margin: 140px 0 0;
 }

@@ -5,8 +5,8 @@ import { IoPlay, IoPause  } from "react-icons/io5";
 import useImageSlide from '../Function/useImageSlide';
 
 export default function MainSlide() {
-    const ImageList = ['main1', 'main2', 'main3'] // 슬라이드에 들어갈 이미지 배열
-    const {nowImage, imageOpacity, animationOn, autoSlide, setAutoSlide, prevImage, nextImage} = useImageSlide(ImageList)
+    const ImageList = ['main1', 'main2', 'main3', 'main4'] // 슬라이드에 들어갈 이미지 배열
+    const {nowImage, imageOpacity, animationOn, autoSlide, setAutoSlide, prevImage, nextImage, selectImage} = useImageSlide(ImageList)
 
     return (
         <div id='main-slide'>
@@ -26,10 +26,10 @@ export default function MainSlide() {
                         <SlArrowRight className='btn' onClick={()=>{nextImage()}}/>
                     </div>
                     <div className="slide-button">
-                        <button className='dot'></button>
-                        <button className='dot'></button>
-                        <button className='dot'></button>
-                        <button className='dot'></button>
+                        <button className='dot' onClick={()=>{selectImage(0)}}></button>
+                        <button className='dot' onClick={()=>{selectImage(1)}}></button>
+                        <button className='dot' onClick={()=>{selectImage(2)}}></button>
+                        <button className='dot' onClick={()=>{selectImage(3)}}></button>
                         {
                             autoSlide ? <IoPause className="auto-btn" onClick={()=>{setAutoSlide(!autoSlide)}}/>
                             : <IoPlay className="auto-btn" onClick={()=>{setAutoSlide(!autoSlide)}}/>

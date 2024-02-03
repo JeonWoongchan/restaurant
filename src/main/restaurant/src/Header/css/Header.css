@@ -1,9 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
 #header {
     position: fixed;
-    /* display: flex;
-    justify-content: space-between; */
     align-items: center;
     width: 100%;
     z-index: 5;
@@ -33,6 +29,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    min-height: 128px;
     background-color: rgba(0, 0, 0, 0.5); /* 검은색 배경에 투명도 추가 */
 }
 
@@ -54,6 +51,8 @@
 }
 
 .header-menu-list .menu {
+    width: 70px;
+    text-align: center;
     font-size: 1.2rem;
     font-weight: 400;
     padding: 50px 0;
@@ -142,4 +141,18 @@
     height: 40px;
     color: var(--color-white);
     cursor: pointer;
+}
+
+@media screen and (max-width: 1600px) {
+    .header-menu-list li {
+        padding: 0 80px;
+    }
+    
+}
+
+@media screen and (max-width: 1300px) {
+    .header-menu-list {
+        display: none;
+    }
+    
 }

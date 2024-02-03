@@ -131,3 +131,9 @@
     cursor: pointer;
     color: white;
 }
+
+@media screen and (max-width : 1000px) {
+    .main-slide-content .content-title .title {
+        font-size: 64px;
+    }
+}

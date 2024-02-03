@@ -30,8 +30,8 @@ export default function Header() {
             <div className="header-btn">
                 <IoMenu className='all-menu-btn' onClick={()=>{setHeaderLeftOn(!headerLeftOn)}}/>
             </div>
-            <div className="header-menu-more-container" onMouseEnter={()=>{setHeaderMouseOn(true)}}>
-                <div className='header-menu-more' style={{display: headerMouseOn ? 'block' : 'none'}} >
+            <div className="header-menu-more-container" onMouseEnter={()=>{setHeaderMouseOn(true)}} style={{display: headerMouseOn ? 'block' : 'none'}}>
+                <div className='header-menu-more'>
                     <div className="more-menu-area" onMouseLeave={()=>{setHeaderMouseOn(false)}}></div>
                 </div>
             </div>

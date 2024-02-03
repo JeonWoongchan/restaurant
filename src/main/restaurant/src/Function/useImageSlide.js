@@ -27,6 +27,11 @@ export default function useImageSlide(imageList) {
         }
     }
 
+    const selectImage = (i)=>{
+        setAnimationOn(false)
+        setSlideNum(i)
+    }
+
     useEffect(()=>{ // 5초 마다 다음 이미지로 전환
         const interval = setInterval(() => {    
             if(autoSlide){
@@ -56,7 +61,8 @@ export default function useImageSlide(imageList) {
         autoSlide, 
         setAutoSlide, 
         prevImage, 
-        nextImage
+        nextImage,
+        selectImage
     }
 }
 
