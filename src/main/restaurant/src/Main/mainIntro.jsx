@@ -10,10 +10,10 @@ export default function MainIntro() {
 
     useEffect(()=>{
         if(scrollPosition > 600){
-            setTextAni('text-slide-up')
+            setTextAni('text-slide-up') 
             setImgAni('img-slide-up')
         }
-    },[scrollPosition])
+    },[scrollPosition]) 
 
     return (
         <div id='main-intro' className='section-container'>
@@ -42,7 +42,7 @@ export default function MainIntro() {
                     </div>
                 </div>
                 <div className={`intro-image ${imgAni}`}>
-                    <img src="/image/dish1.png" alt="" />
+                    <img src="/image/dish1.png"/>
                 </div>
             </div>
         </div>
