@@ -14,7 +14,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
 
     // 간단
-    List <Customer> findByUsernameAndAgeGreaterThan(String username, int age);
+    List <Customer> findByUsernameAndPointGreaterThan(String username, int point);
 
 
 
@@ -25,16 +25,16 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
 
     // 복잡
-    @Query("select c from Customer  c where  c.username = :username and c.age = :age")
-    List<Customer> findUser(@Param("username") String username, @Param("age") int age);
+    @Query("select c from Customer  c where  c.username = :username and c.point = :point")
+    List<Customer> findUser(@Param("username") String username, @Param("point") int point);
 
 
 
     @Query("select c.username from Customer  c")
     List<String> findUsernameList();
 
-    @Query("select new com.example.restaurant.dto.CustomerDto (c.id, c.username, t.name)from Customer c join c.team t")
-    List<CustomerDto> findMemberDto();
+//    @Query("select new com.example.restaurant.dto.CustomerDto (c.id, c.username, t.name)from Customer c join c.team t")
+//    List<CustomerDto> findCustomerDto();
 
 
     @Query("select c from Customer c where c.username in :names")
@@ -42,7 +42,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
 
     List<Customer> findListByUsername(String username);
-    Customer findMemberByUsername(String username);
+    Customer findCustomerByUsername(String username);
 
     Optional<Customer> findOptionalByUsername(String username);
 }

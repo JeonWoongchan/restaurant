@@ -15,21 +15,21 @@ public class CustomerJpaRepository {
     @PersistenceContext
     private EntityManager em;
 
-    public Customer save(Customer member) {
-        em.persist(member);
-        return member;
+    public Customer save(Customer customer) {
+        em.persist(customer);
+        return customer;
     }
 
-    public void delete(Customer member){
-        em.remove(member);
+    public void delete(Customer customer){
+        em.remove(customer);
     }
 
     public List<Customer> findAll() {
         return em.createQuery("select r from Customer r", Customer.class).getResultList();
     }
     public Optional<Customer> findById(Long id) {
-        Customer member = em.find(Customer.class, id);
-        return Optional.ofNullable(member);
+        Customer customer = em.find(Customer.class, id);
+        return Optional.ofNullable(customer);
 
     }
 
@@ -41,30 +41,30 @@ public class CustomerJpaRepository {
         return em.find(Customer.class, id);
     }
 
-    public List<Customer> findByUsernameAndAgeGreaterThen(String username, int age) {
-        return em.createQuery("select  r from Customer r where r.username = :username  and r.age > :age")
+    public List<Customer> findByUsernameAndPointGreaterThen(String username, int point) {
+        return em.createQuery("select  c from Customer c where r.username = :username  and r.age > :age")
                 .setParameter("username", username)
-                .setParameter("age",age)
+                .setParameter("point",point)
                 .getResultList();
     }
     public List<Customer> findByUsername(String username) {
-       return em.createNamedQuery("RestMember.findByUsername", Customer.class)
+       return em.createNamedQuery("Customer.findByUsername", Customer.class)
                 .setParameter("username", username)
                 .getResultList();
     }
 
 
-    public  List<Customer> findByPage(int age, int offset , int limit) {
-         return  em.createQuery("select r from Customer r where r.age = :age order by r.username desc")
-                .setParameter("age", age)
+    public  List<Customer> findByPage(int point, int offset , int limit) {
+         return  em.createQuery("select r from Customer r where r.point = :point order by r.username desc")
+                .setParameter("point", point)
                 .setFirstResult(offset)
                 .setMaxResults(limit)
                 .getResultList();
     }
 
-    public  long totalCount(int age) {
-        return em.createQuery("select count(r) from Customer r where r.age= :age", Long.class)
-                .setParameter("age",age)
+    public  long totalCount(int point) {
+        return em.createQuery("select count(r) from Customer r where r.point= :point", Long.class)
+                .setParameter("point",point)
                 .getSingleResult();
     }
 
