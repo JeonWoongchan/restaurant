@@ -3,6 +3,8 @@ package com.example.restaurant.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @NamedQuery(
         name="Customer.findByUsername",
         query = "select c from Customer c where username = :username"
@@ -11,21 +13,28 @@ import lombok.*;
 @Table(name = "Customer")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"id", "username", "password","email","phone_number","point"})
+@ToString(of = {"id", "email", "password","username","phone_number","point"})
 public class Customer {
 
-    @Id
-    @GeneratedValue
     @Column(name = "customer_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
-    private String password;
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "phone_number")
     private String phone_number;
+
+    @Column(name = "point")
     private int point;
-
-
 
 
     public Customer(String username) {
