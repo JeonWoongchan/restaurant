@@ -7,7 +7,7 @@ import lombok.*;
 @Table(name = "Manager")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"id","managerId","Password"})
+@ToString(of = {"id","managerId","password"})
 
 public class Manager {
     @Id

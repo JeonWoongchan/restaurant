@@ -23,7 +23,7 @@ spring:
   sql:
     init:
       mode: always
-      data-locations: classpath:sql/schema.sql
+      data-locations: classpath:sql/schema2.sql
 logging:
   level:
     org.hibernate.SQL: debug
