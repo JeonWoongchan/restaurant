@@ -1,19 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './css/Header.css'
 import HeaderLeft from './HeaderLeft';
 import { IoMenu } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
     const HeaderMenuList = ['About', 'Menu', 'Contact', 'Social']
     const [headerLeftOn, setHeaderLeftOn] = useState(false)
     const [headerMouseOn, setHeaderMouseOn] = useState(false) // 마우스가 헤더메뉴에 있음
-    const [moreMenuOn, setMoreMenuOn] = useState(false) // 마우스가 드롭다운 메뉴에 있음
-
-    const moreMenuRef = useRef(null)
+    const navigate = useNavigate()
 
     return (
         <div id='header'>
-            <div className="header-logo">
+            <div className="header-logo" onClick={()=>{navigate('/')}}>
                 <a href="" className='header-logo-text'>WooDy</a>
             </div>
             <div className="header-menu">
@@ -43,7 +42,9 @@ export default function Header() {
 }
 
 function HeaderMenu(props) {
-    const MoreMenuList = {'About':['레스토랑 소개', '쉐프 소개'], 'Menu':['Lunch', 'Dinner'], 'Contact':['공지사항', '예약', '오시는길'], 'Social':['인스타그램']}
+    const MoreMenuList = {'About':['레스토랑 소개', '쉐프 소개'], 'Menu':['Lunch', 'Dinner'], 'Contact':['공지사항', '오시는 길', '예약'], 'Social':['인스타그램', '유튜브']}
+    const MoreMenuLink = {'About':['/about/intro', '/about/chef'], 'Menu':['/menu/lunch', '/menu/dinner'], 'Contact':['/contact/notice', '/contact/map', '/reservation'], 'Social':['/', '/']}
+    const navigate = useNavigate()
 
     return(
         <li>
@@ -52,7 +53,7 @@ function HeaderMenu(props) {
                 {
                     MoreMenuList[props.menu].map((a,i)=>{
                         return(
-                            <a href="" className='more-menu' key={i}>{a}</a>
+                            <a href="" className='more-menu' key={i} onClick={()=>{navigate(MoreMenuLink[props.menu][i])}}>{a}</a>
                         )
                     })
                 }

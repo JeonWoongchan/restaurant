@@ -1,0 +1,17 @@
+.sub-intro-container {
+    padding: 50px 50px;
+    min-height: 100vh;
+}
+
+.sub-intro-image {
+    position: relative;
+    width: 50%;
+}
+
+.sub-intro-image .image-content {
+    width: 100%;
+}
+
+.sub-intro-image .image-content img {
+    width: 100%;
+}

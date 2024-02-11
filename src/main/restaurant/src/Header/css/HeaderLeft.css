@@ -12,10 +12,10 @@
     width: 300px;
     background-color: var(--color-primary);
     padding: 20px 30px;
-    animation: slideLeft 0.5s ease;
+    animation: slideHeaderLeft 0.5s ease;
 }
 
-@keyframes slideLeft {
+@keyframes slideHeaderLeft {
     0% {
         transform: translateX(200px); 
     }

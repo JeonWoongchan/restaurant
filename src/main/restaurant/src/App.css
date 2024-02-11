@@ -54,3 +54,22 @@ button:focus {
 .section-container {
     margin: 140px 0 0;
 }
+
+.navigate-btn {
+    display: flex;
+    align-items: center;
+    width: 230px;
+    height: 50px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.navigate-btn .text {
+    font-size: 1.1rem;
+    width: 190px;
+    text-align: center;
+}
+
+.navigate-btn .icon {
+    text-align: left;
+}

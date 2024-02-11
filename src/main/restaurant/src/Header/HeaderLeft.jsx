@@ -1,8 +1,15 @@
 import React from 'react';
 import './css/HeaderLeft.css'
 import { GrClose } from "react-icons/gr";
+import { useNavigate } from 'react-router-dom';
 
 export default function HeaderLeft(props) {
+    const navigate = useNavigate()
+
+    const navigateHandler = (link)=>{
+        navigate(link);
+        props.setHeaderLeftOn(false)
+    }
 
     return (
         <div id='header-left'>
@@ -15,14 +22,14 @@ export default function HeaderLeft(props) {
                                 <div className="user-name"></div>
                                 <div className="logout"></div>
                             </div> */}
-                        <div className="sign-in">로그인</div>
-                        <div className="sign-up">회원가입</div>
+                        <div className="sign-in" onClick={()=>{navigateHandler('/login/sign-in')}}>로그인</div>
+                        <div className="sign-up" onClick={()=>{navigateHandler('/login/sign-up')}}>회원가입</div>
                     </div>
                     <div className="line"></div>
                     <div className="inner-middle">
                         <div className="user-menu">
                             <h5>Member</h5>
-                            <p>예약</p>
+                            <p  onClick={()=>{navigateHandler('/reservation')}}>예약</p>
                             <p>예약확인</p>
                             <p>고객문의</p>
                         </div>

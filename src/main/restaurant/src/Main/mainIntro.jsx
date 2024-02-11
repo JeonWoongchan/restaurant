@@ -9,7 +9,7 @@ export default function MainIntro() {
     const [imgAni, setImgAni] = useState('base-position')
 
     useEffect(()=>{
-        if(scrollPosition > 600){
+        if(scrollPosition > 750){
             setTextAni('text-slide-up') 
             setImgAni('img-slide-up')
         }

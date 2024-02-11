@@ -1,0 +1,91 @@
+.main-info-container {
+    width: 100%;
+    display: flex;
+    background-color: var(--color-primary-variant);
+    color: white;
+}
+
+.main-info-img {
+    width: 50%;
+    overflow: hidden;
+}
+
+.main-info-img img {
+    width: 100%;
+    transition: all 0.5s ease;
+}
+
+.main-info-img .img-base {
+    transform: scaleX(1.5) scaleY(1.5);
+}
+
+.main-info-img .img-transform {
+    transform: scaleX(1) scaleY(1.06);
+}
+
+.main-info-text {
+    position: relative;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main-info-text-title h1{
+    font-family: 'Gowun Batang', serif;
+    font-size: 56px;
+    font-weight: bold;
+}
+
+.main-info-text-detail .inner:not(:last-child){
+    margin-bottom: 30px;
+}
+
+.main-info-text-detail .inner h5 {
+    opacity: 0.6;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.main-info-text-detail .box {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 10px;
+    opacity: 0.9;
+} 
+
+.main-info-text-detail .box p {
+    min-width: 100px;
+}
+
+.main-info-text .navigate-btn{
+    margin-top: 30px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+}
+
+.main-info-text .navigate-btn:hover {
+    background-color: white;
+    color: var(--color-primary-variant);
+}
+
+@media screen and (max-width : 1200px) {
+    .main-info-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-info-img {
+        width: 60%;
+        overflow: hidden;
+    }
+    
+    .main-info-img .img-base {
+        transform: scaleX(1.5) scaleY(1.5);
+    }
+
+    .main-info-img .img-transform {
+        transform: scaleX(1) scaleY(1.06);
+    }
+}
