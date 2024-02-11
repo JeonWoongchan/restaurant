@@ -5,20 +5,28 @@ spring:
     username: root
     password: 1234
 
-
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: create
+      #show_sql: true
+      #format_sql: true
+      ddl-auto: none
+
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-
-    show-sql: true
+    defer-datasource-initialization: true
     properties:
       hibernate.format_sql: true
       dialect: org.hibernate.dialect.MySQL8InnoDBDialect
 
 
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:sql/schema2.sql
 logging:
   level:
     org.hibernate.SQL: debug
+
+
+
