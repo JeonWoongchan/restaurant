@@ -63,3 +63,7 @@
 .tab-wrap .tab-list .tab-item:hover {
     background-color: var(--color-primary);
 }
+
+.tab-wrap .tab-list .tab-item .tab-link {
+    width: 100%;
+}

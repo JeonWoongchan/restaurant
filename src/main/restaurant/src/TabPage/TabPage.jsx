@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import './TabPage.css'
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function TabPage(props) {
+    const navigate = useNavigate()
+    const { subMenu } = useParams()
+
+    const tabStyle = (i)=>{
+        return{
+            backgroundColor : subMenu === props.tabLink[i] ? 'rgb(194,122,52)' : ''
+        }
+    }
 
     return (
         <div id='tab-page'>
@@ -14,8 +23,8 @@ export default function TabPage(props) {
                         <ul className="tab-list">
                             {props.tabMenu.map((a,i) => {
                                     return (
-                                        <li className='tab-item' key={i}>
-                                            <a href="" className="tab-link">{a}</a>
+                                        <li className='tab-item' key={i} onClick={()=>{navigate(`/about/${props.tabLink[i]}`)}} style={tabStyle(i)}>
+                                            <a className="tab-link" onClick={()=>{navigate(`/about/${props.tabLink[i]}`)}}>{a}</a>
                                         </li>
                                     )
                                 })}
