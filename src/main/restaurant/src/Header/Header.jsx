@@ -20,7 +20,7 @@ export default function Header() {
                     {
                         HeaderMenuList.map((a,i)=>{
                             return(
-                                <HeaderMenu key={i} menu={a} headerMouseOn={headerMouseOn}/>
+                                <HeaderMenu key={i} menu={a} headerMouseOn={headerMouseOn} setHeaderMouseOn={setHeaderMouseOn}/>
                             )
                         })
                     }
@@ -42,22 +42,22 @@ export default function Header() {
 }
 
 function HeaderMenu(props) {
-    const MoreMenuList = {'About':['레스토랑 소개', '쉐프 소개'], 'Menu':['Lunch', 'Dinner'], 'Contact':['공지사항', '오시는 길', '예약'], 'Social':['인스타그램', '유튜브']}
-    const MoreMenuLink = {'About':['/about/intro', '/about/chef'], 'Menu':['/menu/lunch', '/menu/dinner'], 'Contact':['/contact/notice', '/contact/map', '/reservation'], 'Social':['/', '/']}
+    const MoreMenuList = {'About':['레스토랑 소개', '쉐프 소개'], 'Menu':['Lunch', 'Dinner', '단품 메뉴'], 'Contact':['공지사항', '오시는 길', '예약'], 'Social':['인스타그램', '유튜브']}
+    const MoreMenuLink = {'About':['/about/intro', '/about/chef'], 'Menu':['/menu/lunch', '/menu/dinner', '/menu/aditional'], 'Contact':['/contact/notice', '/contact/map', '/reservation'], 'Social':['/', '/']}
     const navigate = useNavigate()
 
     return(
         <li>
             <a href="" className='menu'>{props.menu}</a>
-            <ul className='more-menu-list' style={{display: props.headerMouseOn ? '' : 'none'}} >
+            <div className='more-menu-list' style={{display: props.headerMouseOn ? '' : 'none'}} >
                 {
                     MoreMenuList[props.menu].map((a,i)=>{
                         return(
-                            <a href="" className='more-menu' key={i} onClick={()=>{navigate(MoreMenuLink[props.menu][i])}}>{a}</a>
+                            <a href="" className='more-menu' key={i} onClick={()=>{navigate(MoreMenuLink[props.menu][i]); props.setHeaderMouseOn(false)}}>{a}</a>
                         )
                     })
                 }
-            </ul>
+            </div>
         </li>
     )
 }

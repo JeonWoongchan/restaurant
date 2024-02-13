@@ -23,8 +23,8 @@ export default function TabPage(props) {
                         <ul className="tab-list">
                             {props.tabMenu.map((a,i) => {
                                     return (
-                                        <li className='tab-item' key={i} onClick={()=>{navigate(`/about/${props.tabLink[i]}`)}} style={tabStyle(i)}>
-                                            <a className="tab-link" onClick={()=>{navigate(`/about/${props.tabLink[i]}`)}}>{a}</a>
+                                        <li className='tab-item' key={i} onClick={()=>{navigate(`/${props.menu}/${props.tabLink[i]}`)}} style={tabStyle(i)}>
+                                            <a className="tab-link" onClick={()=>{navigate(`/${props.menu}/${props.tabLink[i]}`)}}>{a}</a>
                                         </li>
                                     )
                                 })}

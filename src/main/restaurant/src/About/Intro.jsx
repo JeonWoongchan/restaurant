@@ -23,14 +23,20 @@ export default function Intro() {
     return (
         <div id='sub-intro'>
             <div className="sub-intro-container">
-                <div className="sub-intro-image">
-                    <div className='image-content' style={{background:`url('/image/${nowImage}.png') no-repeat center/cover`}}></div>
+                <div className="sub-intro-title">
+                    <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit dicta est</h1>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, voluptates sit ratione ex consectetur in delectus fugit, dolor impedit nulla quas dolorem ut laborum officiis ea labore reprehenderit placeat assumenda.</p>
                 </div>
-                <div className="sub-intro-text">
-                    <div className="text-content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut maiores omnis aut, asperiores nesciunt nostrum corrupti voluptatum quisquam, eum inventore saepe incidunt explicabo aliquid error, nulla dolorum. Amet, dolorum porro!</div>
-                    <div className="text-content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut maiores omnis aut, asperiores nesciunt nostrum corrupti voluptatum quisquam, eum inventore saepe incidunt explicabo aliquid error, nulla dolorum. Amet, dolorum porro!</div>
-                    <div className="text-content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut maiores omnis aut, asperiores nesciunt nostrum corrupti voluptatum quisquam, eum inventore saepe incidunt explicabo aliquid error, nulla dolorum. Amet, dolorum porro!</div>
-                    <div className="text-content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut maiores omnis aut, asperiores nesciunt nostrum corrupti voluptatum quisquam, eum inventore saepe incidunt explicabo aliquid error, nulla dolorum. Amet, dolorum porro!</div>
+                <div className="sub-intro-main">
+                    <div className="sub-intro-image">
+                        <div className='image-content' style={{background:`url('/image/${nowImage}.png') no-repeat center/cover`}}></div>
+                    </div>
+                    <div className="sub-intro-text">
+                        <div className="text-content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut maiores omnis aut, asperiores nesciunt nostrum corrupti voluptatum quisquam, eum inventore saepe incidunt explicabo aliquid error, nulla dolorum. Amet, dolorum porro!</div>
+                        <div className="text-content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut maiores omnis aut, asperiores nesciunt nostrum corrupti voluptatum quisquam, eum inventore saepe incidunt explicabo aliquid error, nulla dolorum. Amet, dolorum porro!</div>
+                        <div className="text-content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut maiores omnis aut, asperiores nesciunt nostrum corrupti voluptatum quisquam, eum inventore saepe incidunt explicabo aliquid error, nulla dolorum. Amet, dolorum porro!</div>
+                        <div className="text-content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut maiores omnis aut, asperiores nesciunt nostrum corrupti voluptatum quisquam, eum inventore saepe incidunt explicabo aliquid error, nulla dolorum. Amet, dolorum porro!</div>
+                    </div>
                 </div>
             </div>
         </div>

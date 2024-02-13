@@ -9,7 +9,8 @@ export default function About() {
 
     return (
         <div id='about'>
-            <TabPage tabMenu={['레스토랑 소개', '쉐프 소개']} tabLink={['intro', 'chef']} subMenu={subMenu === 'intro' ? <Intro/> : subMenu === 'chef' ? <Chef/> : null}/>
+            <TabPage tabMenu={['레스토랑 소개', '쉐프 소개']} tabLink={['intro', 'chef']} menu={'about'}
+                    subMenu={subMenu === 'intro' ? <Intro/> : subMenu === 'chef' ? <Chef/> : null}/>
         </div>
     );
 }

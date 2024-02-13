@@ -1,9 +1,26 @@
 .sub-intro-container {
     position: relative;
-    padding: 50px 50px;
+    padding: 100px 50px;
     width: 100%;
+}
+
+.sub-intro-title {
+    width: 50%;
+    margin: 0 auto 50px;
+}
+
+
+.sub-intro-title h1 {
+    font-size: 3rem;
+}
+
+.sub-intro-title p {
+    font-size: 1.5rem;
+}
+
+.sub-intro-main {
     display: flex;
-    gap: 50px;
+    justify-content: space-between;
 }
 
 .sub-intro-image {
