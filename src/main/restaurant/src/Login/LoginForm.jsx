@@ -4,7 +4,7 @@ export default function LoginForm(props) {
     const [formInner, setFormInner] = useState()
 
     const siginIn = <>
-                        <h1 className="form-title">Welcome Back</h1>
+                        <h1 className="form-title">로그인</h1>
                         <label>
                             <span>Email</span>
                             <input type="email" />
@@ -20,7 +20,7 @@ export default function LoginForm(props) {
                     </>;
                 
     const siginUp = <>
-                <h1 className="form-title">Welcome to WooDy</h1>
+                <h1 className="form-title">회원가입</h1>
                 <label>
                     <span>Email</span>
                     <input type="email" />

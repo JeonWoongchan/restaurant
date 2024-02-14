@@ -35,7 +35,7 @@ export default function Login() {
                     <img src="/image/login1.png" alt="" />
                 </div>
                 <div className="login-container-main">
-                    <h1 className="login-title">로그인 / 회원가입</h1>
+                    <h1 className="login-title">Welcome to WooDy</h1>
                 </div>
                 <div className="login-form">
                     <LoginForm chaneForm={chaneForm} nowForm={nowForm}/>
