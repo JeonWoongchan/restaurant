@@ -1,0 +1,74 @@
+.reserv-container {
+    
+}
+
+.reserv-image {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.reserv-image img {
+    width: 100%;
+    position: absolute;
+    top: -650px;
+    z-index: 1;
+}
+
+.reserv-image::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.2;
+    z-index: 2;
+}
+
+.reserv-image .image-text{
+    color: white;
+    position: absolute;
+    z-index: 3;
+    top: 60%;
+    width: 100%;
+    text-align: center;
+    font-size: 2.5rem;
+    animation: imageTextAnimation 1s ease;
+    font-family: 'Gowun Batang', serif;
+}
+
+.reserv-inner {
+    display: flex;
+    flex-direction: column;
+    padding: 100px 50px;
+}
+
+.reserv-intro {
+    text-align: center;
+    width: 60%;
+    margin: 0 auto 50px;
+}
+
+.reserv-title {
+    font-size: 2.5rem;
+}
+
+.reserv-detail {
+    text-align: left;
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.reserv-main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 0 auto;
+    width: 800px;
+    box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08);
+    padding: 35px;
+    border-radius: 10px;
+}

@@ -17,6 +17,7 @@ export default function TabPage(props) {
             <div className="tab-page-container">
                 <div className="tab-page-image">
                     <img src="/image/login1.png" alt="" />
+                    <div className="image-text">{subMenu.charAt(0).toUpperCase() + subMenu.slice(1)}</div>
                 </div>
                 <div className="tab-page-inner">
                     <div className="tab-wrap">

@@ -7,6 +7,16 @@
 .sub-intro-title {
     width: 50%;
     margin: 0 auto 50px;
+    animation: subIntroTitleAnimation 1s ease;
+}
+
+@keyframes subIntroTitleAnimation {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
 
 
