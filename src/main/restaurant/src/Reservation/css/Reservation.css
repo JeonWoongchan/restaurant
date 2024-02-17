@@ -72,3 +72,34 @@
     padding: 35px;
     border-radius: 10px;
 }
+
+.selector {
+    background-color: #f9f9f9;
+    border: 1px solid #e6e3df;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    color: var(--color-primary);
+    cursor: pointer;
+    margin-bottom: 15px;
+    
+    & .right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    & span {
+        color: gray;
+    }
+
+    & .arrow {
+        font-size: 1.5rem;
+        margin: 0 10px;
+    }
+
+    & .box-on {
+        display: block;
+    }
+}

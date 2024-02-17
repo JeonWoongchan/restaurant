@@ -1,6 +1,7 @@
 import React from 'react';
 import './css/Reservation.css'
 import Personnel from './Personnel';
+import Calendar from './Calendar';
 
 export default function Reservation() {
     return (
@@ -16,10 +17,8 @@ export default function Reservation() {
                         <div className="reserv-detail">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem cumque voluptates doloribus temporibus, minus repellat animi dolor, quos debitis molestiae explicabo, nemo incidunt laborum quas? Facilis doloribus expedita tenetur. Molestias!</div>
                     </div>
                     <div className="reserv-main">
-                        <Personnel></Personnel>
-                        <Personnel></Personnel>
-                        <Personnel></Personnel>
-                        <div className="calendar"></div>
+                        <Personnel/>
+                        <Calendar/>
                         <div className="reserv-time"></div>
                         <div className="caution-box"></div>
                         <div className="submit"></div>

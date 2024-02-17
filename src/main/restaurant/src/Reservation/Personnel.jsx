@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './css/Personnel.css'
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
+import useSelectBanner from '../Function/useSelectBanner'
 
 export default function Personnel() {
-    const [personnelOn, setPersonnelOn] = useState(true)
-    const [innerHeight, setInnerHeight] = useState('auto')
-    const [innerDisplay, setInnerDisplay] = useState('')
+    const {selectorOn, setSelectorOn, innerHeight} = useSelectBanner(50)
 
     const [adultCount, setAdultCount] = useState(0)
     const [childCount, setChildCount] = useState(0)
@@ -17,14 +16,6 @@ export default function Personnel() {
         setTotalCount(adultCount + childCount + babyCount)
     }, [adultCount, childCount, babyCount])
 
-    useEffect(()=>{
-        if(personnelOn){
-            setInnerHeight('50px')
-        }else{
-            setInnerHeight(0)
-        }
-    },[personnelOn])
-
     const addCount = (func) => {
         if (totalCount < 5) {
             func(prev => prev + 1)
@@ -33,25 +24,18 @@ export default function Personnel() {
         }
     }
 
-    const personnelInnerStyle = ()=>{
-        return{
-            // display : innerDisplay,
-            height : innerHeight
-        }
-    }
-
     return (
         <div id="personnel">
-            <div className='personnel' onClick={()=>{setPersonnelOn(!personnelOn)}}>
+            <div className='personnel selector' onClick={()=>{setSelectorOn(!selectorOn)}}>
                 <p>인원 선택</p>
                 <div className="right">
                     <span style={{display : adultCount > 0 ? 'block' : 'none'}}>성인 ({adultCount})</span>
                     <span style={{display : childCount > 0 ? 'block' : 'none'}}>어린이 ({childCount})</span>
                     <span style={{display : babyCount > 0 ? 'block' : 'none'}}>유아 ({babyCount})</span>
-                    <IoIosArrowUp className='arrow' />
+                    {selectorOn ? <IoIosArrowUp className='arrow' /> : <IoIosArrowDown className='arrow' />}
                 </div>
             </div>
-            <ul className='personnel-inner' style={personnelInnerStyle()}>
+            <ul className='personnel-inner' style={{height : innerHeight}}>
                 <li>
                     <div className="text">
                         <p>성인</p>
