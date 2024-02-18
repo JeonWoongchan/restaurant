@@ -10,7 +10,7 @@ function useSelectBanner(maxHeight) {
         }else{
             setInnerHeight(0)
         }
-    },[selectorOn])
+    },[selectorOn, maxHeight])
 
     return {
         selectorOn,

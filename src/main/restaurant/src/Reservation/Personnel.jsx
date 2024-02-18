@@ -17,7 +17,7 @@ export default function Personnel() {
     }, [adultCount, childCount, babyCount])
 
     const addCount = (func) => {
-        if (totalCount < 5) {
+        if (totalCount < 6) {
             func(prev => prev + 1)
         } else {
             alert('예약 가능 인원수가 초과되었습니다. \n최대 예약 가능 인원수는 6명입니다.')

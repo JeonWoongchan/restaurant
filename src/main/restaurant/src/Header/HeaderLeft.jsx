@@ -43,7 +43,7 @@ export default function HeaderLeft(props) {
                             <h5>운영시간</h5>
                             <div className="box">
                                 <h6>Open</h6>
-                                <p>AM10:30</p>
+                                <p>AM11:30</p>
                             </div>
                             <div className="box">
                                 <h6>Close</h6>

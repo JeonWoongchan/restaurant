@@ -38,7 +38,7 @@ export default function MainInfo() {
                             <h5>운영시간</h5>
                             <div className="box">
                                 <p>Open ~ Close</p>
-                                <p>AM10:30 ~ PM9:30</p>
+                                <p>AM11:30 ~ PM9:30</p>
                             </div>
                             <div className="box">
                                 <p>Break Time</p>
