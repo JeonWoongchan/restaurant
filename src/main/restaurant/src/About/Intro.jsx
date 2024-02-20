@@ -24,7 +24,7 @@ export default function Intro() {
         <div id='sub-intro'>
             <div className="sub-intro-container">
                 <div className="sub-intro-title">
-                    <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit dicta est</h1>
+                    <h1>Restaurant WooDy를 소개합니다.</h1>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, voluptates sit ratione ex consectetur in delectus fugit, dolor impedit nulla quas dolorem ut laborum officiis ea labore reprehenderit placeat assumenda.</p>
                 </div>
                 <div className="sub-intro-main">

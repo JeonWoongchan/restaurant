@@ -15,24 +15,26 @@ export default function Header() {
 
     // 스크롤에 따라 헤더 조정
     useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollPos = window.scrollY;
-            const isScrollingDown = prevScrollPos < currentScrollPos;
-
-            setPrevScrollPos(currentScrollPos);
-
-            if (isScrollingDown) {
-                setHeaderOn(false)
-            } else if (!isScrollingDown) {
-                setHeaderOn(true)
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        if(!headerLeftOn){
+            const handleScroll = () => {
+                const currentScrollPos = window.scrollY;
+                const isScrollingDown = prevScrollPos < currentScrollPos;
+    
+                setPrevScrollPos(currentScrollPos);
+    
+                if (isScrollingDown) {
+                    setHeaderOn(false)
+                } else if (!isScrollingDown) {
+                    setHeaderOn(true)
+                }
+            };
+    
+            window.addEventListener('scroll', handleScroll);
+    
+            return () => {
+                window.removeEventListener('scroll', handleScroll);
+            };
+        }
     });
 
     // 헤더 올라갈 때 더보기 접기
@@ -75,12 +77,12 @@ export default function Header() {
 
 function HeaderMenu(props) {
     const MoreMenuList = { 'About': ['레스토랑 소개', '쉐프 소개'], 'Menu': ['Lunch', 'Dinner', '단품 메뉴'], 'Contact': ['오시는 길', '예약'], 'Social': ['인스타그램', '유튜브'] }
-    const MoreMenuLink = { 'About': ['/about/intro', '/about/chef'], 'Menu': ['/menu/lunch', '/menu/dinner', '/menu/aditional'], 'Contact': ['/contact/map', '/reservation'], 'Social': ['/', '/'] }
+    const MoreMenuLink = { 'About': ['/about/intro', '/about/chef'], 'Menu': ['/menu/lunch', '/menu/dinner', '/menu/additional'], 'Contact': ['/contact/map', '/reservation'], 'Social': ['/', '/'] }
     const navigate = useNavigate()
 
     return (
         <li>
-            <a href="" className='menu'>{props.menu}</a>
+            <a href="" className='menu' onClick={() => { navigate(MoreMenuLink[props.menu][0]); props.setHeaderMouseOn(false) }}>{props.menu}</a>
             <div className='more-menu-list' style={{ display: props.headerMouseOn ? '' : 'none' }} >
                 {
                     MoreMenuList[props.menu].map((a, i) => {

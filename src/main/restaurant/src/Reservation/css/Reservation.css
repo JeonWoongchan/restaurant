@@ -54,6 +54,7 @@
 
 .reserv-title {
     font-size: 2.5rem;
+    color: var(--color-primary);
 }
 
 .reserv-detail {
@@ -171,7 +172,7 @@
     }
 }
 
-.reserv-main .submit {
+.reserv-submit {
     padding: 20px;
     background-color: var(--color-primary);
     width: 150px;
@@ -179,6 +180,6 @@
     margin: 0 auto;
 }
 
-.reserv-main .submit:hover {
+.reserv-submit:hover {
     opacity: 0.8;
 }

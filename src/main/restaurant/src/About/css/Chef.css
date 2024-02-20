@@ -20,6 +20,7 @@
 
 .sub-chef-title h1 {
     font-size: 3rem;
+    color: var(--color-primary);
 }
 
 .sub-chef-title p {

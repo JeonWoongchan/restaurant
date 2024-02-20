@@ -13,9 +13,9 @@ export default function Calendar() {
     const [selectedTime, setSelectedTime] = useState(null) // 선택된 예약 시간
 
     useEffect(()=>{
-        if(nowClickDate !== null){
+        if(nowClickDate.length > 0){
             setCalendarHeight(820)
-        }else if(nowClickDate === null){
+        }else if(nowClickDate.length === 0){
             setCalendarHeight(500)
         }
     },[nowClickDate])

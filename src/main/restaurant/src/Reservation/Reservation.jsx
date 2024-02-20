@@ -4,8 +4,11 @@ import Personnel from './Personnel';
 import Calendar from './Calendar';
 import CalendarForm from './CalendarForm';
 import { MdErrorOutline } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 export default function Reservation() {
+    const navigate = useNavigate()
+
     return (
         <div id='reservation'>
             <div className="reserv-container">
@@ -15,7 +18,7 @@ export default function Reservation() {
                 </div>
                 <div className="reserv-inner">
                     <div className="reserv-intro">
-                        <h1 className="reserv-title">Reservation</h1>
+                        <h1 className="reserv-title">레스토랑 예약</h1>
                         <div className="reserv-detail">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem cumque voluptates doloribus temporibus, minus repellat animi dolor, quos debitis molestiae explicabo, nemo incidunt laborum quas? Facilis doloribus expedita tenetur. Molestias!</div>
                     </div>
                     <div className="reserv-main">
@@ -40,7 +43,7 @@ export default function Reservation() {
                                 <p>당일 취소 및 변경, No Show 시: 환불 불가</p>
                             </div>
                         </div>
-                        <button className="submit">예약 신청</button>
+                        <button className="reserv-submit" onClick={()=>{navigate('/payment')}}>다음단계</button>
                     </div>
                 </div>
             </div>

@@ -11,7 +11,7 @@ export default function Lunch() {
         <div id='lunch'>
             <div className="menu-container">
                 <div className="menu-title">
-                    <h1>Lunch</h1>
+                    <h1>런치 메뉴</h1>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore ab earum hic culpa sapiente corrupti dolorum totam nobis similique id a laboriosam distinctio laborum iste accusantium, sed sint ipsa dolore?</p>
                 </div>
                 <ul className="menu-set-list" >

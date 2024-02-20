@@ -11,7 +11,7 @@ export default function Diiner() {
         <div id='dinner'>
             <div className="menu-container">
                 <div className="menu-title">
-                    <h1>Dinner</h1>
+                    <h1>디너 메뉴</h1>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore ab earum hic culpa sapiente corrupti dolorum totam nobis similique id a laboriosam distinctio laborum iste accusantium, sed sint ipsa dolore?</p>
                 </div>
                 <ul className="menu-set-list" >
