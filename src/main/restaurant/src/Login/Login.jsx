@@ -2,16 +2,24 @@ import React, { useEffect, useState } from 'react';
 import './css/Login.css'
 import LoginForm from './LoginForm';
 import { useParams } from 'react-router-dom';
+import LoginModal from './LoginModal';
+import { useSelector } from 'react-redux';
 
 export default function Login() {
     const [nowForm, setNowForm] = useState(true); // true일때 로그인 false일때 회원가입
     const { value } = useParams();
 
+    const [modalOn, setModalOn] = useState(false)
+
     useEffect(()=>{
         if(value === 'sign-up'){
-            setNowForm(false)
+            setTimeout(() => {
+                setNowForm(false)
+            },300)
         }else if(value === 'sign-in'){
-            setNowForm(true)
+            setTimeout(() => {
+                setNowForm(true)
+            },300)
         }
     },[value])
 
@@ -38,7 +46,7 @@ export default function Login() {
                     <h1 className="login-title">Welcome to WooDy</h1>
                 </div>
                 <div className="login-form">
-                    <LoginForm chaneForm={chaneForm} nowForm={nowForm}/>
+                    <LoginForm chaneForm={chaneForm} nowForm={nowForm} modalOn={modalOn} setModalOn={setModalOn}/>
                     <div className="side-container" style={chaneForm(1)}>
                         <div className="inner-text" style={{ opacity: nowForm ? 1 : 0 }}>
                             <h5>새로 오셨나요?</h5>
@@ -48,9 +56,10 @@ export default function Login() {
                             <h5>이미 회원이신가요?</h5>
                             <p>로그인하고 특별한 경험을 이어가세요!</p>
                         </div>
-                        <button className='change-form-btn' onClick={() => { setNowForm(!nowForm) }}>SIGN UP</button>
+                        <button className='change-form-btn' onClick={()=>{setNowForm(!nowForm)}}>{nowForm ? 'SIGN UP' : 'SIGN IN'}</button>
                     </div>
                 </div>
+                {modalOn && <LoginModal type={modalOn} setModalOn={setModalOn}/>}
             </div>
         </div>
     );

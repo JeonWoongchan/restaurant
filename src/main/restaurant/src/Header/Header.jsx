@@ -3,6 +3,7 @@ import './css/Header.css'
 import HeaderLeft from './HeaderLeft';
 import { IoMenu } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import useMousePosition from '../Function/useMousePosition';
 
 export default function Header() {
     const HeaderMenuList = ['About', 'Menu', 'Contact', 'Social']
@@ -10,12 +11,12 @@ export default function Header() {
     const [headerLeftOn, setHeaderLeftOn] = useState(false)
     const [headerMouseOn, setHeaderMouseOn] = useState(false) // 마우스가 헤더메뉴에 있음
     const navigate = useNavigate()
-
+    
+    const {mousePosition} = useMousePosition()
     const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
 
-    // 스크롤에 따라 헤더 조정
     useEffect(() => {
-        if(!headerLeftOn){
+        if(!headerLeftOn){// 스크롤에 따라 헤더 조정 : 스크롤 내릴때 헤어 안보임, 올리면 다시 보임
             const handleScroll = () => {
                 const currentScrollPos = window.scrollY;
                 const isScrollingDown = prevScrollPos < currentScrollPos;
@@ -43,6 +44,12 @@ export default function Header() {
             setHeaderMouseOn(false)
         }
     },[headerOn])
+
+    useEffect(()=>{
+        if(mousePosition.y > 300){ // 마우스 일정 위치 보내 아래면 header 더보기 닫기
+            setHeaderMouseOn(false)
+        }
+    },[mousePosition])
 
     return (
         <div id='header' className={headerOn ? 'header-show' : 'header-hide'}>

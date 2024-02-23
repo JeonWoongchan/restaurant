@@ -1,60 +1,44 @@
 import React, { useEffect, useState } from 'react';
+import LoginModal from './LoginModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { setEmailCheck, setPhoneCheck, setSignUpEmail, setSignUpPhone } from '../store/loginStore';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
 
 export default function LoginForm(props) {
     const [formInner, setFormInner] = useState()
+    const dispatch = useDispatch()
 
-    const siginIn = <>
-                        <h1 className="form-title">로그인</h1>
-                        <label>
-                            <span>Email</span>
-                            <input type="email" />
-                        </label>
-                        <label>
-                            <span>Password</span>
-                            <input type="password" />
-                        </label>
-                        <label>
-                            <p>비밀번호 찾기</p>
-                        </label>
-                        <button className='form-btn' type="button">SIGN IN</button>
-                    </>;
-                
-    const siginUp = <>
-                <h1 className="form-title">회원가입</h1>
-                <label>
-                    <span>Email</span>
-                    <input type="email" />
-                </label>
-                <label>
-                    <span>Password</span>
-                    <input type="password" />
-                </label>
-                <label>
-                    <span>Name</span>
-                    <input type="text" />
-                </label>
-                <label>
-                    <span>Phone</span>
-                    <input type="text" />
-                </label>
-                <button className='form-btn' type="button">SIGN UP</button>
-            </>;
+    // useEffect(() => {
+    //     if (props.nowForm) {
+    //         setTimeout(() => {
+    //             setFormInner(siginIn)
+    //             
+    //         }, 300)
+    //     } else if (!props.nowForm) {
+    //         setTimeout(() => {
+    //             setFormInner(siginUp)
+    //         }, 300)
+    //     }
+    // }, [props.nowForm, emailCheck, phoneCheck])
 
-    useEffect(()=>{ 
+    useEffect(()=>{
         if(props.nowForm){
             setTimeout(()=>{
-                setFormInner(siginIn)
+                setFormInner(true)
+                dispatch(setEmailCheck(false))
+                dispatch(setPhoneCheck(false))
             },300)
-        }else if(!props.nowForm){
+        }else{
             setTimeout(()=>{
-                setFormInner(siginUp)
+                setFormInner(false)
             },300)
         }
     },[props.nowForm])
 
     return (
         <div className="form-inner" style={props.chaneForm(0)}>
-            {formInner}
+            {formInner ? <SignIn/> : <SignUp setModalOn={props.setModalOn}/>}
         </div>
     );
 }
