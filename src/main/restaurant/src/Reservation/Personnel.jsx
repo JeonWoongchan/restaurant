@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import './css/Personnel.css'
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
+import { useDispatch, useSelector } from 'react-redux';
 import useSelectBanner from '../Function/useSelectBanner'
+import { setPersonnelSlice } from '../store/reservStore';
 
 export default function Personnel() {
+    const dispatch = useDispatch()
     const {selectorOn, setSelectorOn, innerHeight} = useSelectBanner(50)
 
     const [adultCount, setAdultCount] = useState(0)
@@ -14,6 +17,7 @@ export default function Personnel() {
 
     useEffect(() => {
         setTotalCount(adultCount + childCount + babyCount)
+        localStorage.setItem('personnel', [{'adult':adultCount}, {'child':childCount}, {'baby':babyCount}])
     }, [adultCount, childCount, babyCount])
 
     const addCount = (func) => {
