@@ -18,6 +18,7 @@ export default function Calendar() {
     const YEAR_LIST = [2023, 2024, 2025, 2026, 2027]
     const MONTH_LIST = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
+    // 선택한 날짜와 시간 로컬 스토리지에 저장
     useEffect(() => {
         if (nowClickDate.length > 0) {
             setCalendarHeight(820)
@@ -25,6 +26,12 @@ export default function Calendar() {
             setCalendarHeight(500)
         }
     }, [nowClickDate])
+
+    useEffect(()=>{
+        if(selectedTime != null){
+            localStorage.setItem('calendar', JSON.stringify({'date': selectedDate,'time': selectedTime}))
+        }
+    },[selectedDate, selectedTime])
 
     return (
         <div id='calendar'>

@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './css/Payment.css'
+import { useNavigate } from 'react-router-dom';
 
 export default function Payment() {
+    const [reservData, setReservData] = useState('')
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        const personnelData =  JSON.parse(localStorage.getItem('personnel'))
+        const calendarData =  JSON.parse(localStorage.getItem('calendar'))
+
+        if(personnelData != null && calendarData != null){
+            const newReservData = `${calendarData.date} ${calendarData.time} / 
+                                    ${personnelData.adult != 0 ? `성인(${personnelData.adult})` : ''}
+                                    ${personnelData.child != 0 ? `어린이(${personnelData.child})` : ''}
+                                    ${personnelData.baby != 0 ? `유아(${personnelData.baby})` : ''}`
+
+            setReservData(newReservData)
+        }else{ // 예약 인원, 날짜 없이 결제페이지 진입 막음
+            navigate('/reservation')
+        }
+        
+    },[])
+
     return (
         <div id='payment'>
             <div className="payment-container">
@@ -17,7 +38,7 @@ export default function Payment() {
                         <div className="payment-product">
                             <div className="detail">
                                 <h5 className='sub-title'>예약 내용</h5>
-                                <p>2024.02.24 (토) / DINNER / 19:45 / 성인 (1)</p>
+                                <p>{reservData}</p>
                             </div>
                             <div className="detail">
                                 <h5 className='sub-title'>예약자 정보</h5>

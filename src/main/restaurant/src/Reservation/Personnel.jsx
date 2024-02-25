@@ -15,10 +15,23 @@ export default function Personnel() {
     const [babyCount, setBabyCount] = useState(0)
     const [totalCount, setTotalCount] = useState(0)
 
+    // 총 인원수 저장
     useEffect(() => {
         setTotalCount(adultCount + childCount + babyCount)
-        localStorage.setItem('personnel', [{'adult':adultCount}, {'child':childCount}, {'baby':babyCount}])
     }, [adultCount, childCount, babyCount])
+
+    //로컬, 세션 스토리지에 인원내용 저장
+    useEffect(()=>{
+        const personnelData = {
+            'adult': adultCount,
+            'child': childCount,
+            'baby': babyCount
+        };
+
+        if(totalCount > 0){
+            localStorage.setItem('personnel', JSON.stringify(personnelData))
+        }
+    },[totalCount])
 
     const addCount = (func) => {
         if (totalCount < 6) {

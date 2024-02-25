@@ -1,5 +1,7 @@
 SET foreign_key_checks = 0;
 
+use restaurant;
+
 DROP TABLE IF EXISTS Customer;
 CREATE TABLE Customer (
     customer_id INT PRIMARY KEY auto_increment,

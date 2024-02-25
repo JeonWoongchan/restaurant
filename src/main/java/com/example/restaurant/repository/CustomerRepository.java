@@ -20,6 +20,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     List <Customer> findHelloBy();
 
+
     @Query(name = "Member.findByUsername")
     List<Customer> findByUsername(@Param("username") String username);
 
@@ -28,6 +29,10 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Query("select c from Customer  c where  c.username = :username and c.point = :point")
     List<Customer> findUser(@Param("username") String username, @Param("point") int point);
 
+    List<Customer> findByEmail(String email);
+
+    @Query("select c from Customer c where c.email = :email ")
+    Optional<Customer> login(@Param("email") String email);
 
 
     @Query("select c.username from Customer  c")

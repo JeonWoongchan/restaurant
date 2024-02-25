@@ -21,21 +21,13 @@ public class HomeController   {
 
 
 
-    @GetMapping(value = {"", "/main", "/login/{loginStep}", "/login/{userId}/{loginStep}", "/profile/{userId}/{nowProfileCode}/{profileMenu}", "/profile/{profileMenu}", "/profile/{profileMenu}", "/content/{contentType}/{contentGenre}/{contentId}", "/brand/{brandName}", "/search"
-                , "/category/{mediaType}/{categoryType}", "/interest","/board/{nowProfileCode}","/board/{nowProfileCode}/{content}"})
+    @GetMapping(value = {"", "/main", "/login/{value}" ,"/reservation" , "/payment" , "/about/{subMenu}" ,"/menu/{subMenu}" ,"/contact/{subMenu}"})
     public String forward() {
         return "forward:/index.html";
     }
 
-    @GetMapping("/profile/{profileMenu}/{profileSubMenu}")
-    public String forwardProfileSubMenu() {
-        return "forward:/index.html";
-    }
 
-    @GetMapping("/profile/{userId}/{nowProfileCode}/{profileMenu}/{profileSubMenu}")
-    public String forwardProfileSubMenu2() {
-        return "forward:/index.html";
-    }
+
 
 
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './css/Reservation.css'
 import Personnel from './Personnel';
 import Calendar from './Calendar';
@@ -8,6 +8,25 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Reservation() {
     const navigate = useNavigate()
+
+    // 예약 페이지 접속 시 로컬스토리지 초기화
+    useEffect(()=>{
+        localStorage.removeItem('personnel')
+        localStorage.removeItem('calendar')
+    },[])
+
+    const moveToPayment = ()=>{
+        const personnelData =  JSON.parse(localStorage.getItem('personnel'))
+        const calendarData =  JSON.parse(localStorage.getItem('calendar'))
+
+        if(personnelData != null && calendarData != null){
+            navigate('/payment')
+        }else if(personnelData == null){
+            alert('예약 인원을 선택하세요')
+        }else if(calendarData == null){
+            alert('예약 날짜을 선택하세요')
+        } 
+    }
 
     return (
         <div id='reservation'>
@@ -43,7 +62,7 @@ export default function Reservation() {
                                 <p>당일 취소 및 변경, No Show 시: 환불 불가</p>
                             </div>
                         </div>
-                        <button className="reserv-submit" onClick={()=>{navigate('/payment')}}>다음단계</button>
+                        <button className="reserv-submit" onClick={()=>{moveToPayment()}}>다음단계</button>
                     </div>
                 </div>
             </div>

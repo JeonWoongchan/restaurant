@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './css/Login.css'
 import LoginForm from './LoginForm';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import LoginModal from './LoginModal';
 import { useSelector } from 'react-redux';
 
 export default function Login() {
     const [nowForm, setNowForm] = useState(true); // true일때 로그인 false일때 회원가입
     const { value } = useParams();
+    const navigate = useNavigate()
 
     const [modalOn, setModalOn] = useState(false)
 
@@ -21,7 +22,15 @@ export default function Login() {
                 setNowForm(true)
             },300)
         }
-    },[value])
+    },[])
+
+    useEffect(()=>{
+        if(nowForm){
+            navigate('/login/sign-in')
+        }else{
+            navigate('/login/sign-up')
+        }
+    },[nowForm])
 
     const chaneForm = (i) => {
         if (i === 0) {

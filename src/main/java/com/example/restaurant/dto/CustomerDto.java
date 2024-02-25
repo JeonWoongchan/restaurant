@@ -5,13 +5,16 @@ import lombok.Data;
 @Data
 public class CustomerDto {
 
-    private  Long id;
+    private  String email;
+    private String password;
     private String username;
-    private String teamName;
 
-    public CustomerDto(Long id, String username, String teamName) {
-        this.id = id;
-        this.username = username;
-        this.teamName = teamName;
+    private String inputAuth;
+    private String phoneNUm;
+
+
+    public CustomerDto(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 }
