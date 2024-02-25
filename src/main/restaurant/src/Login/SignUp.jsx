@@ -12,9 +12,6 @@ export default function SignUp(props) {
     const emailCheck = useSelector(state => state.loginReducer.emailCheck)// 이메일 인증 여부
     const phoneCheck = useSelector(state => state.loginReducer.phoneCheck) // 휴대폰 인증 여부
 
-    const signUpEmail = useSelector(state=>state.loginReducer.signUpEmail)
-    const signUpPhone = useSelector(state=>state.loginReducer.signUpPhone)
-
     const [phoneFirst, setPhoneFirst] = useState('010')
     const [phoneMiddle, setPhoneMiddle] = useState('')
     const [phoneLast, setPhoneLast] = useState('')
@@ -35,7 +32,7 @@ export default function SignUp(props) {
                 <input type="text" onChange={(e) => { dispatch(setSignUpEmail(e.target.value)) }} readOnly={emailDupli ? true : false}/>
                 {
                     !emailDupli ? <button className='email-btn' onClick={() => { emailDuplicateCheck() }}>이메일 중복 체크</button>
-                    : <button className='email-btn' onClick={()=>{props.setModalOn('이메일')}} style={emailCheck ? { pointerEvents: 'none' } : {}}>{emailCheck ? '인증완료' : '이메일 인증'}</button>
+                    : <button className='email-btn' onClick={()=>{props.setModalOn('이메일'); modalCheck('이메일')}} style={emailCheck ? { pointerEvents: 'none' } : {}}>{emailCheck ? '인증완료' : '이메일 인증'}</button>
                 }
             </label>
             <label>
@@ -64,9 +61,9 @@ export default function SignUp(props) {
                         <input type="text" onChange={(e) => { setPhoneLast(e.target.value) }} readOnly={phoneCheck ? true : false}/>
                     </div>
                 </div>
-                <button className='phone-btn' onClick={()=>{props.setModalOn('이메일')}} style={phoneCheck ? { pointerEvents: 'none' } : {}}>{phoneCheck ? '인증완료' : '휴대폰 인증'}</button>
+                <button className='phone-btn' onClick={()=>{props.setModalOn('휴대폰'); modalCheck('휴대폰')}} style={phoneCheck ? { pointerEvents: 'none' } : {}}>{phoneCheck ? '인증완료' : '휴대폰 인증'}</button>
             </label>
-            <button className='form-btn' type="button" onClick={() => { signUpHandeler() }}>SIGN UP</button>
+            <button className='form-btn' type="button" onClick={()=>{signUpHandeler()}}>SIGN UP</button>
         </>
     );
 }

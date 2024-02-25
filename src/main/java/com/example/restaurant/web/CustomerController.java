@@ -10,11 +10,11 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*")
+@Controller()
 @RestController()
 @RequestMapping("/login")
 @RequiredArgsConstructor
@@ -22,8 +22,7 @@ public class CustomerController {
 
     CustomerRepository customerRepository;
 
-
-    CustomerService customerService;
+    private final CustomerService customerService;
 
 
     // 로그인
@@ -38,8 +37,14 @@ public class CustomerController {
     @PostMapping("/sign-up")
     public ResponseEntity<String> signup(@RequestBody CustomerDto dto, Customer customer, HttpSession session) throws Exception {
 
-
         return ResponseEntity.ok(customerService.joinCustomer(dto,customer));
+
+    }
+
+    @PostMapping("/sign-up/duplicate")
+    public ResponseEntity<Boolean> duplicate(@RequestBody CustomerDto dto, Customer customer, HttpSession session) throws Exception {
+
+        return ResponseEntity.ok(customerService.duplicateCustomer(dto.getEmail()));
 
     }
 

@@ -14,16 +14,15 @@ export default function EmailDuplicateLogic() {
         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
         if (emailPattern.test(signUpEmail)) {
-            dispatch(setEmailDupli(true))
             axios
-                .post("http://localhost:8080/login/sign-up", {
+                .post("http://localhost:8080/login/sign-up/duplicate", {
                     email: signUpEmail,
                 })
                 .then((res) => {
-                    console.log(res.data)
-                    if (res.data.status == 1) { // 중복 없음
+                    console.log(res.data) // ture or false
+                    if (res.data) { // 중복 없음
                         dispatch(setEmailDupli(true))
-                    } else if (res.data.status == 0) { // 이미 있는 이메일
+                    } else if (!res.data) { // 이미 있는 이메일
                         alert('이미 존재하는 이메일 입니다')
                     }
                 })

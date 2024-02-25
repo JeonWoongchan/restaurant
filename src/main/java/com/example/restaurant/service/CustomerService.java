@@ -32,28 +32,13 @@ public class CustomerService {
 
   // 회원 가입
   public String joinCustomer(CustomerDto dto, Customer customer) throws Exception {
-    boolean isDuplicate = duplicateCustomer(dto);
-    if (isDuplicate) {
-
-      return "중복된 회원";
-    } else {
-      boolean checkEmail=emailService.checkAuthentication(dto.getEmail(), dto.getInputAuth(), dto.getUsername());
-      if (checkEmail) {
         customerRepository.save(customer);
         return customer.getUsername() + "님 회원가입 성공하셨습니다"; // Assuming Customer has an ID field
-
-      } else {
-        return "안돼";
-      }
-
-
-
-    }
   }
 
   // 중복 체크
-  public boolean duplicateCustomer(CustomerDto dto) {
-    List<Customer> customers = customerRepository.findByEmail(dto.getEmail());
+  public boolean duplicateCustomer(String email) {
+    List<Customer> customers = customerRepository.findByEmail(email);
     DefaultMessageService messageService =  NurigoApp.INSTANCE.initialize("API 키 입력", "API 시크릿 키 입력", "https://api.coolsms.co.kr");
     // Message 패키지가 중복될 경우 net.nurigo.sdk.message.model.Message로 치환하여 주세요
 

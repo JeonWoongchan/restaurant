@@ -17,6 +17,7 @@ export default function SignUpLogic() {
     const phoneCheck = useSelector(state => state.loginReducer.phoneCheck) // 휴대폰 인증 완료
 
     const signUpHandeler = () => {
+        console.log(emailCheck, phoneCheck)
         if (emailCheck && phoneCheck) {
             axios
                 .post("http://localhost:8080/login/sign-up", {
@@ -27,11 +28,11 @@ export default function SignUpLogic() {
             })
                 .then((res) => {
                     console.log(res.data)
-                    if(res.data.status == 1 ){ // 회원가입 성공
-                        navigate('/login/sign-in')
-                    }else if(res.data.status == 0){ // 이메일 없음
-                        alert('회원가입 실패')
-                    }
+                    // if(res.data.status == 1 ){ // 회원가입 성공
+                    //     navigate('/login/sign-in')
+                    // }else if(res.data.status == 0){ // 이메일 없음
+                    //     alert('회원가입 실패')
+                    // }
             })
             .catch((error)=>{
                 console.log(error)
