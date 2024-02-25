@@ -42,7 +42,7 @@ export default function Header() {
 }
 
 function HeaderMenu(props) {
-    const MoreMenuList = {'About':['레스토랑 소개', '쉐프 소개'], 'Menu':['Lunch', 'Dinner'], 'Contact':['공지사항', '오시는 길', '예약'], 'Social':['인스타그램', '유튜브']}
+    const MoreMenuList = {'About':['레스토랑 소개', '쉐프 소개'], 'Menu':['Lunch', 'Dinner'], 'Contact':['공지사항', '오시는 길', '예약'], 'Social':['ㅇㅇㅇㅇ', '유튜브']}
     const MoreMenuLink = {'About':['/about/intro', '/about/chef'], 'Menu':['/menu/lunch', '/menu/dinner'], 'Contact':['/contact/notice', '/contact/map', '/reservation'], 'Social':['/', '/']}
     const navigate = useNavigate()
 
