@@ -10,19 +10,17 @@ import java.util.Date;
 @Table
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"",""})
+@ToString(of = {"", ""})
 public class Reserve {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reserve_id;
-    private Long customer_id;
-    private Long rest_id;
-    private Long seat_id;
-    private Date reserve_date;
-    private Date start_date;
-    private Date end_date;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long reserve_id;
 
+  @ManyToOne
+  @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
+  private Customer customer;
 
-
-
+  private Date reserve_date;
+  private Date start_date;
+  private Date end_date;
 }

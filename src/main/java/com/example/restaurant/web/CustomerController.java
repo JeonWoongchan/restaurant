@@ -35,7 +35,7 @@ public class CustomerController {
 
     }
     @PostMapping("/sign-up")
-    public ResponseEntity<String> signup(@RequestBody CustomerDto dto, Customer customer, HttpSession session) throws Exception {
+    public ResponseEntity<String> signup(CustomerDto dto, @RequestBody Customer customer, HttpSession session) throws Exception {
 
         return ResponseEntity.ok(customerService.joinCustomer(dto,customer));
 

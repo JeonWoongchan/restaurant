@@ -35,3 +35,21 @@ CREATE TABLE IF NOT EXISTS seat (
      guest_count varchar(200),
      FOREIGN KEY (rest_id) REFERENCES restaurant(rest_id)
 );
+
+-- 예약 테이블
+CREATE TABLE IF NOT EXISTS reserve (
+    reserve_id INT PRIMARY KEY,
+    customer_id INT,
+    reserve_date DATE,
+    start_date DATE,
+    end_date DATE
+);
+
+-- 인원 분류 테이블
+CREATE TABLE IF NOT EXISTS guests (
+    guest_id int not null primary key,
+    reserve_id INT,
+    category VARCHAR(20),
+    guest_count INT,
+    FOREIGN KEY (reserve_id) REFERENCES reserve (reserve_id)
+    );

@@ -46,10 +46,14 @@ public class CustomerService {
   }
 
   // 로그인
-  public int login(String email, String password) {
+  public HashMap<String,Integer> login(String email, String password) {
     Optional<Customer> dbpassword = customerRepository.login(email);
 
     if (dbpassword.isEmpty()) {
+
+      HashMap<String,Integer> log = new HashMap<String,Integer>();
+
+
 
       return -1; // 아이디가 없는 경우
 
@@ -57,6 +61,9 @@ public class CustomerService {
 
       return 0; // 비밀번호 불일치
     } else {
+
+
+
       return 1; // 로그인 성공
     }
   }
