@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+
 @CrossOrigin(origins = "*")
 @Controller()
 @RestController()
@@ -27,7 +29,7 @@ public class CustomerController {
 
     // 로그인
     @PostMapping("/sign-in")
-    public ResponseEntity<Integer> login(@RequestBody CustomerDto dto, HttpSession session)
+    public ResponseEntity<HashMap<String,Integer>>login(@RequestBody CustomerDto dto)
     {
 
 
@@ -35,14 +37,14 @@ public class CustomerController {
 
     }
     @PostMapping("/sign-up")
-    public ResponseEntity<String> signup(CustomerDto dto, @RequestBody Customer customer, HttpSession session) throws Exception {
+    public ResponseEntity<String> signup(@RequestBody Customer customer) throws Exception {
 
-        return ResponseEntity.ok(customerService.joinCustomer(dto,customer));
+        return ResponseEntity.ok(customerService.joinCustomer(customer));
 
     }
 
     @PostMapping("/sign-up/duplicate")
-    public ResponseEntity<Boolean> duplicate(@RequestBody CustomerDto dto, Customer customer, HttpSession session) throws Exception {
+    public ResponseEntity<Boolean> duplicate(@RequestBody CustomerDto dto) throws Exception {
 
         return ResponseEntity.ok(customerService.duplicateCustomer(dto.getEmail()));
 

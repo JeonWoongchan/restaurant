@@ -31,9 +31,9 @@ public class CustomerService {
 
 
   // 회원 가입
-  public String joinCustomer(CustomerDto dto, Customer customer) throws Exception {
+  public String joinCustomer(Customer customer) throws Exception {
         customerRepository.save(customer);
-        return customer.getUsername() + "님 회원가입 성공하셨습니다"; // Assuming Customer has an ID field
+        return customer.getUsername() + "님 회원가입 성공하셨습니다";
   }
 
   // 중복 체크
@@ -48,23 +48,25 @@ public class CustomerService {
   // 로그인
   public HashMap<String,Integer> login(String email, String password) {
     Optional<Customer> dbpassword = customerRepository.login(email);
-
+    HashMap<String,Integer> log = new HashMap<String,Integer>();
     if (dbpassword.isEmpty()) {
 
-      HashMap<String,Integer> log = new HashMap<String,Integer>();
+
+      log.put("비회원", -1);
 
 
-
-      return -1; // 아이디가 없는 경우
+      return log; // 아이디가 없는 경우
 
     } else if (!password.equals(dbpassword.get().getPassword())) {
 
-      return 0; // 비밀번호 불일치
+      log.put("회원", 0);
+      return log; // 비밀번호 불일치
     } else {
 
 
-
-      return 1; // 로그인 성공
+      log.put(email, 1);
+      return log; // 로그인 성공
+      
     }
   }
 

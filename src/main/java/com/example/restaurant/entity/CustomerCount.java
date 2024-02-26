@@ -7,20 +7,18 @@ import lombok.*;
 import java.util.Date;
 
 @Entity
-@Table(name="Reserve")
+@Table(name = "CustomerCount")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"", ""})
-public class Reserve {
+@ToString(of = {"reserve_guest_id", "customer"})
+public class CustomerCount {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long reserve_id;
+  private Long reserve_guest_id;
 
   @ManyToOne
   @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
   private Customer customer;
 
-  private Date reserve_date;
-  private Date start_date;
-  private Date end_date;
+
 }
