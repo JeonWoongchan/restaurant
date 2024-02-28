@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS Customer (
 
 -- 예약 테이블
 CREATE TABLE IF NOT EXISTS reserve (
-    reserve_id INT PRIMARY KEY,
+    reserve_id INT PRIMARY KEY auto_increment,
     customer_id INT,
     reg_date DATE,
     reserve_date DATE,

@@ -21,11 +21,17 @@ public class CustomerCount {
   private Reserve reserve;
 
 
-  private int audults_count;
+  private int adults_count;
 
-  private int childrend_count;
+  private int children_count;
 
   private int infants_count;
 
 
+  public CustomerCount(Reserve reserve, int adults_count, int children_count, int infants_count) {
+    this.reserve = reserve;
+    this.adults_count = adults_count;
+    this.children_count = children_count;
+    this.infants_count = infants_count;
+  }
 }

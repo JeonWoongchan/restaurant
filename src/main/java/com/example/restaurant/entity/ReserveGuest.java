@@ -24,4 +24,6 @@ public class ReserveGuest {
   private Date reserve_date;
   private Date end_date;
   private String comment;
+
+
 }

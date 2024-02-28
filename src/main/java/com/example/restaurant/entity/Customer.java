@@ -3,6 +3,7 @@ package com.example.restaurant.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NamedQuery(
@@ -37,6 +38,11 @@ public class Customer {
     private int point;
 
 
+    @OneToMany(mappedBy = "customer")
+    private List<Reserve> reserves =new ArrayList<>();
+
+
+
     public Customer(String username) {
         this.username = username;
     }
@@ -54,5 +60,15 @@ public class Customer {
     public Customer(String username, int point) {
         this.username = username;
         this.point = point;
+    }
+
+    public Customer(Long id, String email, String password, String username, String phone_number, int point) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.phone_number = phone_number;
+        this.point = point;
+
     }
 }

@@ -22,9 +22,4 @@ public class Guest {
     private String phoneNum;
 
 
-
-
-
-
-
 }

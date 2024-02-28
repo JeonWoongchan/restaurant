@@ -38,11 +38,11 @@ public class CustomerService {
 
   // 중복 체크
   public boolean duplicateCustomer(String email) {
-    List<Customer> customers = customerRepository.findByEmail(email);
+    Optional<Customer> customer = customerRepository.findByEmail(email);
     DefaultMessageService messageService =  NurigoApp.INSTANCE.initialize("API 키 입력", "API 시크릿 키 입력", "https://api.coolsms.co.kr");
     // Message 패키지가 중복될 경우 net.nurigo.sdk.message.model.Message로 치환하여 주세요
 
-    return customers.isEmpty();
+    return customer.isEmpty();
   }
 
   // 로그인
@@ -76,16 +76,16 @@ public class CustomerService {
 
 
 
-  public List<Customer> selectMember(HttpSession session) {
+  public Optional<Customer> selectMember(HttpSession session) {
     String email = (String) session.getAttribute("email");
-    List<Customer> customers = null;
+    Optional<Customer>  customer = Optional.empty();
     if (email == null) {
-      customers = customerRepository.findByEmail(email);
-      return customers;
+      customer = customerRepository.findByEmail(email);
+      return customer;
     } else {
 
       // 비회원
-      return customers;
+      return customer;
     }
 
   }
