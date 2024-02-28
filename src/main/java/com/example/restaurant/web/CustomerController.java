@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 
 @CrossOrigin(origins = "*")
-@Controller()
+
 @RestController()
 @RequestMapping("/login")
 @RequiredArgsConstructor
@@ -29,11 +29,12 @@ public class CustomerController {
 
     // 로그인
     @PostMapping("/sign-in")
-    public ResponseEntity<HashMap<String,Integer>>login(@RequestBody CustomerDto dto)
+    public ResponseEntity<HashMap<String,Integer>>login(@RequestBody CustomerDto dto, HttpSession session)
     {
 
 
-        return ResponseEntity.ok(customerService.login(dto.getEmail(), dto.getPassword()));
+
+        return ResponseEntity.ok(customerService.login(dto.getEmail(), dto.getPassword(), session));
 
     }
     @PostMapping("/sign-up")

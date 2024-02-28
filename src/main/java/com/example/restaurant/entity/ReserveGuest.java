@@ -20,7 +20,8 @@ public class ReserveGuest {
   @JoinColumn(name = "guest_id", referencedColumnName = "guest_id")
   private Guest guest;
 
+  private Date reg_date;
   private Date reserve_date;
-  private Date start_date;
   private Date end_date;
+  private String comment;
 }

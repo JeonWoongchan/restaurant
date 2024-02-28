@@ -1,9 +1,9 @@
 package com.example.restaurant.service;
 
-import com.example.restaurant.dto.CustomerDto;
 import com.example.restaurant.entity.Customer;
 import com.example.restaurant.repository.CustomerRepository;
 
+import jakarta.servlet.http.HttpSession;
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
 import net.nurigo.sdk.message.model.Message;
@@ -11,12 +11,12 @@ import net.nurigo.sdk.message.service.DefaultMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.List;
-import java.util.Random;
 
 @Service
 public class CustomerService {
@@ -46,7 +46,7 @@ public class CustomerService {
   }
 
   // 로그인
-  public HashMap<String,Integer> login(String email, String password) {
+  public HashMap<String,Integer> login(String email, String password, HttpSession session) {
     Optional<Customer> dbpassword = customerRepository.login(email);
     HashMap<String,Integer> log = new HashMap<String,Integer>();
     if (dbpassword.isEmpty()) {
@@ -65,10 +65,31 @@ public class CustomerService {
 
 
       log.put(email, 1);
+      session.setAttribute("email", email);
       return log; // 로그인 성공
-      
+
     }
   }
+
+
+
+
+
+
+  public List<Customer> selectMember(HttpSession session) {
+    String email = (String) session.getAttribute("email");
+    List<Customer> customers = null;
+    if (email == null) {
+      customers = customerRepository.findByEmail(email);
+      return customers;
+    } else {
+
+      // 비회원
+      return customers;
+    }
+
+  }
+
 
 
   //휴대폰번호 인증문자 보내기

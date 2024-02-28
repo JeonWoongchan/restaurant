@@ -11,7 +11,7 @@ import java.util.Date;
 @Table(name = "CustomerCount")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"guest_count_id", "reserve" ,"category"})
+@ToString(of = {"guest_count_id", "reserve" })
 public class GuestCount {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +21,11 @@ public class GuestCount {
   @JoinColumn(name = "reserve_id", referencedColumnName = "reserve_id")
   private Reserve reserve;
 
-  @ManyToOne
-  @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-  private HumanCategory category;
+
+  private int audults_count;
+
+  private int childrend_count;
+
+  private int infants_count;
 
 }

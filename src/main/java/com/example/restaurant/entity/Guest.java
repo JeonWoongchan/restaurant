@@ -7,7 +7,7 @@ import lombok.*;
 @Table(name = "Guset")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"guest_id","reserveGuest"})
+@ToString(of = {"guest_id","reserveGuest","phoneNum"})
 
 public class Guest {
     @Id
@@ -18,6 +18,8 @@ public class Guest {
     @JoinColumn(name = "reserve_guest_id", referencedColumnName = "reserve_guest_id")
     private ReserveGuest reserveGuest;
 
+
+    private String phoneNum;
 
 
 
