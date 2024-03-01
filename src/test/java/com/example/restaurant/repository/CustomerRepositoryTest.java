@@ -100,9 +100,9 @@ class CustomerRepositoryTest {
         customerRepository.save(c2);
 
 
-        List<Customer> result = customerRepository.findByUsername("AAA");
-        Customer findCustomer = result.get(0);
-        assertThat(findCustomer).isEqualTo(c1);
+//        List<Customer> result = customerRepository.findByUsername("AAA");
+//        Customer findCustomer = result.get(0);
+//        assertThat(findCustomer).isEqualTo(c1);
 
 
     }

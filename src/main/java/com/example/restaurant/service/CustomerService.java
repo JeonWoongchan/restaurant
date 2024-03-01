@@ -46,35 +46,35 @@ public class CustomerService {
   }
 
   // 로그인
-  public HashMap<String,Integer> login(String email, String password, HttpSession session) {
+  public HashMap<String,Optional<String>> login(String email, String password, HttpSession session) {
     Optional<Customer> dbpassword = customerRepository.login(email);
-    HashMap<String,Integer> log = new HashMap<String,Integer>();
+    HashMap<String,Optional<String>> log = new HashMap<String,Optional<String>>();
     if (dbpassword.isEmpty()) {
 
 
-      log.put("비회원", -1);
+      log.put("status", Optional.of("-1"));
 
 
       return log; // 아이디가 없는 경우
 
     } else if (!password.equals(dbpassword.get().getPassword())) {
 
-      log.put("회원", 0);
+      log.put("status",Optional.of("0"));
       return log; // 비밀번호 불일치
     } else {
 
 
-      log.put(email, 1);
+      log.put("status",Optional.of("1"));
       session.setAttribute("email", email);
-      return log; // 로그인 성공
+      Optional<String> name = customerRepository.findByUsername(email);
 
+      if (name.isPresent()) {
+        log.put("name",name); // 이름 추가
+      }
+
+      return log;
     }
   }
-
-
-
-
-
 
   public Optional<Customer> selectMember(HttpSession session) {
     String email = (String) session.getAttribute("email");

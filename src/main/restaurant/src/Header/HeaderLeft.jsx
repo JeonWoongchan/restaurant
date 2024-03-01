@@ -2,9 +2,12 @@ import React from 'react';
 import './css/HeaderLeft.css'
 import { GrClose } from "react-icons/gr";
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function HeaderLeft(props) {
     const navigate = useNavigate()
+    const isLogin = useSelector(state=>state.loginReducer.isLogin)
+    const userData = useSelector(state=>state.loginReducer.userData)
 
     const navigateHandler = (link)=>{
         navigate(link);
@@ -22,8 +25,14 @@ export default function HeaderLeft(props) {
                                 <div className="user-name"></div>
                                 <div className="logout"></div>
                             </div> */}
-                        <div className="sign-in" onClick={()=>{navigateHandler('/login/sign-in')}}>로그인</div>
-                        <div className="sign-up" onClick={()=>{navigateHandler('/login/sign-up')}}>회원가입</div>
+                        {
+                            isLogin ? <div className="sign-in">{userData.name}</div>
+                            : <>
+                                <div className="sign-in" onClick={()=>{navigateHandler('/login/sign-in')}}>로그인</div>
+                                <div className="sign-up" onClick={()=>{navigateHandler('/login/sign-up')}}>회원가입</div>
+                            </>
+                        }
+                        
                     </div>
                     <div className="line"></div>
                     <div className="inner-middle">

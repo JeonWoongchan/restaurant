@@ -17,104 +17,105 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
 
-    & .sub-title {
-        color: var(--color-primary);
-        padding: 10px 0;
-        border-bottom: var(--color-primary) 1px solid;
-    }
+.payment-product .sub-title {
+    color: var(--color-primary);
+    padding: 10px 0;
+    border-bottom: var(--color-primary) 1px solid;
+}
 
-    & .detail {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+.payment-product .detail {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
-        & p {
-            font-size: 1.2rem;
-            position: relative;
-            padding: 0 20px;
-        }
+.payment-product .detail p {
+    font-size: 1.2rem;
+    position: relative;
+    padding: 0 20px;
+}
 
-        & p::before {
-            content: '';
-            background: var(--color-primary);
-            display: block;
-            position: absolute;
-            width: 0.2em;
-            height: 0.2em;
-            top: 0.7em;
-            left: 10px;
-            overflow: hidden;
-        }
+.payment-product .detail p::before {
+    content: '';
+    background: var(--color-primary);
+    display: block;
+    position: absolute;
+    width: 0.2em;
+    height: 0.2em;
+    top: 0.7em;
+    left: 10px;
+    overflow: hidden;
+}
 
-        & ul {
-            display: grid;
-            grid-template-columns: repeat(2, 2fr);
+.payment-product .detail ul {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+}
 
-            & .text {
+.payment-product .detail ul .text {
 
-                & p {
-                    font-size: 1rem;
-                }
+}
 
-                & input {
-                    width: 300px;
-                    height: 30px;
-                    border: 1px rgba(0, 0, 0, 0.1) solid;
-                    margin: 20px;
-                }
-            }
+.payment-product .detail ul .text p {
+    font-size: 1rem;
+}
 
-            & .phone {
+.payment-product .detail ul .text input {
+    width: 300px;
+    height: 30px;
+    border: 1px rgba(0, 0, 0, 0.1) solid;
+    margin: 20px;
+}
 
-                & select {
-                    width: 80px;
-                    height: 30px;
-                    border: 1px rgba(0, 0, 0, 0.1) solid;
-                    padding: 0 5px;
-                }
+.payment-product .detail ul .phone {
 
-                & input {
-                    width: 80px;
-                    height: 30px;
-                    border: 1px rgba(0, 0, 0, 0.1) solid;
-                }
+}
 
-                & .num {
-                    position: relative;
-                }
+.payment-product .detail ul .phone select {
+    width: 80px;
+    height: 30px;
+    border: 1px rgba(0, 0, 0, 0.1) solid;
+    padding: 0 5px;
+}
 
-                & .num::before {
-                    content: '';
-                    position: absolute;
-                    border-bottom: 1px solid #9C836A;
-                    width: 8px;
-                    top: 50%;
-                    display: block;
-                    left: -20px;
-                }
-            }
+.payment-product .detail ul .phone input {
+    width: 80px;
+    height: 30px;
+    border: 1px rgba(0, 0, 0, 0.1) solid;
+}
 
-            & p {
-                font-size: 1rem;
-            }
-        }
+.payment-product .detail ul .phone .num {
+    position: relative;
+}
 
-        & .check {
+.payment-product .detail ul .phone .num::before {
+    content: '';
+    position: absolute;
+    border-bottom: 1px solid #9C836A;
+    width: 8px;
+    top: 50%;
+    display: block;
+    left: -20px;
+}
 
+.payment-product .detail ul .phone p {
+    font-size: 1rem;
+}
 
+.payment-product .detail .check {
 
-            & p {
-                font-size: 1rem;
-            }
+}
 
-            & .point {
-                width: 80px;
-                height: 30px;
-                border: 1px rgba(0, 0, 0, 0.1) solid;
-            }
-        }
-    }
+.payment-product .detail .check p {
+    font-size: 1rem;
+}
+
+.payment-product .detail .check .point {
+    width: 80px;
+    height: 30px;
+    border: 1px rgba(0, 0, 0, 0.1) solid;
 }
 
 #payment .input-list {

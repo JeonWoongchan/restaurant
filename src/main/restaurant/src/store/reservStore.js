@@ -1,20 +1,32 @@
 import { combineReducers, createSlice } from "@reduxjs/toolkit";
 
-const personnelSlice = createSlice({
-    name: 'personnelSlice',
-    initialState: '',
+const reservUserData = createSlice({
+    name: 'reservUserData',
+    initialState: {'name':'', 'email':'', 'phone' : '', 'point': ''},
     reducers: {
-        setPersonnelSlice(state, action) {
-            return action.payload; // 예시 액션 생성자
+        setReservUserData(state, action) {
+            return action.payload; 
         }
     }
 });
 
-export const { setPersonnelSlice } = personnelSlice.actions;
+export const { setReservUserData } = reservUserData.actions;
+
+const reservData = createSlice({
+    name: 'reservData',
+    initialState: '',
+    reducers: {
+        setReservData(state, action) {
+            return action.payload; 
+        }
+    }
+});
+
+export const { setReservData } = reservData.actions;
 
 const reservReducer = combineReducers({
-    personnelSlice: personnelSlice.reducer,
-
+    reservUserData: reservUserData.reducer,
+    reservData: reservData.reducer,
 });
 
 export default reservReducer;
