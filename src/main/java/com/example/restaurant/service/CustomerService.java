@@ -66,7 +66,7 @@ public class CustomerService {
 
       log.put("status",Optional.of("1"));
       session.setAttribute("email", email);
-      Optional<String> name = customerRepository.findByUsername(email);
+      Optional<String> name = customerRepository.findByname(email);
 
       if (name.isPresent()) {
         log.put("name",name); // 이름 추가

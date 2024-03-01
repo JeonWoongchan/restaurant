@@ -3,7 +3,7 @@ import { combineReducers, createSlice } from "@reduxjs/toolkit";
 // 현재 로그인 중인지 여부
 const isLogin = createSlice({
     name: 'isLogin',
-    initialState: false,
+    initialState: sessionStorage.getItem('isLogin'),
     reducers: {
         setIsLogin(state, action) {
             return action.payload; 
@@ -16,7 +16,7 @@ export const { setIsLogin } = isLogin.actions;
 // 로그인한 사용자 정보
 const userData = createSlice({
     name: 'userData',
-    initialState: {'name':'', 'email':'', 'phone' : '', 'point': ''},
+    initialState: {'name':sessionStorage.getItem('user'), 'email':'', 'phone' : '', 'point': ''},
     reducers: {
         setUserData(state, action) {
             return action.payload; 

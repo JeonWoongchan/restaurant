@@ -20,7 +20,7 @@ export default function Payment() {
     const reservUserData = useSelector(state=>state.reservReducer.reservUserData)
     const reservData = useSelector(state=>state.reservReducer.reservData)
     
-    const { PaymentHandler } = PaymentLogic()
+    PaymentLogic()
 
     useEffect(()=>{
         const personnelData =  JSON.parse(localStorage.getItem('personnel'))
@@ -38,7 +38,7 @@ export default function Payment() {
         }
     },[])
 
-    const userDataHandler = ()=>{
+    const PaymentHandler = ()=>{
         dispatch(setReservUserData({'name': reservUser, 'email': reservEmail, 'phone' : reservPhoneFirst + reservPhoneMiddle + reservPhoneLast, 'point': ''}))
     }
 
@@ -100,7 +100,7 @@ export default function Payment() {
                                     }
                                 </ul>
                             </div>
-                            <button className='payment-submit' onClick={()=>{PaymentHandler(); userDataHandler()}}>예약하기</button>
+                            <button className='payment-submit' onClick={()=>{PaymentHandler()}}>예약하기</button>
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     List <Customer> findHelloBy();
 
-    Optional<String> findByUsername(@Param("email") String email);
+    @Query("select c.username from Customer  c where  c.email = :email ")
+    Optional<String> findByname(@Param("email") String email);
 
     // 복잡
     @Query("select c from Customer  c where  c.username = :username and c.point = :point")

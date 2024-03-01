@@ -11,15 +11,16 @@ import { useSelector } from 'react-redux';
 export default function Reservation() {
     const navigate = useNavigate()
     const isLogin = useSelector(state=>state.loginReducer.isLogin)
-    const [modalOn, setModalOn] = useState(true)
+    const [modalOn, setModalOn] = useState(false)
+    console.log(modalOn, isLogin)
 
     // 예약 페이지 접속 시 로컬스토리지 초기화
     useEffect(()=>{
         localStorage.removeItem('personnel')
         localStorage.removeItem('calendar')
 
-        if(isLogin){
-            setModalOn(false)
+        if(!isLogin){
+            setModalOn(true)
         }
     },[])
 

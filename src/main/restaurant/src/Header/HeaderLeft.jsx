@@ -14,6 +14,8 @@ export default function HeaderLeft(props) {
         props.setHeaderLeftOn(false)
     }
 
+    console.log(userData, isLogin)
+
     return (
         <div id='header-left'>
             <div className="header-left-container">
