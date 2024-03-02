@@ -51,5 +51,14 @@ public class CustomerController {
 
     }
 
+    @GetMapping("/login-check")
+    public String myEndpoint(@RequestHeader("Authorization") String authorizationHeader,
+                             @RequestHeader("Content-Type") String contentTypeHeader) {
+        // 헤더 값에 따라 다른 작업을 수행할 수 있습니다.
+
+        return "Received Authorization header: " + authorizationHeader +
+                ", Content-Type header: " + contentTypeHeader;
+    }
+
 }
 
