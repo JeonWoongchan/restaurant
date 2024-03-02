@@ -3,6 +3,9 @@ package com.example.restaurant.service;
 import com.example.restaurant.entity.Customer;
 import com.example.restaurant.repository.CustomerRepository;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpSession;
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.List;
@@ -64,14 +68,24 @@ public class CustomerService {
     } else {
 
 
-      log.put("status",Optional.of("1"));
+      log.put("status", Optional.of("1"));
       session.setAttribute("email", email);
       Optional<String> name = customerRepository.findByname(email);
-
       if (name.isPresent()) {
-        log.put("name",name); // 이름 추가
+        log.put("name", name); // 이름 추가
       }
 
+      byte[] secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256).getEncoded();
+
+// 생성된 비밀키를 Base64 인코딩하여 저장
+      String base64EncodedSecretKey = Base64.getEncoder().encodeToString(secretKey);
+
+      // 토큰 생성
+      String token = Jwts.builder()
+              .setSubject(email)
+              .signWith(SignatureAlgorithm.HS256, secretKey)
+              .compact();
+      log.put("token", Optional.of(token));
       return log;
     }
   }
