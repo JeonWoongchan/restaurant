@@ -63,6 +63,8 @@ public class AuthService {
     return generateRefreshToken(email);
   }
 
+
+
   // 토큰에서 이메일 추출
   public String extractEmailFromToken(String token) {
     try {
