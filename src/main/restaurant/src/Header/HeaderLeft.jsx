@@ -12,14 +12,16 @@ export default function HeaderLeft(props) {
     const isLogin = useSelector(state=>state.loginReducer.isLogin)
     const userData = useSelector(state=>state.loginReducer.userData)
 
+    useEffect(()=>{
+        loginCheckHandler() // 로그인 판별 함수
+    },[])
+    
     const navigateHandler = (link)=>{
         navigate(link);
         props.setHeaderLeftOn(false)
     }
 
-    useEffect(()=>{
-        loginCheckHandler() // 로그인 판별 함수
-    },[])
+    
 
     return (
         <div id='header-left'>

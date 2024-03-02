@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PaymentLogic from '../backend/PaymentLogic';
 import { setReservData, setReservUserData } from '../store/reservStore';
+import IsLoginCheck from '../backend/IsLoginCheck';
 
 export default function Payment() {
     const navigate = useNavigate()
@@ -19,6 +20,13 @@ export default function Payment() {
     const userData = useSelector(state=>state.loginReducer.userData)
     const reservUserData = useSelector(state=>state.reservReducer.reservUserData)
     const reservData = useSelector(state=>state.reservReducer.reservData)
+
+    const { loginCheckHandler } = IsLoginCheck()
+
+    // 로그인 판별
+    useEffect(()=>{
+        loginCheckHandler() // 로그인 판별 함수
+    },[])
     
     PaymentLogic()
 

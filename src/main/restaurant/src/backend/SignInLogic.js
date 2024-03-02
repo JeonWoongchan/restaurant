@@ -2,33 +2,36 @@ import React from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import getToken from '../Function/getToken'
+import { Cookies } from "react-cookie";
 
 // 로그인 로직, 엑세스토큰 유효기간 얼마 안남았을 때 리프레시 토큰 보내서 엑세스토큰 재발급
 export default function SignInLogic() {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const cookies = new Cookies();
 
     const signInEmail = useSelector(state => state.loginReducer.signInEmail)
     const signInPw = useSelector(state => state.loginReducer.signInPw)
 
     // 로그인 성공시 로직
     const loginSuccess = (data) => {
-        document.cookie = `refreshToken=${data.refreshToken}; Secure; HttpOnly; SameSite=Strict`; // 리프레시 토큰을 쿠키에 저장
+        // document.cookie = `refreshToken=${data.refreshToken}; Secure; HttpOnly; SameSite=Strict`; // 리프레시 토큰을 쿠키에 저장
+        cookies.set('accessToken', data.accessToken) 
+        // document.cookie = `accessToken=${data.accessToken}; Secure; HttpOnly; SameSite=Strict`; // 리프레시 토큰을 쿠키에 저장
+        // localStorage.setItem('accessToken', data.accessToken);
         axios.defaults.headers.common['Authorization'] = `Bearer ${data.accessToken}`; // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
         localStorage.setItem('userName', data.name)
-
+        console.log(data.refreshToken)
         navigate('/')
 
         setTimeout(() => { // accessTokenTime 유효기간 만료 30초 전에 실행
-            sendRefreshToken()
-        }, data.accessTokenTime - 30000);
+            sendRefreshToken(data.refreshToken)
+        }, data.accessTokenExpiration - 30000);
     }
 
-    const sendRefreshToken = () => {
+    const sendRefreshToken = (Token) => {
         axios
             .post("http://localhost:8080/login/refreshToken", {
-                refreshToken: getToken('refreshToken') // 쿠키에서 리프레시 토큰 가져옴
+                refreshToken: Token
             })
             .then((res) => {
                 console.log(res.data)

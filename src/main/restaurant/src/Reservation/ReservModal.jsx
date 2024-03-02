@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './css/ReservModal.css'
 import { useNavigate } from 'react-router-dom';
+import IsLoginCheck from '../backend/IsLoginCheck';
+import { useSelector } from 'react-redux';
 
 export default function ReservModal(props) {
     const navigate = useNavigate()
+    const isLogin = useSelector(state=>state.loginReducer.isLogin)
+
+    const [modalOn, setModalOn] = useState(false)
+    const { loginCheckHandler } = IsLoginCheck()
+
+    // 로그인 판별
+    useEffect(()=>{
+        loginCheckHandler() // 로그인 판별 함수
+    },[])
+
+    useEffect(()=>{
+        if(!isLogin){
+            setModalOn(false)
+        }
+    },[isLogin])
 
     return (
-        <div id='reserv-modal'>
+        <div id='reserv-modal' style={{display : modalOn ? '' : 'none'}}>
             <div className="modal-container">
                 <div className="modal-inner">
                     <div className="modal-title">

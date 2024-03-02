@@ -62,4 +62,4 @@ logging:
 jwt:
     secretKey: secretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKey
     accessTokenExpirationMinutes: 860000
-    refreshTokenExpirationMinutes: 860000
+    refreshTokenExpirationMinutes: 1600000

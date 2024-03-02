@@ -63,28 +63,35 @@ public class CustomerService {
       log.put("status", Optional.of("0"));
       return log; // 비밀번호 불일치
     } else {
-      log.put("status", Optional.of("1"));
-      session.setAttribute("email", email);
-      Optional<String> name = customerRepository.findByname(email);
-      name.ifPresent(n -> log.put("name", name)); // 이름 추가
-
-      // 액세스 토큰 생성
-      String accessToken = authService.generateAccessTokenWrapper(email);
-      log.put("accessToken", Optional.of(accessToken));
-
-      // 리프레시 토큰 생성
-      String refreshToken = authService.generateRefreshTokenWrapper(email);
-      log.put("refreshToken", Optional.of(refreshToken));
-
-
-      String acess = String.valueOf(authService.getAccessTokenExpirationMinutes());
-      String refresh = String.valueOf(authService.getRefreshTokenExpirationMinutes());
-
-      log.put("accessTokenTime", Optional.of(acess));
-      log.put("refreshTokenTime", Optional.of(refresh));
-
-      return log;
+      // 로그인 성공 시 액세스 토큰 및 리프레시 토큰 발급
+      return issueTokens(email,session);
     }
+  }
+
+  // 액세스 토큰 및 리프레시 토큰 발급 메소드
+  private HashMap<String, Optional<String>> issueTokens(String email,HttpSession session) {
+    HashMap<String, Optional<String>> log = new HashMap<>();
+
+    log.put("status", Optional.of("1"));
+    session.setAttribute("email", email);
+    Optional<String> name = customerRepository.findByname(email);
+    name.ifPresent(n -> log.put("name", name)); // 이름 추가
+
+    // 액세스 토큰 생성
+    String accessToken = authService.generateAccessTokenWrapper(email);
+    log.put("accessToken", Optional.of(accessToken));
+
+    // 리프레시 토큰 생성
+    String refreshToken = authService.generateRefreshTokenWrapper(email);
+    log.put("refreshToken", Optional.of(refreshToken));
+
+    String accessExpiration = String.valueOf(authService.getAccessTokenExpirationMinutes());
+    String refreshExpiration = String.valueOf(authService.getRefreshTokenExpirationMinutes());
+
+    log.put("accessTokenExpiration", Optional.of(accessExpiration));
+    log.put("refreshTokenExpiration", Optional.of(refreshExpiration));
+
+    return log;
   }
 
 
@@ -100,6 +107,27 @@ public class CustomerService {
       return customer;
     }
 
+  }
+
+
+  // 액세스 토큰 갱신 메소드
+  public HashMap<String, Optional<String>> refreshAccessToken(String refreshToken, HttpSession session) {
+    HashMap<String, Optional<String>> log = new HashMap<>();
+
+    // 리프레시 토큰 검증 및 유효성 확인
+    if (authService.isValidRefreshToken(refreshToken)) {
+      String email = authService.extractEmailFromToken(refreshToken);
+      if (email != null) {
+        // 새로운 액세스 토큰 발급
+        return issueTokens(email,session);
+      } else {
+        log.put("status", Optional.of("-1"));
+        return log; // 이메일 추출 실패
+      }
+    } else {
+      log.put("status", Optional.of("-2"));
+      return log; // 유효하지 않은 리프레시 토큰
+    }
   }
 
 

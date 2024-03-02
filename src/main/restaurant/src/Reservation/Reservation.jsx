@@ -7,21 +7,18 @@ import ReservModal from './ReservModal';
 import { MdErrorOutline } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import IsLoginCheck from '../backend/IsLoginCheck';
 
 export default function Reservation() {
     const navigate = useNavigate()
     const isLogin = useSelector(state=>state.loginReducer.isLogin)
-    const [modalOn, setModalOn] = useState(false)
-    console.log(modalOn, isLogin)
 
     // 예약 페이지 접속 시 로컬스토리지 초기화
     useEffect(()=>{
         localStorage.removeItem('personnel')
         localStorage.removeItem('calendar')
-
-        if(!isLogin){
-            setModalOn(true)
-        }
+        console.log(isLogin)
+        
     },[])
 
     const moveToPayment = ()=>{
@@ -74,7 +71,7 @@ export default function Reservation() {
                         <button className="reserv-submit" onClick={()=>{moveToPayment()}}>다음단계</button>
                     </div>
                 </div>
-                {modalOn ? <ReservModal setModalOn={setModalOn}/> : null}
+                <ReservModal/>
             </div>
         </div>
     );
