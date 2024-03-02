@@ -5,6 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -19,17 +20,15 @@ public class AuthService {
   @Value("${jwt.secretKey}") // application.properties 또는 application.yml에 설정된 시크릿 키
   private String secretKey;
 
+  @Getter
   @Value("${jwt.accessTokenExpirationMinutes}") // application.properties 또는 application.yml에 설정된 액세스 토큰 만료 시간(분)
   private int accessTokenExpirationMinutes;
 
+  @Getter
   @Value("${jwt.refreshTokenExpirationMinutes}") // application.properties 또는 application.yml에 설정된 리프레시 토큰 만료 시간(분)
   private int refreshTokenExpirationMinutes;
 
-  private final CustomerRepository customerRepository;
 
-  public AuthService(CustomerRepository customerRepository) {
-    this.customerRepository = customerRepository;
-  }
 
   private String generateAccessToken(String email) {
     LocalDateTime currentTime = LocalDateTime.now();
@@ -61,4 +60,7 @@ public class AuthService {
   public String generateRefreshTokenWrapper(String email) {
     return generateRefreshToken(email);
   }
+
+
+
 }

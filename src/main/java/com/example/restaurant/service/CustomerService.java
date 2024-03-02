@@ -76,6 +76,13 @@ public class CustomerService {
       String refreshToken = authService.generateRefreshTokenWrapper(email);
       log.put("refreshToken", Optional.of(refreshToken));
 
+
+      String acess = String.valueOf(authService.getAccessTokenExpirationMinutes());
+      String refresh = String.valueOf(authService.getRefreshTokenExpirationMinutes());
+
+      log.put("acessTokentime", Optional.of(acess));
+      log.put("refreshTime", Optional.of(refresh));
+
       return log;
     }
   }

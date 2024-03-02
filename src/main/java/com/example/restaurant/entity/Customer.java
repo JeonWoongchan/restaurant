@@ -38,6 +38,8 @@ public class Customer {
     private int point;
 
 
+    @Column(name = "refresh-token")
+
     @OneToMany(mappedBy = "customer")
     private List<Reserve> reserves =new ArrayList<>();
 
