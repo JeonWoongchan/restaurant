@@ -80,8 +80,8 @@ public class CustomerService {
       String acess = String.valueOf(authService.getAccessTokenExpirationMinutes());
       String refresh = String.valueOf(authService.getRefreshTokenExpirationMinutes());
 
-      log.put("acessTokentime", Optional.of(acess));
-      log.put("refreshTime", Optional.of(refresh));
+      log.put("accessTokenTime", Optional.of(acess));
+      log.put("refreshTokenTime", Optional.of(refresh));
 
       return log;
     }

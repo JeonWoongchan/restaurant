@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './css/HeaderLeft.css'
 import { GrClose } from "react-icons/gr";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import IsLoginCheck from '../backend/IsLoginCheck';
 
 export default function HeaderLeft(props) {
     const navigate = useNavigate()
+    const { loginCheckHandler } = IsLoginCheck()
+
     const isLogin = useSelector(state=>state.loginReducer.isLogin)
     const userData = useSelector(state=>state.loginReducer.userData)
 
@@ -14,7 +17,9 @@ export default function HeaderLeft(props) {
         props.setHeaderLeftOn(false)
     }
 
-    console.log(userData, isLogin)
+    useEffect(()=>{
+        loginCheckHandler() // 로그인 판별 함수
+    },[])
 
     return (
         <div id='header-left'>

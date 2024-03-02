@@ -1,21 +1,50 @@
 import React from 'react';
 import axios from 'axios';
-import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsLogin, setSignInEmail, setSignInPw, setUserData } from '../store/loginStore';
+import getToken from '../Function/getToken'
 
-// 로그인 로직
+// 로그인 로직, 엑세스토큰 유효기간 얼마 안남았을 때 리프레시 토큰 보내서 엑세스토큰 재발급
 export default function SignInLogic() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const signInEmail = useSelector(state => state.loginReducer.signInEmail)
     const signInPw = useSelector(state => state.loginReducer.signInPw)
-    const userData = useSelector(state => state.loginReducer.userData)
-    const isLogin = useSelector(state => state.loginReducer.isLogin)
 
-    console.log(userData, isLogin)
+    // 로그인 성공시 로직
+    const loginSuccess = (data) => {
+        document.cookie = `refreshToken=${data.refreshToken}; Secure; HttpOnly; SameSite=Strict`; // 리프레시 토큰을 쿠키에 저장
+        axios.defaults.headers.common['Authorization'] = `Bearer ${data.accessToken}`; // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
+        localStorage.setItem('userName', data.name)
+
+        navigate('/')
+
+        setTimeout(() => { // accessTokenTime 유효기간 만료 30초 전에 실행
+            sendRefreshToken()
+        }, data.accessTokenTime - 30000);
+    }
+
+    const sendRefreshToken = () => {
+        axios
+            .post("http://localhost:8080/login/refreshToken", {
+                refreshToken: getToken('refreshToken') // 쿠키에서 리프레시 토큰 가져옴
+            })
+            .then((res) => {
+                console.log(res.data)
+                if (res.data.status == 1) { // 엑세스토큰 재발급 성공
+                    loginSuccess(res.data)
+                } else if (res.data.status == -1) { // 리프레시토큰 만료
+                    navigate('/login/sign-in')
+                    alert('다시 로그인 필요')
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    // 로그인 요청
     const signInHandler = () => {
         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (emailPattern.test(signInEmail) && signInEmail != null) {
@@ -27,13 +56,7 @@ export default function SignInLogic() {
                 .then((res) => {
                     console.log(res.data)
                     if (res.data.status == 1) { // 로그인 성공
-                        // document.cookie = `accessToken=${res.data.accessToken}; Secure; HttpOnly; SameSite=Strict`; // https only 쿠키에 저장
-                        document.cookie = `refreshToken=${res.data.refreshToken}; Secure; HttpOnly; SameSite=Strict`; // https only 쿠키에 저장
-
-                        // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
-                        axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.accessToken}`;
-
-                        navigate('/')
+                        loginSuccess(res.data)
                     } else if (res.data.status == -1) { // 이메일 없음
                         navigate('/login/sign-in')
                         alert('이메일 오류')
