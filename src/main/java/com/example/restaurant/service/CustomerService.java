@@ -32,6 +32,8 @@ public class CustomerService {
   @Autowired
   EmailService emailService;
 
+  @Autowired
+  AuthService authService;
 
 
   // 회원 가입
@@ -50,45 +52,34 @@ public class CustomerService {
   }
 
   // 로그인
-  public HashMap<String,Optional<String>> login(String email, String password, HttpSession session) {
-    Optional<Customer> dbpassword = customerRepository.login(email);
-    HashMap<String,Optional<String>> log = new HashMap<String,Optional<String>>();
-    if (dbpassword.isEmpty()) {
+  public HashMap<String, Optional<String>> login(String email, String password, HttpSession session) {
+    Optional<Customer> dbPassword = customerRepository.login(email);
+    HashMap<String, Optional<String>> log = new HashMap<>();
 
-
+    if (dbPassword.isEmpty()) {
       log.put("status", Optional.of("-1"));
-
-
       return log; // 아이디가 없는 경우
-
-    } else if (!password.equals(dbpassword.get().getPassword())) {
-
-      log.put("status",Optional.of("0"));
+    } else if (!password.equals(dbPassword.get().getPassword())) {
+      log.put("status", Optional.of("0"));
       return log; // 비밀번호 불일치
     } else {
-
-
       log.put("status", Optional.of("1"));
       session.setAttribute("email", email);
       Optional<String> name = customerRepository.findByname(email);
-      if (name.isPresent()) {
-        log.put("name", name); // 이름 추가
-      }
+      name.ifPresent(n -> log.put("name", name)); // 이름 추가
 
-      byte[] secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256).getEncoded();
+      // 액세스 토큰 생성
+      String accessToken = authService.generateAccessTokenWrapper(email);
+      log.put("accessToken", Optional.of(accessToken));
 
-// 생성된 비밀키를 Base64 인코딩하여 저장
-      String base64EncodedSecretKey = Base64.getEncoder().encodeToString(secretKey);
+      // 리프레시 토큰 생성
+      String refreshToken = authService.generateRefreshTokenWrapper(email);
+      log.put("refreshToken", Optional.of(refreshToken));
 
-      // 토큰 생성
-      String token = Jwts.builder()
-              .setSubject(email)
-              .signWith(SignatureAlgorithm.HS256, secretKey)
-              .compact();
-      log.put("token", Optional.of(token));
       return log;
     }
   }
+
 
   public Optional<Customer> selectMember(HttpSession session) {
     String email = (String) session.getAttribute("email");
