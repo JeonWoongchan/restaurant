@@ -2,7 +2,7 @@ import { combineReducers, createSlice } from "@reduxjs/toolkit";
 
 const reservUserData = createSlice({
     name: 'reservUserData',
-    initialState: {'name':'', 'email':'', 'phone' : '', 'point': ''},
+    initialState: JSON.parse(localStorage.getItem('reservUserData')),
     reducers: {
         setReservUserData(state, action) {
             return action.payload; 

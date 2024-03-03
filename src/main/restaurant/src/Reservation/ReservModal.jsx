@@ -18,6 +18,8 @@ export default function ReservModal(props) {
 
     useEffect(()=>{
         if(!isLogin){
+            setModalOn(true)
+        }else{
             setModalOn(false)
         }
     },[isLogin])
@@ -33,7 +35,7 @@ export default function ReservModal(props) {
                     <div className="modal-main">
                         <div className="content" onClick={()=>{navigate('/login/sign-in')}}>로그인</div>
                         OR
-                        <div className="content" onClick={()=>{props.setModalOn(false)}}>비회원 예약</div>
+                        <div className="content" onClick={()=>{setModalOn(false)}}>비회원 예약</div>
                     </div>
                     <div className="modal-detail">
                         <p>레스토랑 우디의 회원이 되시면<br/> 더 많은 혜택을 누리실 수 있습니다.</p>

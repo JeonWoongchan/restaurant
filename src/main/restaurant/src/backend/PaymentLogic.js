@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsLogin, setSignInEmail, setSignInPw, setUserData } from '../store/loginStore';
@@ -11,31 +11,35 @@ export default function PaymentLogic() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const reservUserData = useSelector(state=>state.reservReducer.reservUserData)
-    const reservData = useSelector(state=>state.reservReducer.reservData)
+    const personnelData = JSON.parse(localStorage.getItem('personnel'))
+    const calendarData = JSON.parse(localStorage.getItem('calendar'))
 
-    useEffect(()=>{
-        if(reservUserData.name){
-            axios
-                .post("http://localhost:8080/reservation/payment", {
-                    reservUserData: reservUserData,
-                    reservData: reservData
-                })
-                .then((res) => {
-                    console.log(res.data) 
-                    if (res.data) { 
-                        
-                    } else if (!res.data) { 
-                        
-                    }
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
-        }       
-    },[reservUserData])
+    const paymentHandler = () => {
+        console.log(calendarData.date.split(' ')[0].replaceAll('.', '-'))
+        console.log(calendarData.time)
+        console.log(personnelData.adult + personnelData.child + personnelData.baby)
+
+        axios
+            .post("http://localhost:8080/reservation/payment", {
+                date: calendarData.date.split(' ')[0].replaceAll('.', '-'),
+                time: calendarData.time,
+                personnel : personnelData.adult + personnelData.child + personnelData.baby
+
+            })
+            .then((res) => {
+                console.log(res.data)
+                if (res.data) {
+
+                } else if (!res.data) {
+
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 
     return {
-        
+        paymentHandler
     }
 }

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import './css/Payment.css'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PaymentLogic from '../backend/PaymentLogic';
 import { setReservData, setReservUserData } from '../store/reservStore';
 import IsLoginCheck from '../backend/IsLoginCheck';
+import PaymentUserData from '../backend/PaymentUserData';
 
 export default function Payment() {
     const navigate = useNavigate()
@@ -17,20 +18,19 @@ export default function Payment() {
     const [reservEmail, setReservEmail] = useState()
 
     const isLogin = useSelector(state=>state.loginReducer.isLogin)
-    const userData = useSelector(state=>state.loginReducer.userData)
     const reservUserData = useSelector(state=>state.reservReducer.reservUserData)
     const reservData = useSelector(state=>state.reservReducer.reservData)
 
-    const { loginCheckHandler } = IsLoginCheck()
-
-    // 로그인 판별
-    useEffect(()=>{
-        loginCheckHandler() // 로그인 판별 함수
-    },[])
-    
-    PaymentLogic()
+    const { paymentHandler } = PaymentLogic()
 
     useEffect(()=>{
+        if(reservData != localStorage.getItem('reservData')){
+            dispatch(setReservData(localStorage.getItem('reservData'))) // 예약정보 최신화
+        }
+    })
+
+    useEffect(()=>{
+
         const personnelData =  JSON.parse(localStorage.getItem('personnel'))
         const calendarData =  JSON.parse(localStorage.getItem('calendar'))
 
@@ -40,15 +40,15 @@ export default function Payment() {
                                     ${personnelData.child != 0 ? `어린이(${personnelData.child})` : ''}
                                     ${personnelData.baby != 0 ? `유아(${personnelData.baby})` : ''}`
 
-            dispatch(setReservData(newReservData))
+            localStorage.setItem('reservData',newReservData)
         }else{ // 예약 인원, 날짜 없이 결제페이지 진입 막음
             navigate('/reservation')
         }
     },[])
 
-    const PaymentHandler = ()=>{
+    useEffect(()=>{
         dispatch(setReservUserData({'name': reservUser, 'email': reservEmail, 'phone' : reservPhoneFirst + reservPhoneMiddle + reservPhoneLast, 'point': ''}))
-    }
+    },[reservUser, reservPhoneFirst, reservPhoneMiddle, reservPhoneLast, reservEmail])
 
     return (
         <div id='payment'>
@@ -72,12 +72,12 @@ export default function Payment() {
                                 <ul>
                                     <li className='text'>
                                         <p>이름</p>
-                                        <input type="text" defaultValue={isLogin ? userData.name : ''} onChange={(e)=>{setReservUser(e.target.value)}}/>
+                                        <input type="text" defaultValue={reservUserData.name} onChange={(e)=>{setReservUser(e.target.value)}}/>
                                     </li>
                                     <li className='phone'>
                                         <p>휴대폰 번호</p>
                                         <div className="input-list">
-                                            <select name="" id="" defaultValue={isLogin ? userData.phone.substring(0, 3) : ''} onChange={(e)=>{setReservPhoneFirst(e.target.value)}}>
+                                            <select name="" id="" defaultValue={reservUserData.phone.substring(0, 3)} onChange={(e)=>{setReservPhoneFirst(e.target.value)}}>
                                                 <option value="010">010</option>
                                                 <option value="011">011</option>
                                                 <option value="016">016</option>
@@ -86,21 +86,21 @@ export default function Payment() {
                                                 <option value="019">019</option>
                                             </select>
                                             <div className="num">
-                                                <input type="text" defaultValue={isLogin ? userData.phone.substring(3, 7) : ''} onChange={(e)=>{setReservPhoneMiddle(e.target.value)}}/>
+                                                <input type="text" defaultValue={reservUserData.phone.substring(3, 7)} onChange={(e)=>{setReservPhoneMiddle(e.target.value)}}/>
                                             </div>
                                             <div className="num">
-                                                <input type="text" defaultValue={isLogin ? userData.phone.substring(7) : ''} onChange={(e)=>{setReservPhoneLast(e.target.value)}}/>
+                                                <input type="text" defaultValue={reservUserData.phone.substring(7)} onChange={(e)=>{setReservPhoneLast(e.target.value)}}/>
                                             </div>
                                         </div>
                                     </li>
                                     <li className='text'>
                                         <p>이메일</p>
-                                        <input type="text" placeholder='WooDy@restaurant.com' defaultValue={isLogin ? userData.email : ''} onChange={(e)=>{setReservEmail(e.target.value)}}/>
+                                        <input type="text" placeholder='WooDy@restaurant.com' defaultValue={reservUserData.email} onChange={(e)=>{setReservEmail(e.target.value)}}/>
                                     </li>
                                     {
                                         isLogin ?
                                         <li className='check'>
-                                            <p>포인트 사용(잔여 포인트: {userData.point}점)</p>
+                                            <p>포인트 사용(잔여 포인트: {reservUserData.point}점)</p>
                                             <div className="input-list">
                                                 <input className='point' type="text"/>
                                             </div>
@@ -108,7 +108,7 @@ export default function Payment() {
                                     }
                                 </ul>
                             </div>
-                            <button className='payment-submit' onClick={()=>{PaymentHandler()}}>예약하기</button>
+                            <button className='payment-submit' onClick={()=>{paymentHandler()}}>예약하기</button>
                         </div>
                     </div>
                 </div>

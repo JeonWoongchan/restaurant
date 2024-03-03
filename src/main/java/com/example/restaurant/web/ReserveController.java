@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
@@ -32,7 +34,13 @@ public class ReserveController {
 
   ReserveService reserveService;
 
-  @GetMapping("/payment")
+  @Autowired
+  public ReserveController(CustomerService customerService, ReserveService reserveService) {
+    this.customerService = customerService;
+    this.reserveService = reserveService;
+  }
+
+  @PostMapping("/user-data")
   @ResponseBody
   public ResponseEntity<Optional<Customer>> reserve(HttpSession session) {
     return ResponseEntity.ok(customerService.selectMember(session));

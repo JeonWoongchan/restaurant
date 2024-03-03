@@ -14,10 +14,8 @@ export default function SignInLogic() {
 
     // 로그인 성공시 로직
     const loginSuccess = (data) => {
-        // document.cookie = `refreshToken=${data.refreshToken}; Secure; HttpOnly; SameSite=Strict`; // 리프레시 토큰을 쿠키에 저장
         cookies.set('accessToken', data.accessToken) 
-        // document.cookie = `accessToken=${data.accessToken}; Secure; HttpOnly; SameSite=Strict`; // 리프레시 토큰을 쿠키에 저장
-        // localStorage.setItem('accessToken', data.accessToken);
+        
         axios.defaults.headers.common['Authorization'] = `Bearer ${data.accessToken}`; // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
         localStorage.setItem('userName', data.name)
         console.log(data.refreshToken)
@@ -37,6 +35,7 @@ export default function SignInLogic() {
                 console.log(res.data)
                 if (res.data.status == 1) { // 엑세스토큰 재발급 성공
                     loginSuccess(res.data)
+                    localStorage.setItem('isLogin', true)
                 } else if (res.data.status == -1) { // 리프레시토큰 만료
                     navigate('/login/sign-in')
                     alert('다시 로그인 필요')

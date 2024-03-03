@@ -26,9 +26,11 @@ export default function IsLoginCheck() {
                     if (res.data != -1) { // 로그인 중임
                         console.log('로그인 중임')
                         dispatch(setIsLogin(true))
+                        localStorage.setItem('isLogin', true)
                     } else if (res.data == -1) { // 로그인 중 아님
                         console.log('로그인 중 아님')
                         dispatch(setIsLogin(false))
+                        localStorage.setItem('isLogin', false)
                     }
                 })
                 .catch((error) => {

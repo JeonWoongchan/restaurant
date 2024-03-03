@@ -3,7 +3,7 @@ import { combineReducers, createSlice } from "@reduxjs/toolkit";
 // 현재 로그인 중인지 여부
 const isLogin = createSlice({
     name: 'isLogin',
-    initialState: false,
+    initialState: localStorage.getItem('isLogin'),
     reducers: {
         setIsLogin(state, action) {
             return action.payload; 

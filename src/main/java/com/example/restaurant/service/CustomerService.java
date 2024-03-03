@@ -98,7 +98,7 @@ public class CustomerService {
   public Optional<Customer> selectMember(HttpSession session) {
     String email = (String) session.getAttribute("email");
     Optional<Customer>  customer = Optional.empty();
-    if (email == null) {
+    if (email != null) {
       customer = customerRepository.findByEmail(email);
       return customer;
     } else {
@@ -108,7 +108,6 @@ public class CustomerService {
     }
 
   }
-
 
   // 액세스 토큰 갱신 메소드
   public HashMap<String, Optional<String>> refreshAccessToken(String refreshToken, HttpSession session) {

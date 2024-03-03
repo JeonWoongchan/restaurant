@@ -8,18 +8,22 @@ import { MdErrorOutline } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import IsLoginCheck from '../backend/IsLoginCheck';
+import PaymentUserData from '../backend/PaymentUserData';
 
 export default function Reservation() {
     const navigate = useNavigate()
-    const isLogin = useSelector(state=>state.loginReducer.isLogin)
+
+    const { getUserData } = PaymentUserData()
+
 
     // 예약 페이지 접속 시 로컬스토리지 초기화
     useEffect(()=>{
+        getUserData() // 유저 데이터 요청
+
         localStorage.removeItem('personnel')
         localStorage.removeItem('calendar')
-        console.log(isLogin)
-        
     },[])
+
 
     const moveToPayment = ()=>{
         const personnelData =  JSON.parse(localStorage.getItem('personnel'))
