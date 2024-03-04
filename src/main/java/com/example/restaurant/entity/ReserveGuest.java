@@ -23,6 +23,9 @@ public class ReserveGuest {
   private Date reg_date;
   private Date reserve_date;
   private Date end_date;
+  private int adults_count;
+  private int children_count;
+  private int infants_count;
   private String comment;
 
 

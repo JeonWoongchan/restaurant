@@ -1,9 +1,10 @@
 package com.example.restaurant.web;
 
 
-import com.example.restaurant.dto.ReserveAndCount;
+
 import com.example.restaurant.entity.Customer;
-import com.example.restaurant.entity.CustomerCount;
+
+import com.example.restaurant.entity.Guest;
 import com.example.restaurant.entity.Reserve;
 import com.example.restaurant.repository.CustomerRepository;
 import com.example.restaurant.service.CustomerService;
@@ -12,6 +13,8 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
@@ -32,7 +35,13 @@ public class ReserveController {
 
   ReserveService reserveService;
 
-  @GetMapping("/payment")
+  @Autowired
+  public ReserveController(CustomerService customerService, ReserveService reserveService) {
+    this.customerService = customerService;
+    this.reserveService = reserveService;
+  }
+
+  @PostMapping("/user-data")
   @ResponseBody
   public ResponseEntity<Optional<Customer>> reserve(HttpSession session) {
     return ResponseEntity.ok(customerService.selectMember(session));
@@ -40,10 +49,11 @@ public class ReserveController {
 
 
   @PostMapping("/payment")
-  public ResponseEntity<String> addReserve(@RequestBody ReserveAndCount reserveAndCount, HttpSession session) {
-    String customerCounts = reserveService.addReserveAndCount(reserveAndCount,session);
-    return ResponseEntity.ok(customerCounts);
+  public  ResponseEntity<String> addreserveController(HttpSession session, @RequestBody Reserve reserve, @RequestBody Guest guest) {
+    return ResponseEntity.ok(reserveService.addreserve(reserve,guest,session));
   }
+
+
 
 
 
