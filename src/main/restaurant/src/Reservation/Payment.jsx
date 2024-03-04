@@ -72,12 +72,12 @@ export default function Payment() {
                                 <ul>
                                     <li className='text'>
                                         <p>이름</p>
-                                        <input type="text" defaultValue={reservUserData.name} onChange={(e)=>{setReservUser(e.target.value)}}/>
+                                        <input type="text" defaultValue={isLogin ? reservUserData.name : null} onChange={(e)=>{setReservUser(e.target.value)}}/>
                                     </li>
                                     <li className='phone'>
                                         <p>휴대폰 번호</p>
                                         <div className="input-list">
-                                            <select name="" id="" defaultValue={reservUserData.phone.substring(0, 3)} onChange={(e)=>{setReservPhoneFirst(e.target.value)}}>
+                                            <select name="" id="" defaultValue={isLogin ? reservUserData.phone.substring(0, 3): null} onChange={(e)=>{setReservPhoneFirst(e.target.value)}}>
                                                 <option value="010">010</option>
                                                 <option value="011">011</option>
                                                 <option value="016">016</option>
@@ -86,21 +86,21 @@ export default function Payment() {
                                                 <option value="019">019</option>
                                             </select>
                                             <div className="num">
-                                                <input type="text" defaultValue={reservUserData.phone.substring(3, 7)} onChange={(e)=>{setReservPhoneMiddle(e.target.value)}}/>
+                                                <input type="text" defaultValue={isLogin ? reservUserData.phone.substring(3, 7): null} onChange={(e)=>{setReservPhoneMiddle(e.target.value)}}/>
                                             </div>
                                             <div className="num">
-                                                <input type="text" defaultValue={reservUserData.phone.substring(7)} onChange={(e)=>{setReservPhoneLast(e.target.value)}}/>
+                                                <input type="text" defaultValue={isLogin ? reservUserData.phone.substring(7): null} onChange={(e)=>{setReservPhoneLast(e.target.value)}}/>
                                             </div>
                                         </div>
                                     </li>
                                     <li className='text'>
                                         <p>이메일</p>
-                                        <input type="text" placeholder='WooDy@restaurant.com' defaultValue={reservUserData.email} onChange={(e)=>{setReservEmail(e.target.value)}}/>
+                                        <input type="text" placeholder='WooDy@restaurant.com' defaultValue={isLogin ? reservUserData.email: null} onChange={(e)=>{setReservEmail(e.target.value)}}/>
                                     </li>
                                     {
                                         isLogin ?
                                         <li className='check'>
-                                            <p>포인트 사용(잔여 포인트: {reservUserData.point}점)</p>
+                                            <p>포인트 사용(잔여 포인트: {isLogin ? reservUserData.point: null}점)</p>
                                             <div className="input-list">
                                                 <input className='point' type="text"/>
                                             </div>
