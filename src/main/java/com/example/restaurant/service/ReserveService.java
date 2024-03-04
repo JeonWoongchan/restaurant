@@ -1,11 +1,13 @@
 package com.example.restaurant.service;
 
 
-import com.example.restaurant.dto.ReserveAndCount;
+
 import com.example.restaurant.entity.Customer;
-import com.example.restaurant.entity.CustomerCount;
+
+import com.example.restaurant.entity.Guest;
 import com.example.restaurant.entity.Reserve;
 import com.example.restaurant.repository.CustomerRepository;
+import com.example.restaurant.repository.GusetRepository;
 import com.example.restaurant.repository.ReserveRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -26,40 +28,33 @@ public class ReserveService {
   CustomerService customerService;
 
 
-// 다른 코드들...
+  GusetRepository gusetRepository;
 
 
 
-// 다른 코드들...
 
-  // addReserveAndCount 메서드에서 세션에서 고객 ID를 가져와서 사용하는 코드
-  public  String addReserveAndCount(ReserveAndCount data, HttpSession session) {
-    Reserve reserve = data.getReserve();
-    CustomerCount customerCount = data.getCustomerCount();
+  public String  addreserve(Reserve reserve,  Guest guest, HttpSession session) {
 
-    // 세션에서 고객 정보를 가져옵니다.
-    Optional<Customer> customerOptional = customerService.selectMember(session);
+    Customer id = customerService.findByIdMembmer(session);
 
-    if (customerOptional.isPresent()) {
-      // 사용자가 로그인한 경우
-      Customer customer = customerOptional.get();
-      reserve.setCustomer(customer);
-      customerCount.setReserve(reserve); // 연관관계 설정
 
-      // Reserve와 CustomerCount를 저장하고자 하는 로직을 여기에 구현합니다.
-      reserve.getCustomerCounts().add(customerCount);
+    if (id != null) {
+
+      reserve.setCustomer(id);
       reserveRepository.save(reserve);
-      return "회원";
+      return "회원등록완료";
     } else {
-      // 사용자가 비회원인 경우
-      // 비회원 처리 로직을 추가하거나 예외를 던지거나, 다른 처리를 하십시오.
-      return "비회원";
+      gusetRepository.save(guest);
+      return "비회원등록완료";
     }
 
-
-
-
   }
+
+
+
+
+
+
 
 
 

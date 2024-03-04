@@ -22,8 +22,7 @@ public class Reserve {
   @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
   private Customer customer;
 
-  @OneToMany(mappedBy = "reserve", cascade = CascadeType.ALL)
-  private List<CustomerCount> customerCounts = new ArrayList<>();
+
 
   private Date reg_date;
   private Date reserve_date;

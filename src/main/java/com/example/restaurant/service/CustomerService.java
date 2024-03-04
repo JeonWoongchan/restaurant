@@ -109,6 +109,22 @@ public class CustomerService {
 
   }
 
+
+  public Customer findByIdMembmer(HttpSession session) {
+    String email = (String) session.getAttribute("email");
+     Customer  customer = null;
+    if (email == null) {
+      customer = customerRepository.findByIdtoEmail(email);
+      return customer;
+    } else {
+
+      // 비회원
+      return customer;
+    }
+
+  }
+
+
   // 액세스 토큰 갱신 메소드
   public HashMap<String, Optional<String>> refreshAccessToken(String refreshToken, HttpSession session) {
     HashMap<String, Optional<String>> log = new HashMap<>();
