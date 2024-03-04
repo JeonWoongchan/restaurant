@@ -110,20 +110,17 @@ public class CustomerService {
   }
 
 
-  public Customer findByIdMembmer(HttpSession session) {
+  public Optional<Customer> findByIdMembmer(HttpSession session) {
     String email = (String) session.getAttribute("email");
-     Customer  customer = null;
-    if (email == null) {
-      customer = customerRepository.findByIdtoEmail(email);
-      return customer;
+    System.out.println(email);
+
+    if (email != null) {
+      return customerRepository.findByIdtoEmail(email);
     } else {
-
       // 비회원
-      return customer;
+      return Optional.empty();
     }
-
   }
-
 
   // 액세스 토큰 갱신 메소드
   public HashMap<String, Optional<String>> refreshAccessToken(String refreshToken, HttpSession session) {

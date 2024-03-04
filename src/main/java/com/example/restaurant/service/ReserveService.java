@@ -12,7 +12,11 @@ import com.example.restaurant.repository.ReserveRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,34 +25,58 @@ import java.util.Optional;
 @Service
 public class ReserveService {
 
-
+  @Autowired
   ReserveRepository reserveRepository;
-  CustomerRepository customerRepository;
 
+
+  @Autowired
   CustomerService customerService;
 
 
-  GusetRepository gusetRepository;
 
 
 
 
-  public String  addreserve(Reserve reserve,  Guest guest, HttpSession session) {
 
-    Customer id = customerService.findByIdMembmer(session);
+  public String addreserve(Reserve reserve, HttpSession session) {
+
+    Optional<Customer> optionalCustomer = customerService.findByIdMembmer(session);
+
+    if (optionalCustomer.isPresent()) {
+      Customer customer = optionalCustomer.get();
 
 
-    if (id != null) {
+      LocalDateTime now = LocalDateTime.now();
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+      reserve.setCustomer(customer);
+      String nowtime = now.format(formatter);
 
-      reserve.setCustomer(id);
+
+
+      reserve.setReg_date(nowtime);
+
+      String reservedate = reserve.getReserve_date();
+
+
+      LocalDateTime LdateTime = LocalDateTime.parse(reservedate, formatter);
+
+      LocalDateTime newDateTime = LdateTime.plusHours(8); // 8시간을 더한 새로운 날짜와 시간
+
+      String end_date = newDateTime.format(formatter); // 문자열로 변환
+
+      reserve.setEnd_date(end_date);
+
+
       reserveRepository.save(reserve);
-      return "회원등록완료";
+      return "회원 등록 완료";
     } else {
-      gusetRepository.save(guest);
-      return "비회원등록완료";
+      // 비회원 처리 로직
+      return "비회원 등록 완료";
     }
-
   }
+
+
+
 
 
 

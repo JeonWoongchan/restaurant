@@ -31,15 +31,13 @@ public class ReserveController {
 
 
   CustomerRepository customerRepository;
+ @Autowired
   CustomerService customerService;
 
+  @Autowired
   ReserveService reserveService;
 
-  @Autowired
-  public ReserveController(CustomerService customerService, ReserveService reserveService) {
-    this.customerService = customerService;
-    this.reserveService = reserveService;
-  }
+
 
   @PostMapping("/user-data")
   @ResponseBody
@@ -49,8 +47,8 @@ public class ReserveController {
 
 
   @PostMapping("/payment")
-  public  ResponseEntity<String> addreserveController(HttpSession session, @RequestBody Reserve reserve, @RequestBody Guest guest) {
-    return ResponseEntity.ok(reserveService.addreserve(reserve,guest,session));
+  public  ResponseEntity<String> addreserveController(HttpSession session, @RequestBody Reserve reserve) {
+    return ResponseEntity.ok(reserveService.addreserve(reserve,session));
   }
 
 

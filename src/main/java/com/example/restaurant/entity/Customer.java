@@ -73,4 +73,8 @@ public class Customer {
         this.point = point;
 
     }
+
+    public Customer(Long id) {
+        this.id = id;
+    }
 }
