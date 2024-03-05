@@ -1,0 +1,6 @@
+rootProject.name = 'restaurant'
+buildCache {
+    local {
+        directory = "$rootDir/.gradle/build-cache"
+    }
+}

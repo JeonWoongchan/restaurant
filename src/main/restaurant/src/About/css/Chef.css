@@ -1,0 +1,68 @@
+.sub-chef-container {
+    padding: 100px 50px;
+    width: 100%;
+}
+
+.sub-chef-title {
+    width: 50%;
+    margin: 0 auto 50px;
+    animation: subIntroTitleAnimation 1s ease;
+}
+
+@keyframes subIntroTitleAnimation {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.sub-chef-title h1 {
+    font-size: 3rem;
+    color: var(--color-primary);
+}
+
+.sub-chef-title p {
+    font-size: 1.5rem;
+}
+
+.sub-chef-main {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+
+.sub-chef-image {
+    width: 50%;
+    height: 700px;
+}
+
+.sub-chef-text {
+
+    padding: 50px;
+    background-color: var(--color-primary);
+}
+
+.sub-chef-text .chef-name {
+    font-family: 'Gowun Batang', serif;
+    margin-bottom: 20px;
+}
+
+.sub-chef-text .chef-detail .detail {
+    position: relative;
+    padding-left: 1em;
+    margin-top: 10px;
+}
+
+.sub-chef-text .chef-detail .detail:before {
+    content: '';
+    background: var(--color-primary-variant);
+    display: block;
+    position: absolute;
+    width: 0.3em;
+    height: 0.3em;
+    top: 0.5em;
+    left: 0;
+    overflow: hidden;
+}

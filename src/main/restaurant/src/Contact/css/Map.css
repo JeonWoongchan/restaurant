@@ -1,0 +1,111 @@
+.map-container {
+    position: relative;
+    padding: 100px 50px;
+    width: 100%;
+}
+
+.map-title {
+    width: 50%;
+    margin: 0 auto 50px;
+}
+
+.map-title h1 {
+    text-align: center;
+}
+
+.map-main {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.map-image {
+    position: relative;
+    width: 800px;
+    min-height: 600px;
+    animation: mapImageAnimation 1s ease;
+}
+
+@keyframes mapImageAnimation {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.map-image .text {
+    position: absolute;
+    font-size: 1.5rem;
+    top: 130px;
+    right: 57px;
+    text-align: center;
+    animation: 1s linear infinite running mapIconAnimation
+}
+
+@keyframes mapIconAnimation {
+    0%{
+        transform: translateY(0px);
+    }
+    50%{
+        transform: translateY(-10px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}
+
+.map-image h1 {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    background-color: rgb(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.map-image .icon {
+    font-size: 50px;
+    color: red;
+}
+
+.map-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 0;
+    animation: mapTextAnimation 1.5s ease;
+}
+
+@keyframes mapTextAnimation {
+    0%{
+        transform: translateX(100px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}
+
+.map-text h1 {
+    color: var(--color-primary);
+    font-family: 'Gowun Batang', serif;
+    font-size: 3rem;
+}
+
+.map-text h5 {
+    position: relative;
+    font-size: 1.5rem;
+    padding-left: 20px;
+    margin: 20px 0;
+}
+
+.map-text h5::before {
+    content: '';
+    background: var(--color-primary-variant);
+    display: block;
+    position: absolute;
+    width: 0.3em;
+    height: 0.3em;
+    top: 0.5em;
+    left: 0;
+    overflow: hidden;
+}
