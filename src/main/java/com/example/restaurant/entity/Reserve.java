@@ -1,6 +1,5 @@
 package com.example.restaurant.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,10 +8,11 @@ import java.util.List;
 import java.util.Date;
 
 @Entity
-@Table(name="Reserve")
-@Getter @Setter
+@Table(name = "Reserve")
+@Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"reserve_id", "customer" ,"reserve_date" ,"end_date" ,"comment"})
+@ToString(of = { "reserve_id", "customer", "reserve_date", "end_date", "comment" })
 public class Reserve {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +21,6 @@ public class Reserve {
   @ManyToOne
   @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
   private Customer customer;
-
-
 
   private String reg_date;
   private String reserve_date;

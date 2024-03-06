@@ -1,7 +1,5 @@
 package com.example.restaurant.service;
 
-
-
 import com.example.restaurant.entity.Customer;
 
 import com.example.restaurant.entity.Guest;
@@ -28,15 +26,8 @@ public class ReserveService {
   @Autowired
   ReserveRepository reserveRepository;
 
-
   @Autowired
   CustomerService customerService;
-
-
-
-
-
-
 
   public String addreserve(Reserve reserve, HttpSession session) {
     Optional<Customer> optionalCustomer = customerService.findByIdMembmer(session);
@@ -55,10 +46,6 @@ public class ReserveService {
     }
   }
 
-
-
-
-
   private String formatDateTime(LocalDateTime dateTime) {
     return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
   }
@@ -68,15 +55,11 @@ public class ReserveService {
     return formatDateTime(LdateTime.plusHours(8)); // 8시간을 더한 새로운 날짜와 시간
   }
 
-
-
   private String addLeadingZeroIfNeeded(String date) {
     if (date.length() == 10 && date.charAt(8) == '-') {
       return date.substring(0, 8) + "0" + date.charAt(9);
     }
     return date;
   }
-
-
 
 }

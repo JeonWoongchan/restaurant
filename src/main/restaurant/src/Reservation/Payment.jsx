@@ -23,6 +23,12 @@ export default function Payment() {
 
     const { paymentHandler } = PaymentLogic()
 
+    useEffect(() => {
+        // 페이지 로드 후 스크롤을 맨 위로 이동
+        window.scrollTo(0, 0);
+    }, []);
+
+    
     useEffect(()=>{
         if(reservData != localStorage.getItem('reservData')){
             dispatch(setReservData(localStorage.getItem('reservData'))) // 예약정보 최신화
@@ -30,7 +36,6 @@ export default function Payment() {
     })
 
     useEffect(()=>{
-
         const personnelData =  JSON.parse(localStorage.getItem('personnel'))
         const calendarData =  JSON.parse(localStorage.getItem('calendar'))
 

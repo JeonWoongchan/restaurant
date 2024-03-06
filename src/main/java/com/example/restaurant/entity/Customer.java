@@ -6,15 +6,13 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedQuery(
-        name="Customer.findByUsername",
-        query = "select c from Customer c where username = :username"
-)
+@NamedQuery(name = "Customer.findByUsername", query = "select c from Customer c where username = :username")
 @Entity
 @Table(name = "Customer")
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"id", "email", "password","username","phone_number","point"})
+@ToString(of = { "id", "email", "password", "username", "phone_number", "point" })
 public class Customer {
 
     @Column(name = "customer_id")
@@ -37,18 +35,14 @@ public class Customer {
     @Column(name = "point")
     private int point;
 
-
     @Column(name = "refresh-token")
 
     @OneToMany(mappedBy = "customer")
-    private List<Reserve> reserves =new ArrayList<>();
-
-
+    private List<Reserve> reserves = new ArrayList<>();
 
     public Customer(String username) {
         this.username = username;
     }
-
 
     public Customer(String username, String password, String email, String phone_number, int point) {
 

@@ -3,8 +3,10 @@ import { IoIosArrowForward } from "react-icons/io";
 import './css/MainInfo.css'
 import useScroll from '../Function/useScroll'
 import ScrollPosition from '../Function/useScroll';
+import { useNavigate } from 'react-router-dom';
 
 export default function MainInfo() {
+    const navigate = useNavigate()
     const {scrollPosition} = useScroll()
     const [imgAni, setImgAni] = useState('img-base')
 
@@ -23,7 +25,7 @@ export default function MainInfo() {
                 <div className="main-info-text">
                     <div className="main-info-text-title">
                         <h1>Restaurant WooDy</h1>
-                        <div className="navigate-btn">
+                        <div className="navigate-btn" onClick={()=>{navigate('/reservation')}}>
                             <div className="text">Reservation</div> 
                             <IoIosArrowForward className='icon'/>
                         </div>

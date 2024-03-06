@@ -3,6 +3,7 @@ import { IoAdd } from "react-icons/io5";
 import './css/MainMenu.css'
 import useScroll from '../Function/useScroll'
 import menuList from '../Json/menuList.json'
+import { useNavigate } from 'react-router-dom';
 
 export default function MainMenu() {
     const {scrollPosition} = useScroll();
@@ -36,8 +37,10 @@ export default function MainMenu() {
 }
 
 function MenuItem(props){
+    const navigate = useNavigate()
+
     return(
-        <div className={`menu-item ${props.style}`} style={{backgroundImage : `url(/image/${props.image}.png)`}}>
+        <div className={`menu-item ${props.style}`} style={{backgroundImage : `url(/image/${props.image}.png)`}} onClick={()=>{navigate(`menu/${props.title}`)}}>
             <div className="item-title">{props.title}</div>
             <IoAdd className='more-btn'/>
             <div className="item-detail">

@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './css/MainIntro.css'
 import { IoIosArrowForward } from "react-icons/io";
 import useScroll from '../Function/useScroll'
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function MainIntro() {
+    const navigate = useNavigate()
+
     const {scrollPosition} = useScroll();
     const [textAni, setTextAni] = useState('base-position')
     const [imgAni, setImgAni] = useState('base-position')
@@ -37,7 +40,7 @@ export default function MainIntro() {
                         </div>
                     </div>
                     <div className="navigate-btn">
-                        <div className="text">ABOUT</div> 
+                        <div className="text" onClick={()=>{navigate('/about/intro')}}>ABOUT</div> 
                         <IoIosArrowForward className='icon'/>
                     </div>
                 </div>

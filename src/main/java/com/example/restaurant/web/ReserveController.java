@@ -1,7 +1,5 @@
 package com.example.restaurant.web;
 
-
-
 import com.example.restaurant.entity.Customer;
 
 import com.example.restaurant.entity.Guest;
@@ -22,22 +20,18 @@ import java.util.Optional;
 
 import org.springframework.web.bind.annotation.*;
 
-
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/reservation")
 @RequiredArgsConstructor
 public class ReserveController {
 
-
   CustomerRepository customerRepository;
- @Autowired
+  @Autowired
   CustomerService customerService;
 
   @Autowired
   ReserveService reserveService;
-
-
 
   @PostMapping("/user-data")
   @ResponseBody
@@ -45,18 +39,9 @@ public class ReserveController {
     return ResponseEntity.ok(customerService.selectMember(session));
   }
 
-
   @PostMapping("/payment")
-  public  ResponseEntity<String> addreserveController(HttpSession session, @RequestBody Reserve reserve) {
-    return ResponseEntity.ok(reserveService.addreserve(reserve,session));
+  public ResponseEntity<String> addreserveController(HttpSession session, @RequestBody Reserve reserve) {
+    return ResponseEntity.ok(reserveService.addreserve(reserve, session));
   }
-
-
-
-
-
-
-
-
 
 }

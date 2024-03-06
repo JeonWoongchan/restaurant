@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Optional;
@@ -25,9 +24,8 @@ import java.util.List;
 @Service
 public class CustomerService {
 
-
   @Autowired
-   CustomerRepository customerRepository;
+  CustomerRepository customerRepository;
 
   @Autowired
   EmailService emailService;
@@ -35,17 +33,17 @@ public class CustomerService {
   @Autowired
   AuthService authService;
 
-
   // 회원 가입
   public String joinCustomer(Customer customer) throws Exception {
-        customerRepository.save(customer);
-        return customer.getUsername() + "님 회원가입 성공하셨습니다";
+    customerRepository.save(customer);
+    return customer.getUsername() + "님 회원가입 성공하셨습니다";
   }
 
   // 중복 체크
   public boolean duplicateCustomer(String email) {
     Optional<Customer> customer = customerRepository.findByEmail(email);
-    DefaultMessageService messageService =  NurigoApp.INSTANCE.initialize("API 키 입력", "API 시크릿 키 입력", "https://api.coolsms.co.kr");
+    DefaultMessageService messageService = NurigoApp.INSTANCE.initialize("API 키 입력", "API 시크릿 키 입력",
+        "https://api.coolsms.co.kr");
     // Message 패키지가 중복될 경우 net.nurigo.sdk.message.model.Message로 치환하여 주세요
 
     return customer.isEmpty();
@@ -64,12 +62,12 @@ public class CustomerService {
       return log; // 비밀번호 불일치
     } else {
       // 로그인 성공 시 액세스 토큰 및 리프레시 토큰 발급
-      return issueTokens(email,session);
+      return issueTokens(email, session);
     }
   }
 
   // 액세스 토큰 및 리프레시 토큰 발급 메소드
-  private HashMap<String, Optional<String>> issueTokens(String email,HttpSession session) {
+  private HashMap<String, Optional<String>> issueTokens(String email, HttpSession session) {
     HashMap<String, Optional<String>> log = new HashMap<>();
 
     log.put("status", Optional.of("1"));
@@ -94,10 +92,9 @@ public class CustomerService {
     return log;
   }
 
-
   public Optional<Customer> selectMember(HttpSession session) {
     String email = (String) session.getAttribute("email");
-    Optional<Customer>  customer = Optional.empty();
+    Optional<Customer> customer = Optional.empty();
     if (email != null) {
       customer = customerRepository.findByEmail(email);
       return customer;
@@ -108,7 +105,6 @@ public class CustomerService {
     }
 
   }
-
 
   public Optional<Customer> findByIdMembmer(HttpSession session) {
     String email = (String) session.getAttribute("email");
@@ -131,7 +127,7 @@ public class CustomerService {
       String email = authService.extractEmailFromToken(refreshToken);
       if (email != null) {
         // 새로운 액세스 토큰 발급
-        return issueTokens(email,session);
+        return issueTokens(email, session);
       } else {
         log.put("status", Optional.of("-1"));
         return log; // 이메일 추출 실패
@@ -142,37 +138,29 @@ public class CustomerService {
     }
   }
 
+  // 휴대폰번호 인증문자 보내기
 
+  public void message() {
+    DefaultMessageService messageService = NurigoApp.INSTANCE.initialize("NCSJC9B1CTYZFSM1",
+        "QHBMBQLX6BBX8V8FEYX1VWUDR7OK4OYW", "https://api.coolsms.co.kr");
+    // Message 패키지가 중복될 경우 net.nurigo.sdk.message.model.Message로 치환하여 주세요
+    Message message = new Message();
 
-  //휴대폰번호 인증문자 보내기
+    message.setFrom("01042609481");
+    message.setTo("01042609481");
+    message.setText("SMS는 한글 45자, 영자 90자까지 입력할 수 있습니다.");
 
+    try {
+      // send 메소드로 ArrayList<Message> 객체를 넣어도 동작합니다!
+      messageService.send(message);
+    } catch (NurigoMessageNotReceivedException exception) {
+      // 발송에 실패한 메시지 목록을 확인할 수 있습니다!
+      System.out.println(exception.getFailedMessageList());
+      System.out.println(exception.getMessage());
+    } catch (Exception exception) {
+      System.out.println(exception.getMessage());
+    }
 
-
-public void message() {
-  DefaultMessageService messageService =  NurigoApp.INSTANCE.initialize("NCSJC9B1CTYZFSM1", "QHBMBQLX6BBX8V8FEYX1VWUDR7OK4OYW", "https://api.coolsms.co.kr");
-  // Message 패키지가 중복될 경우 net.nurigo.sdk.message.model.Message로 치환하여 주세요
-  Message message = new Message();
-
-  message.setFrom("01042609481");
-  message.setTo("01042609481");
-  message.setText("SMS는 한글 45자, 영자 90자까지 입력할 수 있습니다.");
-
-  try {
-    // send 메소드로 ArrayList<Message> 객체를 넣어도 동작합니다!
-    messageService.send(message);
-  } catch (NurigoMessageNotReceivedException exception) {
-    // 발송에 실패한 메시지 목록을 확인할 수 있습니다!
-    System.out.println(exception.getFailedMessageList());
-    System.out.println(exception.getMessage());
-  } catch (Exception exception) {
-    System.out.println(exception.getMessage());
   }
 
-
 }
-
-
-
-
-}
-
