@@ -26,12 +26,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CustomerController {
 
-    CustomerRepository customerRepository;
+    @Autowired  CustomerRepository customerRepository;
 
-    private final CustomerService customerService;
+    @Autowired private final CustomerService customerService;
 
     @Autowired
     AuthService authService;
+
 
     // 로그인
     @PostMapping("/sign-in")
