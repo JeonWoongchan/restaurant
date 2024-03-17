@@ -6,12 +6,10 @@ import lombok.Data;
 public class CustomerDto {
 
     private  String email;
-    private String password;
     private String username;
-
-    private String inputAuth;
-    private String phoneNUm;
-
+    private String phone;
+    private int point;
+    private String password;
 
     public CustomerDto(String email, String password) {
         this.email = email;

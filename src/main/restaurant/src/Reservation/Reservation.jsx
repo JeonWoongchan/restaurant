@@ -14,11 +14,13 @@ export default function Reservation() {
     const navigate = useNavigate()
 
     const { getUserData } = PaymentUserData()
-
+    const isLogin = useSelector(state=>state.loginReducer.isLogin)
 
     // 예약 페이지 접속 시 로컬스토리지 초기화
     useEffect(()=>{
-        getUserData() // 유저 데이터 요청
+        if(isLogin){
+            getUserData() // 유저 데이터 요청
+        }
 
         localStorage.removeItem('personnel')
         localStorage.removeItem('calendar')

@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 import './css/HeaderLeft.css'
 import { GrClose } from "react-icons/gr";
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import IsLoginCheck from '../backend/IsLoginCheck';
+import { setUserData } from '../store/loginStore';
 
 export default function HeaderLeft(props) {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const { loginCheckHandler } = IsLoginCheck()
 
     const isLogin = useSelector(state=>state.loginReducer.isLogin)
@@ -33,7 +35,7 @@ export default function HeaderLeft(props) {
                                 <div className="logout"></div>
                             </div> */}
                         {
-                            isLogin ? <div className="sign-in">{userData.name}</div>
+                            isLogin ? <div className="sign-in">{localStorage.getItem('userName')}</div>
                             : <>
                                 <div className="sign-in" onClick={()=>{navigateHandler('/login/sign-in')}}>로그인</div>
                                 <div className="sign-up" onClick={()=>{navigateHandler('/login/sign-up')}}>회원가입</div>

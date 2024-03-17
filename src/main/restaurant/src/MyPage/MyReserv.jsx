@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 export default function MyReserv() {
     const isLogin = useSelector(state=>state.loginReducer.isLogin)
-    const reservData = useSelector(state=>state.reservReducer.reservData)
 
     return (
         <div id='my-reserv'>
@@ -20,7 +19,7 @@ export default function MyReserv() {
                         </div>
                         <div className="detail">
                             <h5 className='sub-title'>예약 내용</h5>
-                            <p>{reservData}</p>
+                            <p>{}</p>
                         </div>
                         <div className="detail">
                             <h5 className='sub-title'>예약자 정보</h5>

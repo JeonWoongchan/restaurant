@@ -96,16 +96,12 @@ public class CustomerService {
 
   public Optional<Customer> selectMember(HttpSession session) {
     String email = (String) session.getAttribute("email");
-    Optional<Customer> customer = Optional.empty();
     if (email != null) {
-      customer = customerRepository.findByEmail(email);
-      return customer;
+      return customerRepository.findByEmail(email);
     } else {
-
       // 비회원
-      return customer;
+      return Optional.empty();
     }
-
   }
 
   public Optional<Customer> findByIdMembmer(HttpSession session) {
