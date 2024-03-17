@@ -1,18 +1,18 @@
 package com.example.restaurant.web;
 
-import com.example.restaurant.entity.Customer;
+import com.example.restaurant.entity.*;
 
-import com.example.restaurant.entity.Guest;
-import com.example.restaurant.entity.Reserve;
 import com.example.restaurant.repository.CustomerRepository;
 import com.example.restaurant.service.CustomerService;
 import com.example.restaurant.service.ReserveService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
@@ -40,8 +40,12 @@ public class ReserveController {
   }
 
   @PostMapping("/payment")
-  public ResponseEntity<String> addreserveController(HttpSession session, @RequestBody Reserve reserve) {
-    return ResponseEntity.ok(reserveService.addreserve(reserve, session));
+  public ResponseEntity<HashMap<String,Integer>> addreserveController(HttpSession session, @RequestBody Reserve reserve, @RequestBody Guest guest, @RequestBody ReserveGuest reserveGuest) {
+    // ReserveGuest 객체 생성
+
+    // ReserveDTO 객체 생성
+
+    return ResponseEntity.ok(reserveService.addreserve(session,reserve,guest,reserveGuest));
   }
 
 }

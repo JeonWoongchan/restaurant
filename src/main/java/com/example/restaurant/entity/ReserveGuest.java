@@ -20,9 +20,9 @@ public class ReserveGuest {
   @JoinColumn(name = "guest_id", referencedColumnName = "guest_id")
   private Guest guest;
 
-  private Date reg_date;
-  private Date reserve_date;
-  private Date end_date;
+  private String reg_date;
+  private String reserve_date;
+  private String end_date;
   private int adults_count;
   private int children_count;
   private int infants_count;

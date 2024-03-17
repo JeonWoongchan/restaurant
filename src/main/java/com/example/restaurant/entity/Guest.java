@@ -7,7 +7,7 @@ import lombok.*;
 @Table(name = "Guset")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"guest_id","reserveGuest","phoneNum"})
+@ToString(of = {"guest_id","reserveGuest","phone"})
 
 public class Guest {
     @Id
@@ -19,7 +19,7 @@ public class Guest {
     private ReserveGuest reserveGuest;
 
 
-    private String phoneNum;
+    private String phone;
 
 
 }

@@ -34,9 +34,11 @@ public class CustomerService {
   AuthService authService;
 
   // 회원 가입
-  public String joinCustomer(Customer customer) throws Exception {
+  public HashMap<String, Optional<Integer>> joinCustomer(Customer customer) throws Exception {
+    HashMap<String, Optional<Integer>> log = new HashMap<>();
     customerRepository.save(customer);
-    return customer.getUsername() + "님 회원가입 성공하셨습니다";
+    log.put("status", Optional.of(1));
+    return log;
   }
 
   // 중복 체크

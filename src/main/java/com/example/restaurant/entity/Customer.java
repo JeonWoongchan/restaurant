@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = { "id", "email", "password", "username", "phone_number", "point" })
+@ToString(of = { "id", "email", "password", "username", "phone", "point" })
 public class Customer {
 
     @Column(name = "customer_id")
@@ -29,8 +29,8 @@ public class Customer {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "phone_number")
-    private String phone_number;
+    @Column(name = "phone")
+    private String phone;
 
     @Column(name = "point")
     private int point;
@@ -44,12 +44,12 @@ public class Customer {
         this.username = username;
     }
 
-    public Customer(String username, String password, String email, String phone_number, int point) {
+    public Customer(String username, String password, String email, String phone, int point) {
 
         this.username = username;
         this.password = password;
         this.email = email;
-        this.phone_number = phone_number;
+        this.phone = phone;
         this.point = point;
     }
 
@@ -58,12 +58,12 @@ public class Customer {
         this.point = point;
     }
 
-    public Customer(Long id, String email, String password, String username, String phone_number, int point) {
+    public Customer(Long id, String email, String password, String username, String phone, int point) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.username = username;
-        this.phone_number = phone_number;
+        this.phone = phone;
         this.point = point;
 
     }
