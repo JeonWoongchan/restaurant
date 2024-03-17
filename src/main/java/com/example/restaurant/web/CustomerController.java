@@ -58,7 +58,7 @@ public class CustomerController {
     }
 
     @PostMapping("/sign-up")
-    public ResponseEntity< HashMap<String, Optional<Integer>>> signup(@RequestBody Customer customer) throws Exception {
+    public ResponseEntity<String> signup(@RequestBody Customer customer) throws Exception {
 
         return ResponseEntity.ok(customerService.joinCustomer(customer));
 

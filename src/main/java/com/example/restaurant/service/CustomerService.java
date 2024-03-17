@@ -1,5 +1,6 @@
 package com.example.restaurant.service;
 
+import com.example.restaurant.dto.CustomerDto;
 import com.example.restaurant.entity.Customer;
 import com.example.restaurant.repository.CustomerRepository;
 
@@ -34,16 +35,14 @@ public class CustomerService {
   AuthService authService;
 
   // 회원 가입
-  public HashMap<String, Optional<Integer>> joinCustomer(Customer customer) throws Exception {
-    HashMap<String, Optional<Integer>> log = new HashMap<>();
+  public String joinCustomer(Customer customer) throws Exception {
     customerRepository.save(customer);
-    log.put("status", Optional.of(1));
-    return log;
+    return customer.getUsername() + "님 회원가입 성공하셨습니다";
   }
 
   // 중복 체크
   public boolean duplicateCustomer(String email) {
-    Optional<Customer> customer = customerRepository.findByEmail(email);
+    Optional<CustomerDto> customer = customerRepository.findE(email);
     DefaultMessageService messageService = NurigoApp.INSTANCE.initialize("API 키 입력", "API 시크릿 키 입력",
         "https://api.coolsms.co.kr");
     // Message 패키지가 중복될 경우 net.nurigo.sdk.message.model.Message로 치환하여 주세요
@@ -94,11 +93,11 @@ public class CustomerService {
     return log;
   }
 
-  public Optional<Customer> selectMember(HttpSession session) {
+  public Optional<CustomerDto> selectMember(HttpSession session) {
     String email = (String) session.getAttribute("email");
-    Optional<Customer> customer = Optional.empty();
+    Optional<CustomerDto> customer = Optional.empty();
     if (email != null) {
-      customer = customerRepository.findByEmail(email);
+      customer = customerRepository.findE(email);
       return customer;
     } else {
 

@@ -35,7 +35,6 @@ public class Customer {
     @Column(name = "point")
     private int point;
 
-    @Column(name = "refresh-token")
 
     @OneToMany(mappedBy = "customer")
     private List<Reserve> reserves = new ArrayList<>();
@@ -58,14 +57,13 @@ public class Customer {
         this.point = point;
     }
 
-    public Customer(Long id, String email, String password, String username, String phone, int point) {
-        this.id = id;
+
+
+    public Customer(String email, String username, String phone, int point) {
         this.email = email;
-        this.password = password;
         this.username = username;
         this.phone = phone;
         this.point = point;
-
     }
 
     public Customer(Long id) {

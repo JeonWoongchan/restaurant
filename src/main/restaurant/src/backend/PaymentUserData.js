@@ -22,7 +22,7 @@ export default function PaymentUserData() {
             .then((res) => {
                 console.log(res.data)
                 if (res.data) {
-                    localStorage.setItem('reservUserData', JSON.stringify({'name': res.data.username, 'email': res.data.email, 'phone': res.data.phone_number, 'point': res.data.point}))
+                    localStorage.setItem('reservUserData', JSON.stringify({'name': res.data.username, 'email': res.data.email, 'phone': res.data.phone, 'point': res.data.point}))
                 } else if (!res.data) {
 
                 }
