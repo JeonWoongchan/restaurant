@@ -36,10 +36,12 @@ public class ReserveService {
   @Autowired
   GusetRepository gusetRepository;
 
-  public HashMap<String,Integer> addreserve(HttpSession session, Reserve reserve, Guest guest, ReserveGuest reserveGuest) {
+  public HashMap<String,Integer> addreserve(HttpSession session, ReservationDTO reservationDTO) {
 
-    HashMap<String,Integer> save = new HashMap<String,Integer>();
-
+    HashMap<String,Integer> save = new HashMap<>();
+    Reserve reserve = reservationDTO.getReserve();
+    Guest guest = reservationDTO.getGuest();
+    ReserveGuest reserveGuest = reservationDTO.getReserveGuest();
 
     Optional<Customer> optionalCustomer = customerService.findByIdMembmer(session);
     if (optionalCustomer.isPresent()) {

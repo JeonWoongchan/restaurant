@@ -40,12 +40,7 @@ public class ReserveController {
   }
 
   @PostMapping("/payment")
-  public ResponseEntity<HashMap<String,Integer>> addreserveController(HttpSession session, @RequestBody Reserve reserve, @RequestBody Guest guest, @RequestBody ReserveGuest reserveGuest) {
-    // ReserveGuest 객체 생성
-
-    // ReserveDTO 객체 생성
-
-    return ResponseEntity.ok(reserveService.addreserve(session,reserve,guest,reserveGuest));
+  public ResponseEntity<HashMap<String,Integer>> addreserveController(HttpSession session, @RequestBody ReservationDTO reservationDTO) {
+    return ResponseEntity.ok(reserveService.addreserve(session, reservationDTO));
   }
-
 }
