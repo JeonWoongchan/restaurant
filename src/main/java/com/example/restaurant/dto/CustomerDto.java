@@ -17,4 +17,12 @@ public class CustomerDto {
         this.email = email;
         this.password = password;
     }
+
+    public CustomerDto() {
+
+    }
+
+    public CustomerDto(String email) {
+        this.email = email;
+    }
 }

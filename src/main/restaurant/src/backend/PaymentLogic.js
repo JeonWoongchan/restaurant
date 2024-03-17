@@ -21,15 +21,19 @@ export default function PaymentLogic() {
         // console.log(calendarData.date.split(' ')[0].replaceAll('.', '-') + ' ' + calendarData.time)
         axios 
             .post("http://localhost:8080/reservation/payment", {
-                date: calendarData.date.split(' ')[0].replaceAll('.', '-') + ' ' + calendarData.time,
-                personnel : personnelData.adult + personnelData.child + personnelData.baby
+                reserve_date: calendarData.date.split(' ')[0].replaceAll('.', '-') + ' ' + calendarData.time,
+                adults_count : personnelData.adult,
+                children_count: personnelData.child,
+                infants_count: personnelData.baby
             })
             .then((res) => {
                 console.log(res.data)
-                if (res.data) {
-
-                } else if (!res.data) {
-
+                if (res.data === '회원 등록 완료') {
+                    navigate('/my-page/reservation')
+                } else if (res.data === '비회원 등록 완료') {
+                    navigate('/')
+                }else {
+                    alert('예약 오류')
                 }
             })
             .catch((error) => {

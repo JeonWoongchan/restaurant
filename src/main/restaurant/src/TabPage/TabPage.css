@@ -10,8 +10,9 @@
 }
 
 .tab-page-image img {
-    width: 100%;
-    position: absolute;
+    min-width: 100vw;
+    min-height: 1200px;
+    position: relative;
     top: -650px;
     z-index: 1;
 }

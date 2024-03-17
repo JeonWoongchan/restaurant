@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Customer (
     customer_id INT PRIMARY KEY auto_increment,
     email VARCHAR(255),
     password VARCHAR(255),
-    phone_number VARCHAR(20),
+    phone VARCHAR(20),
     point INT default 0,
     username VARCHAR(255)
     );
@@ -25,9 +25,9 @@ CREATE TABLE IF NOT EXISTS Customer (
 CREATE TABLE IF NOT EXISTS reserve (
     reserve_id INT PRIMARY KEY auto_increment,
     customer_id INT,
-    reg_date DATE,
+    reg_date DATETIME,
     reserve_date DATETIME,
-    end_date DATE,
+    end_date DATETIME,
     adults_count INT,
     children_count INT,
     infants_count INT,
@@ -53,9 +53,9 @@ CREATE TABLE IF NOT EXISTS Guest (
 CREATE TABLE IF NOT EXISTS reserveGuest (
     reserve_guest_id INT PRIMARY KEY,
     guest_id INT,
-    reg_date DATE,
-    reserve_date DATE,
-    end_date DATE,
+    reg_date DATETIME,
+    reserve_date DATETIME,
+    end_date DATETIME,
     adults_count INT,
     children_count INT,
     infants_count INT,

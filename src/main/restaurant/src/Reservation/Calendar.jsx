@@ -30,6 +30,7 @@ export default function Calendar() {
     useEffect(()=>{
         if(selectedTime != null){
             localStorage.setItem('calendar', JSON.stringify({'date': selectedDate,'time': selectedTime}))
+            console.log(selectedDate)
         }
     },[selectedDate, selectedTime])
 

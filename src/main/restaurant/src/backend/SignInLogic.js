@@ -12,20 +12,6 @@ export default function SignInLogic() {
     const signInEmail = useSelector(state => state.loginReducer.signInEmail)
     const signInPw = useSelector(state => state.loginReducer.signInPw)
 
-    // 로그인 성공시 로직
-    const loginSuccess = (data) => {
-        cookies.set('accessToken', data.accessToken) 
-        
-        axios.defaults.headers.common['Authorization'] = `Bearer ${data.accessToken}`; // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
-        localStorage.setItem('userName', data.name)
-        console.log(data.refreshToken)
-        navigate('/')
-
-        setTimeout(() => { // accessTokenTime 유효기간 만료 30초 전에 실행
-            sendRefreshToken(data.refreshToken)
-        }, data.accessTokenExpiration - 30000);
-    }
-
     const sendRefreshToken = (Token) => {
         axios
             .post("http://localhost:8080/login/refreshToken", {
@@ -45,11 +31,26 @@ export default function SignInLogic() {
                 console.log(error)
             })
     }
+    
+    // 로그인 성공시 로직
+    const loginSuccess = (data) => {
+        cookies.set('accessToken', data.accessToken) 
+        
+        axios.defaults.headers.common['Authorization'] = `Bearer ${data.accessToken}`; // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
+        localStorage.setItem('userName', data.name)
+        console.log(data.refreshToken)
+        navigate('/')
+
+        setTimeout(() => { // accessTokenTime 유효기간 만료 30초 전에 실행
+            sendRefreshToken(data.refreshToken)
+        }, data.accessTokenExpiration - 30000);
+    }
 
     // 로그인 요청
     const signInHandler = () => {
         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (emailPattern.test(signInEmail) && signInEmail != null) {
+            console.log(signInEmail, signInPw)
             axios
                 .post("http://localhost:8080/login/sign-in", {
                     email: signInEmail,

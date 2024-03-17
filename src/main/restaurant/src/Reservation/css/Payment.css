@@ -118,7 +118,7 @@
     border: 1px rgba(0, 0, 0, 0.1) solid;
 }
 
-#payment .input-list {
+.payment-product .input-list {
     display: flex;
     align-items: center;
     padding: 0 20px;

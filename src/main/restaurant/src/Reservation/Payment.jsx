@@ -23,14 +23,22 @@ export default function Payment() {
 
     const { paymentHandler } = PaymentLogic()
 
+    useEffect(() => {
+        // 페이지 로드 후 스크롤을 맨 위로 이동
+        window.scrollTo(0, 0);
+    }, []);
+
+    
     useEffect(()=>{
         if(reservData != localStorage.getItem('reservData')){
             dispatch(setReservData(localStorage.getItem('reservData'))) // 예약정보 최신화
         }
+        if(reservUserData != localStorage.getItem('reservUserData')){
+            dispatch(setReservUserData(localStorage.getItem('reservUserData'))) // 예약정보 최신화
+        }
     })
 
     useEffect(()=>{
-
         const personnelData =  JSON.parse(localStorage.getItem('personnel'))
         const calendarData =  JSON.parse(localStorage.getItem('calendar'))
 
@@ -72,12 +80,12 @@ export default function Payment() {
                                 <ul>
                                     <li className='text'>
                                         <p>이름</p>
-                                        <input type="text" defaultValue={isLogin ? reservUserData.name : null} onChange={(e)=>{setReservUser(e.target.value)}}/>
+                                        <input type="text" defaultValue={reservUserData ? reservUserData.name : null} onChange={(e)=>{setReservUser(e.target.value)}}/>
                                     </li>
                                     <li className='phone'>
                                         <p>휴대폰 번호</p>
                                         <div className="input-list">
-                                            <select name="" id="" defaultValue={isLogin ? reservUserData.phone.substring(0, 3): null} onChange={(e)=>{setReservPhoneFirst(e.target.value)}}>
+                                            <select name="" id="" defaultValue={reservUserData.phone ? reservUserData.phone.substring(0, 3): null} onChange={(e)=>{setReservPhoneFirst(e.target.value)}}>
                                                 <option value="010">010</option>
                                                 <option value="011">011</option>
                                                 <option value="016">016</option>
@@ -86,21 +94,21 @@ export default function Payment() {
                                                 <option value="019">019</option>
                                             </select>
                                             <div className="num">
-                                                <input type="text" defaultValue={isLogin ? reservUserData.phone.substring(3, 7): null} onChange={(e)=>{setReservPhoneMiddle(e.target.value)}}/>
+                                                <input type="text" defaultValue={reservUserData.phone ? reservUserData.phone.substring(3, 7): null} onChange={(e)=>{setReservPhoneMiddle(e.target.value)}}/>
                                             </div>
                                             <div className="num">
-                                                <input type="text" defaultValue={isLogin ? reservUserData.phone.substring(7): null} onChange={(e)=>{setReservPhoneLast(e.target.value)}}/>
+                                                <input type="text" defaultValue={reservUserData.phone ? reservUserData.phone.substring(7): null} onChange={(e)=>{setReservPhoneLast(e.target.value)}}/>
                                             </div>
                                         </div>
                                     </li>
                                     <li className='text'>
                                         <p>이메일</p>
-                                        <input type="text" placeholder='WooDy@restaurant.com' defaultValue={isLogin ? reservUserData.email: null} onChange={(e)=>{setReservEmail(e.target.value)}}/>
+                                        <input type="text" placeholder='WooDy@restaurant.com' defaultValue={reservUserData ? reservUserData.email: null} onChange={(e)=>{setReservEmail(e.target.value)}}/>
                                     </li>
                                     {
                                         isLogin ?
                                         <li className='check'>
-                                            <p>포인트 사용(잔여 포인트: {isLogin ? reservUserData.point: null}점)</p>
+                                            <p>포인트 사용(잔여 포인트: {reservUserData.point ? reservUserData.point: null}점)</p>
                                             <div className="input-list">
                                                 <input className='point' type="text"/>
                                             </div>

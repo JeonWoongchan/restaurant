@@ -26,12 +26,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CustomerController {
 
-    CustomerRepository customerRepository;
+    @Autowired  CustomerRepository customerRepository;
 
-    private final CustomerService customerService;
+    @Autowired private final CustomerService customerService;
 
     @Autowired
     AuthService authService;
+
 
     // 로그인
     @PostMapping("/sign-in")
@@ -57,7 +58,7 @@ public class CustomerController {
     }
 
     @PostMapping("/sign-up")
-    public ResponseEntity<String> signup(@RequestBody Customer customer) throws Exception {
+    public ResponseEntity< HashMap<String, Optional<Integer>>> signup(@RequestBody Customer customer) throws Exception {
 
         return ResponseEntity.ok(customerService.joinCustomer(customer));
 

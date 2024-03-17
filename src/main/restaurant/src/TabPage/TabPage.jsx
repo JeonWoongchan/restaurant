@@ -6,6 +6,11 @@ export default function TabPage(props) {
     const navigate = useNavigate()
     const { subMenu } = useParams()
 
+    useEffect(() => {
+        // 페이지 로드 후 스크롤을 맨 위로 이동
+        window.scrollTo(0, 0);
+    }, []);
+
     const tabStyle = (i)=>{
         return{
             backgroundColor : subMenu === props.tabLink[i] ? 'rgb(194,122,52)' : ''

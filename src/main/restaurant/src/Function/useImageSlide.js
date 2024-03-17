@@ -43,9 +43,9 @@ export default function useImageSlide(imageList) {
     })
 
     useEffect(()=>{ // slideNum 바뀌면 바뀐 값에 따라 이미지 전환
-        setImageOpacity(0.8)
+        // setImageOpacity(0.8)
         setTimeout(()=>{
-            setImageOpacity(0.9)
+            // setImageOpacity(0.9)
             setNowImage(imageList[slideNum])
         },200)
     },[slideNum])

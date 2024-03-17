@@ -45,8 +45,8 @@ export default function HeaderLeft(props) {
                     <div className="inner-middle">
                         <div className="user-menu">
                             <h5>Member</h5>
-                            <p  onClick={()=>{navigateHandler('/reservation')}}>예약</p>
-                            <p>예약확인</p>
+                            <p onClick={()=>{navigateHandler('/reservation')}}>예약</p>
+                            <p onClick={()=>{navigateHandler('/my-page/reservation')}}>예약확인</p>
                             <p>고객문의</p>
                         </div>
                         <div className="company">

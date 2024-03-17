@@ -15,6 +15,11 @@ export default function Personnel() {
     const [babyCount, setBabyCount] = useState(0)
     const [totalCount, setTotalCount] = useState(0)
 
+    useEffect(() => {
+        // 페이지 로드 후 스크롤을 맨 위로 이동
+        window.scrollTo(0, 0);
+    }, []);
+
     // 총 인원수 저장
     useEffect(() => {
         setTotalCount(adultCount + childCount + babyCount)

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSignUpEmail, setSignUpPhone } from '../store/loginStore';
+import { setSignUpEmail, setSignUpName, setSignUpPhone, setSignUpPw } from '../store/loginStore';
 import SignUpLogic from '../backend/SignUpLogic';
 import EmailDuplicateLogic from '../backend/EmailDuplicateLogic';
 import ModalCheckLogic from '../backend/ModalCheckLogic'
@@ -11,6 +11,7 @@ export default function SignUp(props) {
     const emailDupli = useSelector(state=>state.loginReducer.emailDupli) // 이메일 중복 체크 여부
     const emailCheck = useSelector(state => state.loginReducer.emailCheck)// 이메일 인증 여부
     const phoneCheck = useSelector(state => state.loginReducer.phoneCheck) // 휴대폰 인증 여부
+    const signUpPw = useSelector(state=>state.loginReducer.signUpPw)
 
     const [phoneFirst, setPhoneFirst] = useState('010')
     const [phoneMiddle, setPhoneMiddle] = useState('')
@@ -37,11 +38,11 @@ export default function SignUp(props) {
             </label>
             <label>
                 <span>Password</span>
-                <input type="password" />
+                <input type="password" onChange={(e)=>{dispatch(setSignUpPw(e.target.value))}}/>
             </label>
             <label>
                 <span>Name</span>
-                <input type="text" />
+                <input type="text" onChange={(e)=>{dispatch(setSignUpName(e.target.value))}}/>
             </label>
             <label>
                 <span>Phone</span>

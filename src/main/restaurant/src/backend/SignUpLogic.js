@@ -23,16 +23,16 @@ export default function SignUpLogic() {
                 .post("http://localhost:8080/login/sign-up", {
                 email: signUpEmail,
                 password: signUpPw,
-                name: signUpName,
+                username: signUpName,
                 phone: signUpPhone
             })
                 .then((res) => {
                     console.log(res.data)
-                    // if(res.data.status == 1 ){ // 회원가입 성공
-                    //     navigate('/login/sign-in')
-                    // }else if(res.data.status == 0){ // 이메일 없음
-                    //     alert('회원가입 실패')
-                    // }
+                    if(res.data.status == 1 ){ // 회원가입 성공
+                        navigate('/')
+                    }else if(res.data.status == 0){ // 실패
+                        alert('회원가입 실패')
+                    }
             })
             .catch((error)=>{
                 console.log(error)
