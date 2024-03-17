@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setIsLogin, setSignInEmail, setSignInPw, setUserData } from '../store/loginStore';
 import { setReservUserData } from '../store/reservStore';
 
-// 예약 완료 로직
 export default function PaymentUserData() {
     const navigate = useNavigate()
     const dispatch = useDispatch()

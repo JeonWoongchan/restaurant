@@ -36,7 +36,7 @@ export default function Payment() {
         if(reservUserData != localStorage.getItem('reservUserData')){
             dispatch(setReservUserData(localStorage.getItem('reservUserData'))) // 예약정보 최신화
         }
-    })
+    },[])
 
     useEffect(()=>{
         const personnelData =  JSON.parse(localStorage.getItem('personnel'))
@@ -80,7 +80,7 @@ export default function Payment() {
                                 <ul>
                                     <li className='text'>
                                         <p>이름</p>
-                                        <input type="text" defaultValue={isLogin && reservUserData ? reservUserData.name : null} onChange={(e)=>{setReservUser(e.target.value)}}/>
+                                        <input type="text" defaultValue={reservUserData.name} onChange={(e)=>{setReservUser(e.target.value)}}/>
                                     </li>
                                     <li className='phone'>
                                         <p>휴대폰 번호</p>

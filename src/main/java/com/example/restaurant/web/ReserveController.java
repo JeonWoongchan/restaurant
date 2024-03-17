@@ -1,5 +1,6 @@
 package com.example.restaurant.web;
 
+import com.example.restaurant.dto.CustomerDto;
 import com.example.restaurant.entity.*;
 
 import com.example.restaurant.repository.CustomerRepository;
@@ -35,7 +36,7 @@ public class ReserveController {
 
   @PostMapping("/user-data")
   @ResponseBody
-  public ResponseEntity<Optional<Customer>> reserve(HttpSession session) {
+  public ResponseEntity<Optional<CustomerDto>> reserve(HttpSession session) {
     return ResponseEntity.ok(customerService.selectMember(session));
   }
 
