@@ -11,6 +11,6 @@ public class ReserveDTO {
   private Reserve reserve;
 
   private Guest guest;
-  private GReserve gReserve;
+  private GReserve greserve;
   // 필요한 생성자, 게터, 세터 등을 추가합니다.
 }

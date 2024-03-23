@@ -14,11 +14,7 @@ import java.util.List;
 
 public class Guest {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long guest_id;
-
-
-
 
     private String phone;
 
