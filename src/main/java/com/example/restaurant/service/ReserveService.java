@@ -6,7 +6,8 @@ import com.example.restaurant.entity.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.example.restaurant.repository.CustomerRepository;
-import com.example.restaurant.repository.GusetRepository;
+import com.example.restaurant.repository.GuestRepository;
+
 import com.example.restaurant.repository.ReserveGusetRepository;
 import com.example.restaurant.repository.ReserveRepository;
 import jakarta.servlet.http.HttpSession;
@@ -14,12 +15,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.List;
+
 import java.util.Optional;
 import java.util.Random;
 
@@ -37,7 +38,7 @@ public class ReserveService {
   CustomerService customerService;
 
   @Autowired
-  GusetRepository gusetRepository;
+  GuestRepository guestRepository;
 
   public HashMap<String, Integer> addreserve(HttpSession session, ReserveDTO dto) {
     HashMap<String, Integer> save = new HashMap<>();
@@ -60,23 +61,24 @@ public class ReserveService {
     } else {
 
       Long id = generateRandomLong(1,10000000);
-      dto.getGuest().setGuest_id(10L);
+      dto.getGuest().setGuest_id(id);
       String phone = dto.getGuest().getPhone();
 
       String filterphone = filterPhoneNumber(phone);
       dto.getGuest().setPhone(filterphone);
-      gusetRepository.save(dto.getGuest());
       Guest guest = new Guest(id,filterphone);
-      dto.getGReserve().setGuest(guest);
+      guestRepository.save(dto.getGuest());
+
+      dto.getGreserve().setGuest(guest);
 
 
-      String reserveDate = addLeadingZeroIfNeeded(dto.getGReserve().getReserve_date());
-      dto.getGReserve().setReserve_date(reserveDate);
-      dto.getGReserve().setReg_date(formatDateTime(LocalDateTime.now()));
-      dto.getGReserve().setEnd_date(calculateEndDateTime(dto.getGReserve().getReserve_date()));
+      String reserveDate = addLeadingZeroIfNeeded(dto.getGreserve().getReserve_date());
+      dto.getGreserve().setReserve_date(reserveDate);
+      dto.getGreserve().setReg_date(formatDateTime(LocalDateTime.now()));
+      dto.getGreserve().setEnd_date(calculateEndDateTime(dto.getGreserve().getReserve_date()));
 
 
-      reservegusetRepository.save(dto.getGReserve());
+      reservegusetRepository.save(dto.getGreserve());
 
       save.put("status", 2);
     }

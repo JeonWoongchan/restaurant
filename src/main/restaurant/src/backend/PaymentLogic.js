@@ -30,7 +30,7 @@ export default function PaymentLogic() {
                     children_count: personnelData.child,
                     infants_count: personnelData.baby
                 },
-                gReserve: {
+                greserve: {
                     reserve_date: calendarData.date.split(' ')[0].replaceAll('.', '-') + ' ' + calendarData.time,
                     adults_count: personnelData.adult,
                     children_count: personnelData.child,

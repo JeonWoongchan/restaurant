@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS reserveGuest (
 
 
 CREATE TABLE IF NOT EXISTS GReserve (
-    reserve_guest_id INT PRIMARY KEY,
+    reserve_guest_id INT PRIMARY KEY auto_increment,
     guest_id INT,
     reg_date DATE,
     reserve_date DATE,
