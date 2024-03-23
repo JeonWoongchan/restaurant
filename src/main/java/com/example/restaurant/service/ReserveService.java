@@ -1,7 +1,10 @@
 package com.example.restaurant.service;
 
+import com.example.restaurant.dto.ReserveDTO;
 import com.example.restaurant.entity.*;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import com.example.restaurant.repository.CustomerRepository;
 import com.example.restaurant.repository.GusetRepository;
 import com.example.restaurant.repository.ReserveGusetRepository;
@@ -36,68 +39,71 @@ public class ReserveService {
   @Autowired
   GusetRepository gusetRepository;
 
-  public HashMap<String,Integer> addreserve(HttpSession session, ReservationDTO reservationDTO) {
-
-    HashMap<String,Integer> save = new HashMap<>();
-    Reserve reserve = reservationDTO.getReserve();
-    Guest guest = reservationDTO.getGuest();
-    ReserveGuest reserveGuest = reservationDTO.getReserveGuest();
+  public HashMap<String, Integer> addreserve(HttpSession session, ReserveDTO dto) {
+    HashMap<String, Integer> save = new HashMap<>();
 
     Optional<Customer> optionalCustomer = customerService.findByIdMembmer(session);
     if (optionalCustomer.isPresent()) {
+
+
       Customer customer = optionalCustomer.get();
-      reserve.setCustomer(customer);
-      String reserveDate = addLeadingZeroIfNeeded(reserve.getReserve_date());
-      reserve.setReserve_date(reserveDate);
-      reserve.setReg_date(formatDateTime(LocalDateTime.now()));
-      reserve.setEnd_date(calculateEndDateTime(reserve.getReserve_date()));
-      reserveRepository.save(reserve);
-      save.put("status",1);
-      return save;
+      dto.getReserve().setCustomer(customer);
 
+
+      String reserveDate = addLeadingZeroIfNeeded(dto.getReserve().getReserve_date());
+      dto.getReserve().setReserve_date(reserveDate);
+      dto.getReserve().setReg_date(formatDateTime(LocalDateTime.now()));
+      dto.getReserve().setEnd_date(calculateEndDateTime(dto.getReserve().getReserve_date()));
+
+      reserveRepository.save(dto.getReserve());
+      save.put("status", 1);
     } else {
-      // 비회원의 경우 ReserveGuest 객체 설정
+
+      Long id = generateRandomLong(1,10000000);
+      dto.getGuest().setGuest_id(id);
+      String phone = dto.getGuest().getPhone();
+
+      String filterphone = filterPhoneNumber(phone);
+      dto.getGuest().setPhone(filterphone);
+      gusetRepository.save(dto.getGuest());
+      Guest guest = new Guest(id,filterphone);
+      dto.getReserveGuest().setGuest(guest);
 
 
-      // 1부터 999999(6자리) 사이의 랜덤 숫자 생성
-      long randomNumber = generateRandomLong(1, 999999);
-
-      guest.setGuest_id(randomNumber);
-
-
-
-      gusetRepository.save(guest);
+      String reserveDate = addLeadingZeroIfNeeded(dto.getReserveGuest().getReserve_date());
+      dto.getReserveGuest().setReserve_date(reserveDate);
+      dto.getReserveGuest().setReg_date(formatDateTime(LocalDateTime.now()));
+      dto.getReserveGuest().setEnd_date(calculateEndDateTime(dto.getReserveGuest().getReserve_date()));
 
 
-      reserveGuest.setGuest(guest);
+      reservegusetRepository.save(dto.getReserveGuest());
 
-      String reserveDate = addLeadingZeroIfNeeded(reserve.getReserve_date());
-      reserveGuest.setReserve_date(reserveDate);
-      reserveGuest.setReg_date(formatDateTime(LocalDateTime.now()));
-      reserveGuest.setEnd_date(calculateEndDateTime(reserve.getReserve_date()));
-      reservegusetRepository.save(reserveGuest); // 예시로 ReserveGuest를 저장하는 것으로 가정
 
-      save.put("status",2);
-      return save;
+
+
+
+      save.put("status", 2);
     }
-
-
+    return save;
   }
+
 
   // 기존 코드 생략
 
 
 
-
+  // 날짜 형식 메소드
   private String formatDateTime(LocalDateTime dateTime) {
     return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
   }
 
+  // END date 정하는 메소드
   private String calculateEndDateTime(String reserveDate) {
     LocalDateTime LdateTime = LocalDateTime.parse(reserveDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     return formatDateTime(LdateTime.plusHours(8)); // 8시간을 더한 새로운 날짜와 시간
   }
 
+  // 날짜 month 에서 0누락되는거 추가하는 메소드
   private String addLeadingZeroIfNeeded(String date) {
     if (date.length() == 10 && date.charAt(8) == '-') {
       return date.substring(0, 8) + "0" + date.charAt(9);
@@ -116,6 +122,21 @@ public class ReserveService {
     long range = max - min;
     long fraction = (long) (range * random.nextDouble());
     return fraction + min;
+  }
+
+  
+  // 번호 메소드
+  public static String filterPhoneNumber(String phoneNumber) {
+    // 정규 표현식 패턴 설정 (숫자 이외의 문자 모두)
+    Pattern pattern = Pattern.compile("[^0-9]");
+
+    // 정규 표현식 패턴과 매치되는 부분 찾기
+    Matcher matcher = pattern.matcher(phoneNumber);
+
+    // 매치된 부분을 제거하여 숫자만 남기기
+    String filteredPhoneNumber = matcher.replaceAll("");
+
+    return filteredPhoneNumber;
   }
 
 

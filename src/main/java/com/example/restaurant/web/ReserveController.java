@@ -1,6 +1,7 @@
 package com.example.restaurant.web;
 
 import com.example.restaurant.dto.CustomerDto;
+import com.example.restaurant.dto.ReserveDTO;
 import com.example.restaurant.entity.*;
 
 import com.example.restaurant.repository.CustomerRepository;
@@ -40,8 +41,9 @@ public class ReserveController {
     return ResponseEntity.ok(customerService.selectMember(session));
   }
 
+
   @PostMapping("/payment")
-  public ResponseEntity<HashMap<String,Integer>> addreserveController(HttpSession session, @RequestBody ReservationDTO reservationDTO) {
-    return ResponseEntity.ok(reserveService.addreserve(session, reservationDTO));
+  public ResponseEntity<HashMap<String,Integer>> addreserveController(HttpSession session, @RequestBody ReserveDTO dto) {
+    return ResponseEntity.ok(reserveService.addreserve(session, dto));
   }
 }

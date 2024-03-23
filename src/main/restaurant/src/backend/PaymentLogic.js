@@ -21,10 +21,18 @@ export default function PaymentLogic() {
         // console.log(calendarData.date.split(' ')[0].replaceAll('.', '-') + ' ' + calendarData.time)
         axios 
             .post("http://localhost:8080/reservation/payment", {
-                reserve_date: calendarData.date.split(' ')[0].replaceAll('.', '-') + ' ' + calendarData.time,
-                adults_count : personnelData.adult,
-                children_count: personnelData.child,
-                infants_count: personnelData.baby
+                reserve: {
+                    reserve_date: calendarData.date.split(' ')[0].replaceAll('.', '-') + ' ' + calendarData.time,
+                    adults_count: personnelData.adult,
+                    children_count: personnelData.child,
+                    infants_count: personnelData.baby
+                },
+                reserveGuest: {
+                    reserve_date: calendarData.date.split(' ')[0].replaceAll('.', '-') + ' ' + calendarData.time,
+                    adults_count: personnelData.adult,
+                    children_count: personnelData.child,
+                    infants_count: personnelData.baby
+                },
             })
             .then((res) => {
                 console.log(res.data)

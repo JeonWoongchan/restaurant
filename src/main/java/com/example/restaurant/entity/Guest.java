@@ -3,6 +3,9 @@ package com.example.restaurant.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "Guset")
 @Getter @Setter
@@ -14,12 +17,16 @@ public class Guest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long guest_id;
 
-    @ManyToOne
-    @JoinColumn(name = "reserve_guest_id", referencedColumnName = "reserve_guest_id")
-    private ReserveGuest reserveGuest;
+
 
 
     private String phone;
 
+    @OneToMany(mappedBy = "Guest")
+    private  List<ReserveGuest> reserveGuest = new ArrayList<>();;
 
+    public Guest(Long guest_id, String phone) {
+        this.guest_id = guest_id;
+        this.phone = phone;
+    }
 }
