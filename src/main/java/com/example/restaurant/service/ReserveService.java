@@ -5,7 +5,7 @@ import com.example.restaurant.entity.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import com.example.restaurant.repository.CustomerRepository;
+
 import com.example.restaurant.repository.GuestRepository;
 
 import com.example.restaurant.repository.ReserveGusetRepository;
@@ -46,10 +46,8 @@ public class ReserveService {
     Optional<Customer> optionalCustomer = customerService.findByIdMembmer(session);
     if (optionalCustomer.isPresent()) {
 
-
       Customer customer = optionalCustomer.get();
       dto.getReserve().setCustomer(customer);
-
 
       String reserveDate = addLeadingZeroIfNeeded(dto.getReserve().getReserve_date());
       dto.getReserve().setReserve_date(reserveDate);
@@ -67,7 +65,9 @@ public class ReserveService {
       String filterphone = filterPhoneNumber(phone);
       dto.getGuest().setPhone(filterphone);
       Guest guest = new Guest(id,filterphone);
+
       guestRepository.save(dto.getGuest());
+
 
       dto.getGreserve().setGuest(guest);
 

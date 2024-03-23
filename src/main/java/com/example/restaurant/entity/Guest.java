@@ -16,9 +16,6 @@ public class Guest {
     @Id
     private Long guest_id;
 
-
-
-
     private String phone;
 
     @OneToMany(mappedBy = "guest")
