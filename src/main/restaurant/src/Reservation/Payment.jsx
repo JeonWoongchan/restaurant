@@ -11,11 +11,12 @@ export default function Payment() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const [reservUser, setReservUser] = useState()
+    const [reservUser, setReservUser] = useState('')
     const [reservPhoneFirst, setReservPhoneFirst] = useState('010') // 입력받은 폰 앞자리
-    const [reservPhoneMiddle, setReservPhoneMiddle] = useState() // 폰 중간
-    const [reservPhoneLast, setReservPhoneLast] = useState() // 폰 마지막
-    const [reservEmail, setReservEmail] = useState()
+    const [reservPhoneMiddle, setReservPhoneMiddle] = useState('') // 폰 중간
+    const [reservPhoneLast, setReservPhoneLast] = useState('') // 폰 마지막
+    const [reservPhone, setReservPhone] = useState('')
+    const [reservEmail, setReservEmail] = useState('')
 
     const isLogin = useSelector(state=>state.loginReducer.isLogin)
     const reservUserData = useSelector(state=>state.reservReducer.reservUserData)
@@ -33,10 +34,10 @@ export default function Payment() {
         if(reservData != localStorage.getItem('reservData')){
             dispatch(setReservData(localStorage.getItem('reservData'))) // 예약정보 최신화
         }
-        if(reservUserData != localStorage.getItem('reservUserData')){
-            dispatch(setReservUserData(localStorage.getItem('reservUserData'))) // 예약정보 최신화
-        }
-    },[])
+        // if(reservUserData != localStorage.getItem('reservUserData')){
+        //     dispatch(setReservUserData(localStorage.getItem('reservUserData'))) // 예약정보 최신화
+        // }
+    })
 
     useEffect(()=>{
         const personnelData =  JSON.parse(localStorage.getItem('personnel'))
@@ -57,6 +58,10 @@ export default function Payment() {
     useEffect(()=>{
         dispatch(setReservUserData({'name': reservUser, 'email': reservEmail, 'phone' : reservPhoneFirst + reservPhoneMiddle + reservPhoneLast, 'point': ''}))
     },[reservUser, reservPhoneFirst, reservPhoneMiddle, reservPhoneLast, reservEmail])
+
+    useEffect(()=>{
+        setReservPhone(reservPhoneFirst + reservPhoneMiddle + reservPhoneLast)
+    },[reservPhoneFirst, reservPhoneMiddle, reservPhoneLast])
 
     return (
         <div id='payment'>
@@ -80,7 +85,7 @@ export default function Payment() {
                                 <ul>
                                     <li className='text'>
                                         <p>이름</p>
-                                        <input type="text" defaultValue={reservUserData.name} onChange={(e)=>{setReservUser(e.target.value)}}/>
+                                        <input type="text" defaultValue={isLogin && reservUserData.name ? reservUserData.name : null} onChange={(e)=>{setReservUser(e.target.value)}}/>
                                     </li>
                                     <li className='phone'>
                                         <p>휴대폰 번호</p>
@@ -116,7 +121,7 @@ export default function Payment() {
                                     }
                                 </ul>
                             </div>
-                            <button className='payment-submit' onClick={()=>{paymentHandler()}}>예약하기</button>
+                            <button className='payment-submit' onClick={()=>{ localStorage.setItem('reservUserData', JSON.stringify(reservUserData)); paymentHandler();}}>예약하기</button>
                         </div>
                     </div>
                 </div>

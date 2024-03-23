@@ -60,27 +60,23 @@ public class ReserveService {
     } else {
 
       Long id = generateRandomLong(1,10000000);
-      dto.getGuest().setGuest_id(id);
+      dto.getGuest().setGuest_id(10L);
       String phone = dto.getGuest().getPhone();
 
       String filterphone = filterPhoneNumber(phone);
       dto.getGuest().setPhone(filterphone);
       gusetRepository.save(dto.getGuest());
       Guest guest = new Guest(id,filterphone);
-      dto.getReserveGuest().setGuest(guest);
+      dto.getGReserve().setGuest(guest);
 
 
-      String reserveDate = addLeadingZeroIfNeeded(dto.getReserveGuest().getReserve_date());
-      dto.getReserveGuest().setReserve_date(reserveDate);
-      dto.getReserveGuest().setReg_date(formatDateTime(LocalDateTime.now()));
-      dto.getReserveGuest().setEnd_date(calculateEndDateTime(dto.getReserveGuest().getReserve_date()));
+      String reserveDate = addLeadingZeroIfNeeded(dto.getGReserve().getReserve_date());
+      dto.getGReserve().setReserve_date(reserveDate);
+      dto.getGReserve().setReg_date(formatDateTime(LocalDateTime.now()));
+      dto.getGReserve().setEnd_date(calculateEndDateTime(dto.getGReserve().getReserve_date()));
 
 
-      reservegusetRepository.save(dto.getReserveGuest());
-
-
-
-
+      reservegusetRepository.save(dto.getGReserve());
 
       save.put("status", 2);
     }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Guset")
+@Table(name = "guest")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"guest_id","reserveGuest","phone"})
@@ -22,8 +22,8 @@ public class Guest {
 
     private String phone;
 
-    @OneToMany(mappedBy = "Guest")
-    private  List<ReserveGuest> reserveGuest = new ArrayList<>();;
+    @OneToMany(mappedBy = "guest")
+    private  List<GReserve> reserveGuest = new ArrayList<>();;
 
     public Guest(Long guest_id, String phone) {
         this.guest_id = guest_id;

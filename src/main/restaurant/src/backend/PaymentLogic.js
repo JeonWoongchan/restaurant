@@ -13,6 +13,9 @@ export default function PaymentLogic() {
 
     const personnelData = JSON.parse(localStorage.getItem('personnel'))
     const calendarData = JSON.parse(localStorage.getItem('calendar'))
+    const userData = JSON.parse(localStorage.getItem('reservUserData'))
+
+    const reservUserData = useSelector(state=>state.reservReducer.reservUserData)
 
     const paymentHandler = () => {
         // console.log(calendarData.date.split(' ')[0].replaceAll('.', '-'))
@@ -27,18 +30,22 @@ export default function PaymentLogic() {
                     children_count: personnelData.child,
                     infants_count: personnelData.baby
                 },
-                reserveGuest: {
+                gReserve: {
                     reserve_date: calendarData.date.split(' ')[0].replaceAll('.', '-') + ' ' + calendarData.time,
                     adults_count: personnelData.adult,
                     children_count: personnelData.child,
-                    infants_count: personnelData.baby
+                    infants_count: personnelData.baby,
                 },
+                guest: {
+                    guest_id : '',
+                    phone : reservUserData.phone
+                }
             })
             .then((res) => {
-                console.log(res.data)
-                if (res.data === '회원 등록 완료') {
+
+                if (res.data.status === 1) {
                     navigate('/my-page/reservation')
-                } else if (res.data === '비회원 등록 완료') {
+                } else if (res.data.status === 2) {
                     navigate('/')
                 }else {
                     alert('예약 오류')
