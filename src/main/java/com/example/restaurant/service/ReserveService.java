@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 import com.example.restaurant.repository.GuestRepository;
 
-import com.example.restaurant.repository.ReserveGusetRepository;
 import com.example.restaurant.repository.ReserveRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
