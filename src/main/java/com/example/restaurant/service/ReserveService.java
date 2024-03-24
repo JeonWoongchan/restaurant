@@ -5,21 +5,21 @@ import com.example.restaurant.entity.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import com.example.restaurant.repository.CustomerRepository;
-import com.example.restaurant.repository.GusetRepository;
-import com.example.restaurant.repository.ReserveGusetRepository;
+
+import com.example.restaurant.repository.GuestRepository;
+
 import com.example.restaurant.repository.ReserveRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.List;
+
 import java.util.Optional;
 import java.util.Random;
 
@@ -37,7 +37,7 @@ public class ReserveService {
   CustomerService customerService;
 
   @Autowired
-  GusetRepository gusetRepository;
+  GuestRepository guestRepository;
 
   public HashMap<String, Integer> addreserve(HttpSession session, ReserveDTO dto) {
     HashMap<String, Integer> save = new HashMap<>();
@@ -64,7 +64,9 @@ public class ReserveService {
       String filterphone = filterPhoneNumber(phone);
       dto.getGuest().setPhone(filterphone);
       Guest guest = new Guest(id,filterphone);
-      gusetRepository.save(dto.getGuest());
+
+      guestRepository.save(dto.getGuest());
+
 
       dto.getGreserve().setGuest(guest);
 
@@ -73,6 +75,7 @@ public class ReserveService {
       dto.getGreserve().setReserve_date(reserveDate);
       dto.getGreserve().setReg_date(formatDateTime(LocalDateTime.now()));
       dto.getGreserve().setEnd_date(calculateEndDateTime(dto.getGreserve().getReserve_date()));
+
 
       reservegusetRepository.save(dto.getGreserve());
 
