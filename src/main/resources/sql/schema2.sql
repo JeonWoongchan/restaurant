@@ -25,9 +25,9 @@ CREATE TABLE IF NOT EXISTS Customer (
 CREATE TABLE IF NOT EXISTS reserve (
     reserve_id INT PRIMARY KEY auto_increment,
     customer_id INT,
-    reg_date DATETIME,
-    reserve_date DATETIME,
-    end_date DATETIME,
+    reg_date DATE,
+    reserve_date DATE,
+    end_date DATE,
     adults_count INT,
     children_count INT,
     infants_count INT,
@@ -42,23 +42,6 @@ CREATE TABLE IF NOT EXISTS Guest (
      name  VARCHAR(100) NOT NULL,
      phone VARCHAR(100) NOT NULL
     );
-
--- reserveGuest 테이블 생성
-CREATE TABLE IF NOT EXISTS reserveGuest (
-    reserve_guest_id INT PRIMARY KEY,
-    guest_id INT,
-    reg_date DATETIME,
-    reserve_date DATETIME,
-    end_date DATETIME,
-    adults_count INT,
-    children_count INT,
-    infants_count INT,
-    comment VARCHAR(4000),
-    FOREIGN KEY (guest_id) REFERENCES Guest (Guest_id)
-    );
-
-
-
 
 CREATE TABLE IF NOT EXISTS GReserve (
     reserve_guest_id INT PRIMARY KEY auto_increment,

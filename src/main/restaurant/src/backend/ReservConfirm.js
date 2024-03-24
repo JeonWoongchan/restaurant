@@ -11,12 +11,17 @@ export default function ReservConfrim() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const confrimHandler = () => {
-        axios .post("http://localhost:8080/my-page/reservation",{
+    const confirmHandler = () => {
+        axios .post("http://localhost:8080/my-page/reserve",{
 
             })
             .then((res) => {
                 console.log(res.data)
+                if(res.data.length == 0) {
+                    alert('예약 정보가 없습니다')
+                    navigate(-1)
+                }
+
                 if(res.data) {
                     dispatch(setGuestReservConfirm({
                         date : res.data[0].reg_date,
@@ -28,9 +33,7 @@ export default function ReservConfrim() {
                         phone : res.data[0].phone
                     }))
                     navigate('/my-page/reservation')
-                } else {
-                    alert('예약 정보가 없습니다')
-                }
+                } 
             })
             .catch((error) => {
                 console.log(error)
@@ -38,6 +41,6 @@ export default function ReservConfrim() {
     }
 
     return {
-        confrimHandler
+        confirmHandler
     }
 }

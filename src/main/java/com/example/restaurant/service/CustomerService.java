@@ -35,9 +35,9 @@ public class CustomerService {
   AuthService authService;
 
   // 회원 가입
-  public String joinCustomer(Customer customer) throws Exception {
+  public Integer joinCustomer(Customer customer) throws Exception {
     customerRepository.save(customer);
-    return customer.getUsername() + "님 회원가입 성공하셨습니다";
+    return 1;
   }
 
   // 중복 체크

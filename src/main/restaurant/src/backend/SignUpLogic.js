@@ -28,9 +28,9 @@ export default function SignUpLogic() {
             })
                 .then((res) => {
                     console.log(res.data)
-                    if(res.data.status == 1 ){ // 회원가입 성공
+                    if(res.data == 1 ){ // 회원가입 성공
                         navigate('/login/sign-in')
-                    }else if(res.data.status == 0){ // 실패
+                    }else { // 실패
                         alert('회원가입 실패')
                     }
             })

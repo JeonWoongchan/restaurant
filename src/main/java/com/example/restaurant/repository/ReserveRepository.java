@@ -12,7 +12,7 @@ import java.util.List;
 public interface ReserveRepository extends JpaRepository<Reserve,Long> {
 
    @Query("select new com.example.restaurant.dto.ReserveDTO( r.reg_date,r.reserve_date,r.end_date,r.adults_count,r.children_count,r.infants_count, customer.username, customer.phone)  FROM Reserve r INNER JOIN r.customer customer  WHERE customer.id = :id")
-   List<ReserveDTO> selectReserve(Long customer_id);
+   List<ReserveDTO> selectReserve(Long id);
 
 
 }
