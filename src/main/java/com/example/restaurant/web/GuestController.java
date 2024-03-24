@@ -28,7 +28,7 @@ public class GuestController {
   @PostMapping("/my-page/reservGuest")
   public ResponseEntity<List<GReserveDTO>> getGuestsByGuestId(@RequestBody Guest guest) {
     String phone = guest.getPhone();
-    List<GReserveDTO> guests = guestService.selectinfo(phone, guest);
+    List<GReserveDTO> guests = guestService.selectinfo(phone);
     return new ResponseEntity<>(guests, HttpStatus.OK);
   }
 }

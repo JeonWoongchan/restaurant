@@ -36,10 +36,23 @@ const guestPhone = createSlice({
 
 export const { setGuestPhone } = guestPhone.actions;
 
+const guestReservConfirm = createSlice({
+    name: 'guestReservConfirm',
+    initialState: '',
+    reducers: {
+        setGuestReservConfirm(state, action) {
+            return action.payload; 
+        }
+    }
+});
+
+export const { setGuestReservConfirm } = guestReservConfirm.actions;
+
 const reservReducer = combineReducers({
     reservUserData: reservUserData.reducer,
     reservData: reservData.reducer,
     guestPhone: guestPhone.reducer,
+    guestReservConfirm: guestReservConfirm.reducer,
 });
 
 export default reservReducer;

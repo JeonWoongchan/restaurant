@@ -37,6 +37,7 @@ export default function PaymentLogic() {
                 },
                 guest: {
                     guest_id : '',
+                    name : reservUserData.name,
                     phone : reservUserData.phone
                 }
             })

@@ -11,6 +11,7 @@ export default function MyReservGuest() {
     // const [guestName, setGuestName] = useState('')
 
     const guestPhone = useSelector(state=>state.reservReducer.guestPhone)
+
     const [guestPhone1, setGuestPhone1] = useState('010')
     const [guestPhone2, setGuestPhone2] = useState('')
     const [guestPhone3, setGuestPhone3] = useState('')
