@@ -10,8 +10,8 @@ export default function MyPage() {
 
     return (
         <div id='my-page'>
-            <TabPage tabMenu={['회원정보', '예약정보']} menu={'my-page'} tabLink={['profile','reservation']} 
-                    subMenu={subMenu === 'profile' ? <MyInfo/> : subMenu === 'reservation' ? <MyReserv/> : null}/>
+            <TabPage tabMenu={['예약정보']} menu={'my-page'} tabLink={['reservation']} 
+                    subMenu={subMenu === 'reservation' ? <MyReserv/> : null}/>
         </div>
     );
 }

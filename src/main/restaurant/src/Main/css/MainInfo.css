@@ -1,5 +1,6 @@
 .main-info-container {
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
     display: flex;
     background-color: var(--color-primary-variant);
     color: white;
