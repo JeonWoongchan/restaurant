@@ -29,7 +29,8 @@ export default function SignUpLogic() {
                 .then((res) => {
                     console.log(res.data)
                     if(res.data == 1 ){ // 회원가입 성공
-                        navigate('/login/sign-in')
+                        navigate('/')
+                        alert('회원가입 성공')
                     }else { // 실패
                         alert('회원가입 실패')
                     }
@@ -39,7 +40,7 @@ export default function SignUpLogic() {
             })
         } else if (!emailCheck) {
             alert('이메일 인증을 완료 해주세요')
-        } else if (!emailCheck) {
+        } else if (!phoneCheck) {
             alert('휴대폰 인증을 완료 해주세요')
         }
     }

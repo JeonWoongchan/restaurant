@@ -23,7 +23,7 @@ export default function EmailDuplicateLogic() {
             // .catch((error)=>{
             //     console.log(error)
             // })
-            dispatch(setEmailCheck(true))
+            // dispatch(setEmailCheck(true))
         }else if(type == '휴대폰'){
             // axios
             //     .post("http://localhost:8080/login/sign-in", {
@@ -35,7 +35,7 @@ export default function EmailDuplicateLogic() {
             // .catch((error)=>{
             //     console.log(error)
             // })
-            dispatch(setPhoneCheck(true))
+            // dispatch(setPhoneCheck(true))
         }
     }
 

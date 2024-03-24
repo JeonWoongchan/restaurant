@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ReservConfrim from '../backend/ReservConfirm';
 import { useNavigate } from 'react-router-dom';
+import IsLoginCheck from '../backend/IsLoginCheck';
 
 export default function MyReserv() {
     const isLogin = useSelector(state => state.loginReducer.isLogin)
@@ -9,15 +10,19 @@ export default function MyReserv() {
     const [reservDetail, setReservDetail] = useState("")
 
     const { confirmHandler } = ReservConfrim()
+    const { loginCheckHandler } = IsLoginCheck()
+
     const navigate = useNavigate()
+    console.log(guestReservConfirm)
 
     useEffect(() => {
+        loginCheckHandler()
         if (isLogin) {
             confirmHandler()
-        } else if(guestReservConfirm === '') {
-            navigate('my-page/reservGuest')
+        } else if(!isLogin && guestReservConfirm == '') {
+            navigate('/my-page/reservGuest')
         }
-    }, [])
+    }, [isLogin])
 
     useEffect(() => {
         if (guestReservConfirm.detail_adults > 0) {

@@ -56,10 +56,10 @@ export default function SignUp(props) {
                         <option value="019">019</option>
                     </select>
                     <div className="num">
-                        <input type="text" onChange={(e) => { setPhoneMiddle(e.target.value) }} readOnly={phoneCheck ? true : false}/>
+                        <input type="text" maxLength={4} onChange={(e) => { setPhoneMiddle(e.target.value) }} readOnly={phoneCheck ? true : false}/>
                     </div>
                     <div className="num">
-                        <input type="text" onChange={(e) => { setPhoneLast(e.target.value) }} readOnly={phoneCheck ? true : false}/>
+                        <input type="text" maxLength={4} onChange={(e) => { setPhoneLast(e.target.value) }} readOnly={phoneCheck ? true : false}/>
                     </div>
                 </div>
                 <button className='phone-btn' onClick={()=>{props.setModalOn('휴대폰'); modalCheck('휴대폰')}} style={phoneCheck ? { pointerEvents: 'none' } : {}}>{phoneCheck ? '인증완료' : '휴대폰 인증'}</button>
