@@ -1,5 +1,10 @@
 package com.example.restaurant.dto;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
 public class GReserveDTO {
 
   private String reg_date;

@@ -28,13 +28,16 @@ public class GuestService {
   public Page<GReserveDTO> getGuestsByGuestId( int pageNumber, int pageSize,String phone) {
 
 
-    Optional<Long> guestId = guestRepository.findByID(phone);
+    Optional<Guest> guestIdOptional = guestRepository.findByID(phone);
 
-    if (guestId.isPresent()) {
-      Long id = guestId.get(); // 값이 존재한다고 확신할 때 사용
+    if (guestIdOptional.isPresent()) {
+
       Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
-      Page<GReserveDTO> guestsPage = gReserveRepository.info(id,pageable);
+      // 여기서 데이터베이스에서 해당 guestId에 대한 Guest 개체를 가져오는 작업을 수행합니다.
+      Guest guest = guestIdOptional.get();
+
+      Page<GReserveDTO> guestsPage = gReserveRepository.info(guest,pageable);
 
       return guestsPage;
 

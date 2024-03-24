@@ -1,13 +1,16 @@
 package com.example.restaurant.service;
 
+import com.example.restaurant.dto.ReserveAndGusetDTO;
 import com.example.restaurant.dto.ReserveDTO;
 import com.example.restaurant.entity.*;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.example.restaurant.repository.GuestRepository;
 
+import com.example.restaurant.repository.ReserveGusetRepository;
 import com.example.restaurant.repository.ReserveRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +42,7 @@ public class ReserveService {
   @Autowired
   GuestRepository guestRepository;
 
-  public HashMap<String, Integer> addreserve(HttpSession session, ReserveDTO dto) {
+  public HashMap<String, Integer> addreserve(HttpSession session, ReserveAndGusetDTO dto) {
     HashMap<String, Integer> save = new HashMap<>();
 
     Optional<Customer> optionalCustomer = customerService.findByIdMembmer(session);
@@ -82,6 +85,22 @@ public class ReserveService {
       save.put("status", 2);
     }
     return save;
+  }
+
+
+  public List<ReserveDTO> selectReserve(HttpSession session) {
+
+
+    Optional<Customer>id = customerService.findByIdMembmer(session);
+
+
+    Long customer_id = id.get().getId();
+
+
+    return reserveRepository.selectReserve(customer_id);
+
+
+
   }
 
 
