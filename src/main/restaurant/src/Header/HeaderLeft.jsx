@@ -35,7 +35,12 @@ export default function HeaderLeft(props) {
                                 <div className="logout"></div>
                             </div> */}
                         {
-                            isLogin ? <div className="sign-in">{localStorage.getItem('userName')}</div>
+                            isLogin ? 
+                            <>
+                                <div className="sign-in">{localStorage.getItem('userName')}</div>
+                                <div className="sign-up" onClick={()=>{}}>로그아웃</div>
+                            </>
+                            
                             : <>
                                 <div className="sign-in" onClick={()=>{navigateHandler('/login/sign-in')}}>로그인</div>
                                 <div className="sign-up" onClick={()=>{navigateHandler('/login/sign-up')}}>회원가입</div>
@@ -48,7 +53,12 @@ export default function HeaderLeft(props) {
                         <div className="user-menu">
                             <h5>Member</h5>
                             <p onClick={()=>{navigateHandler('/reservation')}}>예약</p>
-                            <p onClick={()=>{navigateHandler('/my-page/reservation')}}>예약확인</p>
+                            <p onClick={()=>{
+                                if(isLogin) {
+                                navigateHandler('/my-page/reservation')
+                            } else {
+                                navigateHandler('/my-page/reservGuest')
+                            }}}>예약확인</p>
                             <p>고객문의</p>
                         </div>
                         <div className="company">

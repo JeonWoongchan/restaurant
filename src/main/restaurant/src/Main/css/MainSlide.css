@@ -21,6 +21,7 @@
     background-position: center;
     z-index: 1;
     transition: opacity 300ms linear 0s;
+    transition: all 0.5s ease;
 }
 
 .main-slide-content::before {

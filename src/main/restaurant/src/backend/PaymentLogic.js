@@ -13,7 +13,6 @@ export default function PaymentLogic() {
 
     const personnelData = JSON.parse(localStorage.getItem('personnel'))
     const calendarData = JSON.parse(localStorage.getItem('calendar'))
-    const userData = JSON.parse(localStorage.getItem('reservUserData'))
 
     const reservUserData = useSelector(state=>state.reservReducer.reservUserData)
 

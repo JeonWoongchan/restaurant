@@ -24,9 +24,22 @@ const reservData = createSlice({
 
 export const { setReservData } = reservData.actions;
 
+const guestPhone = createSlice({
+    name: 'guestPhone',
+    initialState: '',
+    reducers: {
+        setGuestPhone(state, action) {
+            return action.payload; 
+        }
+    }
+});
+
+export const { setGuestPhone } = guestPhone.actions;
+
 const reservReducer = combineReducers({
     reservUserData: reservUserData.reducer,
     reservData: reservData.reducer,
+    guestPhone: guestPhone.reducer,
 });
 
 export default reservReducer;

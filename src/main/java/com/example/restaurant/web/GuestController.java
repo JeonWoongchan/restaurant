@@ -19,6 +19,7 @@ public class GuestController {
 
   @Autowired
   private GuestRepository guestRepository;
+
   @GetMapping("/guests/{guestId}")
   public ResponseEntity<Page<Guest>> getGuestsByGuestId(@RequestBody Guest guest,
                                                         @RequestParam(value = "page", defaultValue = "0") int page,
