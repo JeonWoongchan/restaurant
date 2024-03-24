@@ -1,16 +1,25 @@
 package com.example.restaurant.dto;
 
-import com.example.restaurant.entity.Guest;
-import com.example.restaurant.entity.Reserve;
-import com.example.restaurant.entity.GReserve;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
 public class ReserveDTO {
-  private Reserve reserve;
 
-  private Guest guest;
-  private GReserve greserve;
-  // 필요한 생성자, 게터, 세터 등을 추가합니다.
+  private String reg_date;
+  private String reserve_date;
+  private String end_date;
+  private int adults_count;
+  private int children_count;
+  private int infants_count;
+
+  public ReserveDTO(String reg_date, String reserve_date, String end_date, int adults_count, int children_count, int infants_count) {
+    this.reg_date = reg_date;
+    this.reserve_date = reserve_date;
+    this.end_date = end_date;
+    this.adults_count = adults_count;
+    this.children_count = children_count;
+    this.infants_count = infants_count;
+  }
 }
