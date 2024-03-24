@@ -1,23 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ReservConfirmGuest from '../backend/ReservConfirmGuest';
+import { useParams } from 'react-router-dom';
+import { setGuestPhone } from '../store/reservStore';
 
 export default function MyReservGuest() {
-    const {confirmGuestHandler} = ReservConfirmGuest()
+    const dispatch = useDispatch()
+    const { confirmGuestHandler } = ReservConfirmGuest()
 
-    const [guestName, setGuestName] = useState('')
+    // const [guestName, setGuestName] = useState('')
 
-    const [guestPhone, setGuestPhone] = useState('')
-    const [guestPhone1, setGuestPhone1] = useState('')
+    const guestPhone = useSelector(state=>state.reservReducer.guestPhone)
+    const [guestPhone1, setGuestPhone1] = useState('010')
     const [guestPhone2, setGuestPhone2] = useState('')
     const [guestPhone3, setGuestPhone3] = useState('')
-    
-    useEffect(()=>{
-        setGuestPhone(guestPhone1+guestPhone2+guestPhone3)
-    },[guestPhone1, guestPhone2, guestPhone3])
+
+    useEffect(() => {
+        dispatch(setGuestPhone(guestPhone1 + guestPhone2 + guestPhone3))
+    }, [guestPhone1, guestPhone2, guestPhone3])
+
 
     return (
         <div id='my-reserv'>
+            <div className="tab-page-image">
+                <img src="/image/login1.png" alt="" />
+                <div className="image-text">Guest Reservation</div>
+            </div>
             <div className="reserv-inner">
                 <div className="reserv-intro">
                     <h1 className="reserv-title">예약 확인</h1>
@@ -28,14 +36,14 @@ export default function MyReservGuest() {
                         <div className="detail">
                             <h5 className='sub-title'>예약자 정보 입력</h5>
                             <ul>
-                                <li className='text'>
+                                {/* <li className='text'>
                                     <p>이름</p>
-                                    <input type="text" onChange={(e)=>{setGuestName(e.target.value)}}/>
-                                </li>
-                                <li className='phone'>
+                                    <input type="text" onChange={(e) => { setGuestName(e.target.value) }} />
+                                </li> */}
+                                <li className='phone guest-input'>
                                     <p>휴대폰 번호</p>
                                     <div className="input-list" >
-                                        <select name="" id="" onChange={(e)=>{setGuestPhone1(e.target.value)}}>
+                                        <select name="" id="" onChange={(e) => { setGuestPhone1(e.target.value) }}>
                                             <option value="010">010</option>
                                             <option value="011">011</option>
                                             <option value="016">016</option>
@@ -44,16 +52,16 @@ export default function MyReservGuest() {
                                             <option value="019">019</option>
                                         </select>
                                         <div className="num">
-                                            <input type="text" onChange={(e)=>{setGuestPhone2(e.target.value)}}/>
+                                            <input type="text" onChange={(e) => { setGuestPhone2(e.target.value) }} />
                                         </div>
                                         <div className="num">
-                                            <input type="text"onChange={(e)=>{setGuestPhone3(e.target.value)}}/>
+                                            <input type="text" onChange={(e) => { setGuestPhone3(e.target.value) }} />
                                         </div>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                        <button className='payment-submit' onClick={()=>{confirmGuestHandler(guestName, guestPhone)}}>예약 조회</button>
+                        <button className='payment-submit' onClick={() => { confirmGuestHandler() }}>예약 조회</button>
                     </div>
                 </div>
             </div>

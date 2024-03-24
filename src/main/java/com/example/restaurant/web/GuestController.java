@@ -25,22 +25,13 @@ public class GuestController {
   private GuestRepository guestRepository;
   @Autowired
   private GreserveRepository gReserveRepository;
-  @GetMapping("/guests")
+  @PostMapping("/my-page/reservGuest")
   public ResponseEntity<Page<GReserveDTO>> getGuestsByGuestId(@RequestBody Guest guest,
-                                                        @RequestParam(value = "page", defaultValue = "0") int page,
-                                                        @RequestParam(value = "size", defaultValue = "10") int size) {
+                                                              @RequestParam(value = "page", defaultValue = "0") int page,
+                                                              @RequestParam(value = "size", defaultValue = "10") int size) {
 
     String phone = guest.getPhone();
-
     Page<GReserveDTO> guests = guestService.getGuestsByGuestId(page, size, phone);
     return new ResponseEntity<>(guests, HttpStatus.OK);
-
-
-
-
-
-
-
-    // 성공적으로 데이터를 조회했을 때 HTTP 상태 코드 200(OK)와 함께 데이터를 반환
   }
 }

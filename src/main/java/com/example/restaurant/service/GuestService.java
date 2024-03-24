@@ -25,21 +25,16 @@ public class GuestService {
 
 
 
-  public Page<GReserveDTO> getGuestsByGuestId( int pageNumber, int pageSize,String phone) {
+  public Page<GReserveDTO> getGuestsByGuestId(int pageNumber, int pageSize, String phone) {
+    Optional<Long> guestOptional = guestRepository.findByPhone(phone); // 메소드 이름을 명확하게 변경
 
-
-    Optional<Long> guestId = guestRepository.findByID(phone);
-
-    if (guestId.isPresent()) {
-      Long id = guestId.get(); // 값이 존재한다고 확신할 때 사용
+    if (guestOptional.isPresent()) {
       Pageable pageable = PageRequest.of(pageNumber, pageSize);
-
-      Page<GReserveDTO> guestsPage = gReserveRepository.info(id,pageable);
-
+      Long guest = guestOptional.get();
+      Page<GReserveDTO> guestsPage = gReserveRepository.info(guest, pageable);
       return guestsPage;
-
     } else {
-      return  null;
+      return Page.empty(); // null 대신 비어있는 Page 반환
     }
   }
 }

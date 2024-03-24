@@ -6,6 +6,7 @@ import com.example.restaurant.entity.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.example.restaurant.repository.GreserveRepository;
 import com.example.restaurant.repository.GuestRepository;
 
 import com.example.restaurant.repository.ReserveRepository;
@@ -32,7 +33,8 @@ public class ReserveService {
   ReserveRepository reserveRepository;
 
   @Autowired
-  ReserveGusetRepository reservegusetRepository;
+  GreserveRepository greserveRepository;
+
   @Autowired
   CustomerService customerService;
 
@@ -77,7 +79,7 @@ public class ReserveService {
       dto.getGreserve().setEnd_date(calculateEndDateTime(dto.getGreserve().getReserve_date()));
 
 
-      reservegusetRepository.save(dto.getGreserve());
+      greserveRepository.save(dto.getGreserve());
 
       save.put("status", 2);
     }

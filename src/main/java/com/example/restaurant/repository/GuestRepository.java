@@ -13,5 +13,6 @@ public interface GuestRepository extends JpaRepository<Guest,Long> {
 
 
   @Query("SELECT g.guest_id FROM Guest g WHERE g.phone = :phone")
-  Optional<Long> findByID(String phone);
+  Optional<Long> findByPhone(String phone);
 }
+
