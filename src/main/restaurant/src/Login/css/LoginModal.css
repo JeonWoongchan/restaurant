@@ -1,0 +1,62 @@
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 불투명한 배경 색상 */
+    z-index: 10; /* 모달보다 앞에 위치하도록 설정 */
+}
+
+.modal-inner {
+    width: 500px;
+    min-height: 500px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--color-primary-variant); /* 불투명한 배경 색상 */
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 11; /* 배경보다 앞에 위치하도록 설정 */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-inner .modal-title {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    padding-bottom: 10px;
+}
+
+.modal-inner .modal-check {
+}
+
+.modal-inner .modal-check .user-input {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.modal-inner .modal-check .user-input input {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    color: black;
+}
+
+.modal-inner .modal-check .user-input button  {
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+
+.modal-inner .modal-detail {
+    
+}
+
+.modal-inner .close-btn {
+    width: 460px;
+    background: gray;
+    position: absolute;
+    bottom: 20px;
+    height: 50px;
+}

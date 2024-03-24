@@ -1,0 +1,185 @@
+.reserv-container {
+    
+}
+
+.reserv-image {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.reserv-image img {
+    width: 100%;
+    position: absolute;
+    top: -650px;
+    z-index: 1;
+}
+
+.reserv-image::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.2;
+    z-index: 2;
+}
+
+.reserv-image .image-text{
+    color: white;
+    position: absolute;
+    z-index: 3;
+    top: 60%;
+    width: 100%;
+    text-align: center;
+    font-size: 2.5rem;
+    animation: imageTextAnimation 1s ease;
+    font-family: 'Gowun Batang', serif;
+}
+
+.reserv-inner {
+    display: flex;
+    flex-direction: column;
+    padding: 100px 50px;
+}
+
+.reserv-intro {
+    text-align: center;
+    width: 60%;
+    margin: 0 auto 50px;
+}
+
+.reserv-title {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+}
+
+.reserv-detail {
+    text-align: left;
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.reserv-main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 0 auto;
+    width: 800px;
+    box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08);
+    padding: 35px;
+    border-radius: 10px;
+}
+
+.selector {
+    background-color: #f9f9f9;
+    border: 1px solid #e6e3df;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    color: var(--color-primary);
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.selector .right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.selector span {
+    color: gray;
+}
+
+.selector .arrow {
+    font-size: 1.5rem;
+    margin: 0 10px;
+}
+
+.selector .box-on {
+    display: block;
+}
+
+.calendar-form {
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.calendar-form h5 {
+    color: var(--color-primary-variant);
+    opacity: 0.6;
+}
+
+.calendar-form textarea {
+    width: 100%;
+    height: 150px;
+    resize: none;
+    outline: none;
+    margin-top: 20px;
+    border: solid 1px var(--color-primary);
+    padding: 5px;
+    font-size: 0.9rem;
+}
+
+.caution-box {
+    width: 100%;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.caution-box .top {
+    font-size: 1.6rem;
+    display: flex;
+    gap: 5px;
+}
+
+.caution-box .top h5 {
+    font-size: 1rem;
+}
+
+.caution-box .inner {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.caution-box .inner p {
+    padding-left: 10px;
+    position: relative;
+}
+
+.caution-box .inner p::before {
+    content: '';
+    background: var(--color-primary);
+    display: block;
+    position: absolute;
+    width: 0.2em;
+    height: 0.2em;
+    top: 0.6em;
+    left: 0;
+    overflow: hidden;
+}
+
+.caution-box .inner h3 {
+    margin-top: 20px;
+    font-weight: bold;
+    opacity: 0.8;
+}
+
+.reserv-submit {
+    padding: 20px;
+    background-color: var(--color-primary);
+    width: 150px;
+    color: white;
+    margin: 0 auto;
+}
+
+.reserv-submit:hover {
+    opacity: 0.8;
+}

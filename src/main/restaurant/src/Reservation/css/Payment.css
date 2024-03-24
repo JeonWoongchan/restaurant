@@ -1,0 +1,139 @@
+.payment-title {
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--color-primary);
+    margin-bottom: 50px;
+}
+
+.payment-main {
+    margin: 0 auto;
+    width: 800px;
+    box-shadow: 0px 2px 3px -1px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(25, 28, 33, 0.02), 0px 0px 0px 1px rgba(25, 28, 33, 0.08);
+    padding: 35px;
+    border-radius: 10px;
+}
+
+.payment-product {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.payment-product .sub-title {
+    color: var(--color-primary);
+    padding: 10px 0;
+    border-bottom: var(--color-primary) 1px solid;
+}
+
+.payment-product .detail {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.payment-product .detail p {
+    font-size: 1.2rem;
+    position: relative;
+    padding: 0 20px;
+}
+
+.payment-product .detail p::before {
+    content: '';
+    background: var(--color-primary);
+    display: block;
+    position: absolute;
+    width: 0.2em;
+    height: 0.2em;
+    top: 0.7em;
+    left: 10px;
+    overflow: hidden;
+}
+
+.payment-product .detail ul {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+}
+
+.payment-product .detail ul .text {
+
+}
+
+.payment-product .detail ul .text p {
+    font-size: 1rem;
+}
+
+.payment-product .detail ul .text input {
+    width: 300px;
+    height: 30px;
+    border: 1px rgba(0, 0, 0, 0.1) solid;
+    margin: 20px;
+}
+
+.payment-product .detail ul .phone {
+
+}
+
+.payment-product .detail ul .phone select {
+    width: 80px;
+    height: 30px;
+    border: 1px rgba(0, 0, 0, 0.1) solid;
+    padding: 0 5px;
+}
+
+.payment-product .detail ul .phone input {
+    width: 80px;
+    height: 30px;
+    border: 1px rgba(0, 0, 0, 0.1) solid;
+}
+
+.payment-product .detail ul .phone .num {
+    position: relative;
+}
+
+.payment-product .detail ul .phone .num::before {
+    content: '';
+    position: absolute;
+    border-bottom: 1px solid #9C836A;
+    width: 8px;
+    top: 50%;
+    display: block;
+    left: -20px;
+}
+
+.payment-product .detail ul .phone p {
+    font-size: 1rem;
+}
+
+.payment-product .detail .check {
+
+}
+
+.payment-product .detail .check p {
+    font-size: 1rem;
+}
+
+.payment-product .detail .check .point {
+    width: 80px;
+    height: 30px;
+    border: 1px rgba(0, 0, 0, 0.1) solid;
+}
+
+.payment-product .input-list {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.payment-submit {
+    padding: 20px;
+    background-color: var(--color-primary);
+    width: 150px;
+    color: white;
+    margin: 0 auto;
+}
+
+.payment-submit:hover {
+    opacity: 0.8;
+}

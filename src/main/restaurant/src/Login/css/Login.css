@@ -1,0 +1,234 @@
+.login-container {
+    /* background-color: var(--color-primary-variant); */
+}
+
+.login-image {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.login-image::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.2;
+    z-index: 2;
+}
+
+.login-container-main {
+    position: relative;
+    text-align: center;
+    padding: 70px 0;
+    border-bottom: 1px solid rgb(0,0,0,0.2);
+}
+
+.login-container-main .login-title {
+    position: absolute;
+    margin: 0 auto;
+    padding: 20px;
+    color: black;
+    z-index: 2;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 300;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Gowun Batang', serif;
+}
+
+.login-image img {
+    width: 100%;
+    position: absolute;
+    top: -650px;
+    z-index: 1;
+}
+
+.login-form {
+    position: relative;
+    display: flex;
+    margin: 0 auto;
+    width: 1000px;
+    height: 550px;
+    color: black;
+    z-index: 5;
+    /* background-color: var(--color-primary-variant); */
+}
+
+.login-form .form-inner {
+    width: 70%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+    padding: 50px 0;
+    justify-content: space-between;
+    /* background-color: var(--color-primary-variant); */
+    left: 30%;
+    transition: all 1.2s ease;
+    z-index: 2;
+}
+
+.login-form .form-inner .form-title {
+    
+}
+
+.login-form .form-inner label {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.login-form .form-inner label span {
+    opacity: 0.7;
+}
+
+.login-form .form-inner label .input-list {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 10px;
+}
+
+.login-form .form-inner label .input-list select {
+    width: 70px;
+    height: 30px;
+    border: 1px rgba(0, 0, 0, 0.1) solid;
+    padding: 0 5px;
+}
+
+.login-form .form-inner label .input-list .num {
+    width: 70px;
+    height: 30px;
+    border: 1px rgba(0, 0, 0, 0.1) solid;
+    position: relative;
+}
+
+.login-form .form-inner label .input-list .num::before {
+    content: '';
+    position: absolute;
+    border-bottom: 1px solid #9C836A;
+    width: 8px;
+    top: 50%;
+    display: block;
+    left: -17px;
+}
+
+.login-form .form-inner label .input-list .num input {
+    border: none;
+}
+
+.login-form .form-inner .email-btn {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    border: 1px solid rgb(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 0.8rem;
+}
+
+.login-form .form-inner .phone-btn {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    border: 1px solid rgb(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 0.8rem;
+}
+
+.login-form .form-inner p {
+    opacity: 0.7;
+    margin-top: -20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.login-form .form-inner label input {
+    background: none;
+    border: none;
+    border-bottom: 1px solid black;
+    height: 30px;
+    /* font-size: 1.1rem; */
+    color: black;
+}
+
+.login-form .form-inner label input:focus {
+    outline: none;
+}
+
+.login-form .form-inner .form-btn {
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 30px;
+    color: white;
+    height: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: var(--color-primary);
+}
+
+.login-form .side-container {
+    position: relative;
+    width: 30%;
+    right: 70%;
+    transition: all 1.2s ease;
+    overflow: hidden;
+    z-index: 2;
+    background-image: url('../../../public/image/login1.png');
+    background-size: cover;
+}
+
+.login-form .side-container::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0,0.3);
+    z-index: -2;
+}
+
+.side-container .inner-text {
+    position: absolute;
+    z-index: -2;
+    text-align: center;
+    width: 100%;
+    top: 50px;
+    transition: all 1.2s ease;
+    color: white;
+    user-select: none;
+}
+
+.side-container .inner-text h5 {
+    font-size: 1.5rem;
+}
+
+.change-form-btn {
+    position: absolute;
+    z-index: -1;
+    border: 2px solid white;
+    width: 150px;
+    height: 40px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 30%;
+    color: white;
+    cursor: pointer;
+}
+
