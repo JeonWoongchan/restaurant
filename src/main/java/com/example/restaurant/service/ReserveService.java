@@ -61,28 +61,54 @@ public class ReserveService {
       reserveRepository.save(dto.getReserve());
       save.put("status", 1);
     } else {
-
-      Long id = generateRandomLong(1,10000000);
-      dto.getGuest().setGuest_id(id);
       String phone = dto.getGuest().getPhone();
+      Optional<Guest> phoneparse = guestRepository.findByID(phone);
 
-      String filterphone = filterPhoneNumber(phone);
-      dto.getGuest().setPhone(filterphone);
-      Guest guest = new Guest(id,filterphone);
-
-      guestRepository.save(dto.getGuest());
+      if (phoneparse.isPresent()) {
 
 
-      dto.getGreserve().setGuest(guest);
+        Long guest_id = phoneparse.get().getGuest_id();
+        Guest guest = new Guest(guest_id);
+        dto.getGreserve().setGuest(guest);
+        String reserveDate = addLeadingZeroIfNeeded(dto.getGreserve().getReserve_date());
+        dto.getGreserve().setReserve_date(reserveDate);
+        dto.getGreserve().setReg_date(formatDateTime(LocalDateTime.now()));
+        dto.getGreserve().setEnd_date(calculateEndDateTime(dto.getGreserve().getReserve_date()));
 
 
-      String reserveDate = addLeadingZeroIfNeeded(dto.getGreserve().getReserve_date());
-      dto.getGreserve().setReserve_date(reserveDate);
-      dto.getGreserve().setReg_date(formatDateTime(LocalDateTime.now()));
-      dto.getGreserve().setEnd_date(calculateEndDateTime(dto.getGreserve().getReserve_date()));
+        greserveRepository.save(dto.getGreserve());
 
 
-      greserveRepository.save(dto.getGreserve());
+      } else {
+        Long id = generateRandomLong(1,10000000);
+        dto.getGuest().setGuest_id(id);
+
+
+        String filterphone = filterPhoneNumber(phone);
+        dto.getGuest().setPhone(filterphone);
+        Guest guest = new Guest(id,filterphone);
+
+        guestRepository.save(dto.getGuest());
+
+
+        String reserveDate = addLeadingZeroIfNeeded(dto.getGreserve().getReserve_date());
+        dto.getGreserve().setReserve_date(reserveDate);
+        dto.getGreserve().setReg_date(formatDateTime(LocalDateTime.now()));
+        dto.getGreserve().setEnd_date(calculateEndDateTime(dto.getGreserve().getReserve_date()));
+
+
+        greserveRepository.save(dto.getGreserve());
+      }
+
+
+
+
+
+
+
+
+
+
 
       save.put("status", 2);
     }

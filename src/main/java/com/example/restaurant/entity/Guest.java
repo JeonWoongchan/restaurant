@@ -25,4 +25,8 @@ public class Guest {
         this.guest_id = guest_id;
         this.phone = phone;
     }
+
+    public Guest(Long guest_id) {
+        this.guest_id = guest_id;
+    }
 }

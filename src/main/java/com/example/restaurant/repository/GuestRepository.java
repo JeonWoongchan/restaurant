@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface GuestRepository extends JpaRepository<Guest, Long> {
 
 
-  @Query("SELECT g.guest_id FROM Guest g WHERE g.phone = :phone")
+  @Query("SELECT g FROM Guest g WHERE g.phone = :phone")
   Optional<Guest> findByID(String phone);
 }
