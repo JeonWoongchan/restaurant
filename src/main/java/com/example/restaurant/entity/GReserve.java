@@ -8,7 +8,7 @@ import lombok.*;
 @Table(name = "GReserve")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"reserve_guest_id", "guest"})
+
 public class GReserve {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

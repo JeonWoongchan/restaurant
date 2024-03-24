@@ -105,6 +105,19 @@ public class CustomerService {
     }
   }
 
+
+  public Optional<Customer> selectMember2(HttpSession session) {
+    String email = (String) session.getAttribute("email");
+    Optional<Customer> customer = Optional.empty();
+    if (email != null) {
+      customer = customerRepository.findByIdtoEmail(email);
+      return customer;
+    } else {
+      // 비회원
+      return Optional.empty();
+    }
+  }
+
   public Optional<Customer> findByIdMembmer(HttpSession session) {
     String email = (String) session.getAttribute("email");
     System.out.println(email);
