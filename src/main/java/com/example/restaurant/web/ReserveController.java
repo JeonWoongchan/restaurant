@@ -1,8 +1,7 @@
 package com.example.restaurant.web;
 
 import com.example.restaurant.dto.CustomerDto;
-import com.example.restaurant.dto.ReserveDTO;
-import com.example.restaurant.entity.*;
+import com.example.restaurant.dto.ReserveAndGusetDTO;
 
 import com.example.restaurant.repository.CustomerRepository;
 import com.example.restaurant.service.CustomerService;
@@ -11,13 +10,10 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +39,7 @@ public class ReserveController {
 
 
   @PostMapping("/payment")
-  public ResponseEntity<HashMap<String,Integer>> addreserveController(HttpSession session, @RequestBody ReserveDTO dto) {
+  public ResponseEntity<HashMap<String,Integer>> addreserveController(HttpSession session, @RequestBody ReserveAndGusetDTO dto) {
     return ResponseEntity.ok(reserveService.addreserve(session, dto));
   }
 }

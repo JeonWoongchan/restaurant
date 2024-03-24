@@ -26,12 +26,9 @@ public class GuestController {
   @Autowired
   private GreserveRepository gReserveRepository;
   @PostMapping("/my-page/reservGuest")
-  public ResponseEntity<Page<GReserveDTO>> getGuestsByGuestId(@RequestBody Guest guest,
-                                                              @RequestParam(value = "page", defaultValue = "0") int page,
-                                                              @RequestParam(value = "size", defaultValue = "10") int size) {
-
+  public ResponseEntity<List<GReserveDTO>> getGuestsByGuestId(@RequestBody Guest guest) {
     String phone = guest.getPhone();
-    Page<GReserveDTO> guests = guestService.getGuestsByGuestId(page, size, phone);
+    List<GReserveDTO> guests = guestService.selectinfo(phone, guest);
     return new ResponseEntity<>(guests, HttpStatus.OK);
   }
 }
