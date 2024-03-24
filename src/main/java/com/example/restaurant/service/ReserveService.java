@@ -88,13 +88,16 @@ public class ReserveService {
       } else  {
         Long id = generateRandomLong(1, 10000000);
         dto.getGuest().setGuest_id(id);
+        String name = dto.getGuest().getName();
 
 
         String filterphone = filterPhoneNumber(phone);
         dto.getGuest().setPhone(filterphone);
-        Guest guest = new Guest(id, filterphone);
+        Guest guest = new Guest(id,name,filterphone);
 
         guestRepository.save(dto.getGuest());
+
+
 
         dto.getGreserve().setGuest(guest);
         String reserveDate = addLeadingZeroIfNeeded(dto.getGreserve().getReserve_date());

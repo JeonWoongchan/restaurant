@@ -8,7 +8,9 @@ import com.example.restaurant.repository.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -21,16 +23,20 @@ public class GuestService {
 
 
 
-  public List<GReserveDTO> selectinfo(String phone) {
+  public Map<String, Object>  selectinfo(String phone) {
     Optional <Guest> guestOptional = guestRepository.findByID(phone);
 
     if (guestOptional.isPresent()) {
-
+      Map<String, Object> result = new HashMap<>();
       Long id = guestOptional.get().getGuest_id();
 
 
+      List<Guest> guestinfo = guestRepository.findByNames(phone);
       List<GReserveDTO> guestsPage = greserveRepository.info(id);
-      return guestsPage;
+      result.put("guestinfo", guestinfo);
+      result.put("guestsPage", guestsPage);
+      return result;
+
     } else {
       return null;
     }

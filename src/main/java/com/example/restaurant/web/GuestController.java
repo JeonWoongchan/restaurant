@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.restaurant.entity.Guest;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -37,10 +38,10 @@ public class GuestController {
 
 
   @PostMapping("/reservGuest")
-  public ResponseEntity<List<GReserveDTO>> getGuestsByGuestId(@RequestBody Guest guest) {
+  public ResponseEntity<Map<String, Object>>getGuestsByGuestId(@RequestBody Guest guest) {
     String phone = guest.getPhone();
-    List<GReserveDTO> guests = guestService.selectinfo(phone);
-    return new ResponseEntity<>(guests, HttpStatus.OK);
+    Map<String, Object> result = guestService.selectinfo(phone);
+    return new ResponseEntity<>(result, HttpStatus.OK);
   }
 
   @PostMapping("/reserve")

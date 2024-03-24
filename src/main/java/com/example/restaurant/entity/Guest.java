@@ -22,13 +22,21 @@ public class Guest {
     private  List<GReserve> reserveGuest = new ArrayList<>();;
 
 
+
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "phone")
     private String phone;
 
 
 
-    public Guest(Long guest_id, String phone) {
+
+
+    public Guest(Long guest_id,String name,String phone) {
         this.guest_id = guest_id;
+        this.name = name;
+
         this.phone = phone;
     }
 
