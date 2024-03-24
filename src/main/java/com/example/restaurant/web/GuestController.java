@@ -38,10 +38,10 @@ public class GuestController {
 
 
   @PostMapping("/reservGuest")
-  public ResponseEntity<Map<String, Object>>getGuestsByGuestId(@RequestBody Guest guest) {
+  public ResponseEntity<List<GReserveDTO>>getGuestsByGuestId(@RequestBody Guest guest) {
     String phone = guest.getPhone();
-    Map<String, Object> result = guestService.selectinfo(phone);
-    return new ResponseEntity<>(result, HttpStatus.OK);
+    List<GReserveDTO> selectinfo = guestService.selectinfo(phone);
+    return new ResponseEntity<>(selectinfo, HttpStatus.OK);
   }
 
   @PostMapping("/reserve")
