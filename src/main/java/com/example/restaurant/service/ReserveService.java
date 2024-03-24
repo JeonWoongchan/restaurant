@@ -1,5 +1,7 @@
 package com.example.restaurant.service;
 
+import com.example.restaurant.dto.CustomerDto;
+import com.example.restaurant.dto.GReserveDTO;
 import com.example.restaurant.dto.ReserveAndGusetDTO;
 import com.example.restaurant.dto.ReserveDTO;
 import com.example.restaurant.entity.*;
@@ -8,10 +10,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.example.restaurant.repository.CustomerRepository;
 import com.example.restaurant.repository.GreserveRepository;
 import com.example.restaurant.repository.GuestRepository;
 
-import com.example.restaurant.repository.ReserveGusetRepository;
 import com.example.restaurant.repository.ReserveRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +44,9 @@ public class ReserveService {
   CustomerService customerService;
 
   @Autowired
+  CustomerRepository customerRepository;
+
+  @Autowired
   GuestRepository guestRepository;
 
   public HashMap<String, Integer> addreserve(HttpSession session, ReserveAndGusetDTO dto) {
@@ -63,12 +68,37 @@ public class ReserveService {
     } else {
       String phone = dto.getGuest().getPhone();
       Optional<Guest> phoneparse = guestRepository.findByID(phone);
-
+      System.out.println(phoneparse);
       if (phoneparse.isPresent()) {
 
 
-        Long guest_id = phoneparse.get().getGuest_id();
-        Guest guest = new Guest(guest_id);
+        Guest guest_id = phoneparse.get();
+
+
+        dto.getGreserve().setGuest(guest_id);
+        String reserveDate = addLeadingZeroIfNeeded(dto.getGreserve().getReserve_date());
+        dto.getGreserve().setReserve_date(reserveDate);
+        dto.getGreserve().setReg_date(formatDateTime(LocalDateTime.now()));
+        dto.getGreserve().setEnd_date(calculateEndDateTime(dto.getGreserve().getReserve_date()));
+
+
+        greserveRepository.save(dto.getGreserve());
+
+        save.put("status", 2);
+      } else  {
+        Long id = generateRandomLong(1, 10000000);
+        dto.getGuest().setGuest_id(id);
+        String name = dto.getGuest().getName();
+
+
+        String filterphone = filterPhoneNumber(phone);
+        dto.getGuest().setPhone(filterphone);
+        Guest guest = new Guest(id,name,filterphone);
+
+        guestRepository.save(dto.getGuest());
+
+
+
         dto.getGreserve().setGuest(guest);
         String reserveDate = addLeadingZeroIfNeeded(dto.getGreserve().getReserve_date());
         dto.getGreserve().setReserve_date(reserveDate);
@@ -77,40 +107,8 @@ public class ReserveService {
 
 
         greserveRepository.save(dto.getGreserve());
-
-
-      } else {
-        Long id = generateRandomLong(1,10000000);
-        dto.getGuest().setGuest_id(id);
-
-
-        String filterphone = filterPhoneNumber(phone);
-        dto.getGuest().setPhone(filterphone);
-        Guest guest = new Guest(id,filterphone);
-
-        guestRepository.save(dto.getGuest());
-
-
-        String reserveDate = addLeadingZeroIfNeeded(dto.getGreserve().getReserve_date());
-        dto.getGreserve().setReserve_date(reserveDate);
-        dto.getGreserve().setReg_date(formatDateTime(LocalDateTime.now()));
-        dto.getGreserve().setEnd_date(calculateEndDateTime(dto.getGreserve().getReserve_date()));
-
-
-        greserveRepository.save(dto.getGreserve());
+        save.put("status", 3);
       }
-
-
-
-
-
-
-
-
-
-
-
-      save.put("status", 2);
     }
     return save;
   }
@@ -127,6 +125,25 @@ public class ReserveService {
 
     return reserveRepository.selectReserve(customer_id);
 
+
+
+  }
+
+  public List<ReserveDTO> selectrinfo(HttpSession session) {
+
+
+    Optional<Customer> customerOptional =  customerService.selectMember2(session);
+
+    if (customerOptional.isPresent()) {
+
+      Long id = customerOptional.get().getId();
+
+
+      List<ReserveDTO> customerPage = reserveRepository.selectReserve(id);
+      return customerPage;
+    } else {
+      return null;
+    }
 
 
   }

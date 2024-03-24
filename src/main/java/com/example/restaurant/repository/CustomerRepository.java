@@ -17,7 +17,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     // 간단
     List<Customer> findByUsernameAndPointGreaterThan(String username, int point);
 
-    @Query("SELECT c.id FROM Customer c WHERE c.email = :email")
+    @Query("SELECT c.id,c.point FROM Customer c WHERE c.email = :email")
     Optional<Customer> findByIdtoEmail(@Param("email") String email);
 
     List<Customer> findHelloBy();

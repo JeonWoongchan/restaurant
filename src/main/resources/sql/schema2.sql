@@ -39,7 +39,8 @@ CREATE TABLE IF NOT EXISTS reserve (
 -- Guest 테이블 생성
 CREATE TABLE IF NOT EXISTS Guest (
      Guest_id INT NOT NULL PRIMARY KEY auto_increment,
-     phone VARCHAR(100) NOT NULL UNIQUE
+     name  VARCHAR(100) NOT NULL,
+     phone VARCHAR(100) NOT NULL
     );
 
 -- reserveGuest 테이블 생성

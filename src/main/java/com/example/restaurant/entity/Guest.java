@@ -10,19 +10,33 @@ import java.util.List;
 @Table(name = "guest")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"guest_id","reserveGuest","phone"})
+
 
 public class Guest {
+
+    @Column(name = "guest_id")
     @Id
     private Long guest_id;
-
-    private String phone;
 
     @OneToMany(mappedBy = "guest")
     private  List<GReserve> reserveGuest = new ArrayList<>();;
 
-    public Guest(Long guest_id, String phone) {
+
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "phone")
+    private String phone;
+
+
+
+
+
+    public Guest(Long guest_id,String name,String phone) {
         this.guest_id = guest_id;
+        this.name = name;
+
         this.phone = phone;
     }
 
