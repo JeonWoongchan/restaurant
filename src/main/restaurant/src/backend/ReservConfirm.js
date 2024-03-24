@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsLogin, setSignInEmail, setSignInPw, setUserData } from '../store/loginStore';
-import { setReservUserData } from '../store/reservStore';
+import { setGuestReservConfirm, setReservUserData } from '../store/reservStore';
 
 // 예약 확인 로직
 export default function ReservConfrim() {
@@ -12,15 +12,25 @@ export default function ReservConfrim() {
     const dispatch = useDispatch()
 
     const confrimHandler = () => {
-        // console.log(calendarData.date.split(' ')[0].replaceAll('.', '-'))
-        // console.log(calendarData.time)
-        // console.log(personnelData.adult + personnelData.child + personnelData.baby)
-        // console.log(calendarData.date.split(' ')[0].replaceAll('.', '-') + ' ' + calendarData.time)
-        axios 
-            .get("http://localhost:8080/my-page/reservation")
+        axios .post("http://localhost:8080/my-page/reservation",{
+
+            })
             .then((res) => {
                 console.log(res.data)
-                
+                if(res.data) {
+                    dispatch(setGuestReservConfirm({
+                        date : res.data[0].reg_date,
+                        detail_date : res.data[0].reserve_date, 
+                        detail_adults : res.data[0].adults_count ,
+                        detail_children : res.data[0].children_count ,
+                        detail_baby : res.data[0].infants_count,
+                        name : res.data[0].name,
+                        phone : res.data[0].phone
+                    }))
+                    navigate('/my-page/reservation')
+                } else {
+                    alert('예약 정보가 없습니다')
+                }
             })
             .catch((error) => {
                 console.log(error)

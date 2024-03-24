@@ -24,7 +24,8 @@ export default function ReservConfirmGuest() {
                         detail_adults : res.data[0].adults_count ,
                         detail_children : res.data[0].children_count ,
                         detail_baby : res.data[0].infants_count,
-                        user : ''
+                        name : res.data[0].name,
+                        phone : res.data[0].phone
                     }))
                     navigate('/my-page/reservation')
                 } else {
