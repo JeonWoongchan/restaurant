@@ -23,19 +23,18 @@ public class GuestService {
 
 
 
-  public Map<String, Object>  selectinfo(String phone) {
+  public List<GReserveDTO>  selectinfo(String phone) {
     Optional <Guest> guestOptional = guestRepository.findByID(phone);
 
     if (guestOptional.isPresent()) {
-      Map<String, Object> result = new HashMap<>();
+
       Long id = guestOptional.get().getGuest_id();
 
 
-      List<Guest> guestinfo = guestRepository.findByNames(phone);
+
       List<GReserveDTO> guestsPage = greserveRepository.info(id);
-      result.put("guestinfo", guestinfo);
-      result.put("guestsPage", guestsPage);
-      return result;
+
+      return guestsPage;
 
     } else {
       return null;
