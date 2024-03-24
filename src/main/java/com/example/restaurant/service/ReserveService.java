@@ -107,7 +107,7 @@ public class ReserveService {
 
 
         greserveRepository.save(dto.getGreserve());
-        save.put("status", 3);
+        save.put("status", 2);
       }
     }
     return save;
