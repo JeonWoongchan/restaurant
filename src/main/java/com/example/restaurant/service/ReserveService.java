@@ -1,8 +1,6 @@
 package com.example.restaurant.service;
 
-import com.example.restaurant.dto.CustomerDto;
-import com.example.restaurant.dto.GReserveDTO;
-import com.example.restaurant.dto.ReserveAndGusetDTO;
+import com.example.restaurant.dto.ReserveAndGuestDTO;
 import com.example.restaurant.dto.ReserveDTO;
 import com.example.restaurant.entity.*;
 
@@ -49,75 +47,89 @@ public class ReserveService {
   @Autowired
   GuestRepository guestRepository;
 
-  public HashMap<String, Integer> addreserve(HttpSession session, ReserveAndGusetDTO dto) {
+  public HashMap<String, Integer> addReserve(HttpSession session, ReserveAndGuestDTO dto) {
     HashMap<String, Integer> save = new HashMap<>();
-
     Optional<Customer> optionalCustomer = customerService.findByIdMembmer(session);
+
+
+
+
+
+
+
+
     if (optionalCustomer.isPresent()) {
-
-      Customer customer = optionalCustomer.get();
-      dto.getReserve().setCustomer(customer);
-
-      String reserveDate = addLeadingZeroIfNeeded(dto.getReserve().getReserve_date());
-      dto.getReserve().setReserve_date(reserveDate);
-      dto.getReserve().setReg_date(formatDateTime(LocalDateTime.now()));
-      dto.getReserve().setEnd_date(calculateEndDateTime(dto.getReserve().getReserve_date()));
-
-      reserveRepository.save(dto.getReserve());
+      processCustomerReservation(dto, optionalCustomer.get());
       save.put("status", 1);
     } else {
-      String phone = dto.getGuest().getPhone();
-      Optional<Guest> phoneparse = guestRepository.findByID(phone);
-      System.out.println(phoneparse);
-      if (phoneparse.isPresent()) {
-
-
-        Guest guest_id = phoneparse.get();
-
-
-        dto.getGreserve().setGuest(guest_id);
-        String reserveDate = addLeadingZeroIfNeeded(dto.getGreserve().getReserve_date());
-        dto.getGreserve().setReserve_date(reserveDate);
-        dto.getGreserve().setReg_date(formatDateTime(LocalDateTime.now()));
-        dto.getGreserve().setEnd_date(calculateEndDateTime(dto.getGreserve().getReserve_date()));
-
-
-        greserveRepository.save(dto.getGreserve());
-
-        save.put("status", 2);
-      } else  {
-        Long id = generateRandomLong(1, 10000000);
-        dto.getGuest().setGuest_id(id);
-        String name = dto.getGuest().getName();
-
-
-        String filterphone = filterPhoneNumber(phone);
-        dto.getGuest().setPhone(filterphone);
-        Guest guest = new Guest(id,name,filterphone);
-
-        guestRepository.save(dto.getGuest());
-
-
-
-        dto.getGreserve().setGuest(guest);
-        String reserveDate = addLeadingZeroIfNeeded(dto.getGreserve().getReserve_date());
-        dto.getGreserve().setReserve_date(reserveDate);
-        dto.getGreserve().setReg_date(formatDateTime(LocalDateTime.now()));
-        dto.getGreserve().setEnd_date(calculateEndDateTime(dto.getGreserve().getReserve_date()));
-
-
-        greserveRepository.save(dto.getGreserve());
-        save.put("status", 2);
-      }
+      processGuestReservation(dto);
+      save.put("status", 2);
     }
     return save;
   }
 
+  private void processCustomerReservation(ReserveAndGuestDTO dto, Customer customer) {
+    dto.getReserve().setCustomer(customer);
+    prepareReserveDetails(dto.getReserve());
+    reserveRepository.save(dto.getReserve());
+  }
+
+  private Long generateUniqueGuestId() {
+    Long newId;
+    boolean isDuplicate = true;
+    do {
+      newId = generateRandomLong(1, 10000000);
+      isDuplicate = guestRepository.existsById(newId);
+    } while (isDuplicate);
+    return newId;
+  }
+
+
+  private void processGuestReservation(ReserveAndGuestDTO dto) {
+    String phone = dto.getGuest().getPhone();
+    Optional<Guest> phoneparse = guestRepository.findByID(phone);
+    Guest guest;
+
+
+    if (phoneparse.isPresent()) {
+      guest = phoneparse.get();
+      prepareGReserveDetails(dto.getGreserve());
+    } else {
+      guest = createAndSaveGuest(dto.getGuest());
+      prepareGReserveDetails(dto.getGreserve());
+    }
+
+    dto.getGreserve().setGuest(guest);
+    greserveRepository.save(dto.getGreserve());
+  }
+
+  private Guest createAndSaveGuest(Guest guestInfo) {
+    guestInfo.setGuest_id(generateUniqueGuestId());
+    guestInfo.setPhone(filterPhoneNumber(guestInfo.getPhone()));
+    guestRepository.save(guestInfo);
+    return guestInfo;
+  }
+
+  private void prepareReserveDetails(Reserve reserve) {
+    String reserveDate = addLeadingZeroIfNeeded(reserve.getReserve_date());
+    reserve.setReserve_date(reserveDate);
+    reserve.setReg_date(formatDateTime(LocalDateTime.now()));
+    reserve.setEnd_date(calculateEndDateTime(reserve.getReserve_date()));
+  }
+
+  private void prepareGReserveDetails(GReserve gReserve) {
+    String reserveDate = addLeadingZeroIfNeeded(gReserve.getReserve_date());
+    gReserve.setReserve_date(reserveDate);
+
+    System.out.println(formatDateTime(LocalDateTime.now()));
+    gReserve.setReg_date(formatDateTime(LocalDateTime.now()));
+    gReserve.setEnd_date(calculateEndDateTime(gReserve.getReserve_date()));
+  }
 
   public List<ReserveDTO> selectReserve(HttpSession session) {
 
 
-    Optional<Customer>id = customerService.findByIdMembmer(session);
+    Optional<Customer> id = customerService.findByIdMembmer(session);
 
 
     Long customer_id = id.get().getId();
@@ -126,13 +138,12 @@ public class ReserveService {
     return reserveRepository.selectReserve(customer_id);
 
 
-
   }
 
   public List<ReserveDTO> selectrinfo(HttpSession session) {
 
 
-    Optional<Customer> customerOptional =  customerService.selectMember2(session);
+    Optional<Customer> customerOptional = customerService.selectMember2(session);
 
     if (customerOptional.isPresent()) {
 
@@ -150,7 +161,6 @@ public class ReserveService {
 
 
   // 기존 코드 생략
-
 
 
   // 날짜 형식 메소드
@@ -185,7 +195,7 @@ public class ReserveService {
     return fraction + min;
   }
 
-  
+
   // 번호 메소드
   public static String filterPhoneNumber(String phoneNumber) {
     // 정규 표현식 패턴 설정 (숫자 이외의 문자 모두)

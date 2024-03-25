@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class ReserveAndGusetDTO {
+public class ReserveAndGuestDTO {
   private Reserve reserve;
 
   private Guest guest;
