@@ -22,6 +22,7 @@ export default function EmailDuplicateLogic() {
                     console.log(res.data) // ture or false
                     if (res.data) { // 중복 없음
                         dispatch(setEmailDupli(true))
+                        alert('사용 가능한 이메일 입니다.')
                     } else if (!res.data) { // 이미 있는 이메일
                         alert('이미 존재하는 이메일 입니다')
                     }

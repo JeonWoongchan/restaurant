@@ -29,7 +29,7 @@ export default function MyReservGuest() {
             </div>
             <div className="reserv-inner">
                 <div className="reserv-intro">
-                    <h1 className="reserv-title">예약 확인</h1>
+                    <h1 className="reserv-title">비회원 예약 확인</h1>
                     <div className="reserv-detail">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem cumque voluptates doloribus temporibus, minus repellat animi dolor, quos debitis molestiae explicabo, nemo incidunt laborum quas? Facilis doloribus expedita tenetur. Molestias!</div>
                 </div>
                 <div className="payment-main">
@@ -53,10 +53,10 @@ export default function MyReservGuest() {
                                             <option value="019">019</option>
                                         </select>
                                         <div className="num">
-                                            <input type="text" onChange={(e) => { setGuestPhone2(e.target.value) }} />
+                                            <input type="text" maxLength={4} onChange={(e) => { setGuestPhone2(e.target.value) }} />
                                         </div>
                                         <div className="num">
-                                            <input type="text" onChange={(e) => { setGuestPhone3(e.target.value) }} />
+                                            <input type="text" maxLength={4} onChange={(e) => { setGuestPhone3(e.target.value) }} />
                                         </div>
                                     </div>
                                 </li>

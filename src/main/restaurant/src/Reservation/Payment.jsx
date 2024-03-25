@@ -99,10 +99,10 @@ export default function Payment() {
                                                 <option value="019">019</option>
                                             </select>
                                             <div className="num">
-                                                <input type="text" defaultValue={isLogin && reservUserData.phone ? reservUserData.phone.substring(3, 7): null} onChange={(e)=>{setReservPhoneMiddle(e.target.value)}}/>
+                                                <input type="text" maxLength={4} defaultValue={isLogin && reservUserData.phone ? reservUserData.phone.substring(3, 7): null} onChange={(e)=>{setReservPhoneMiddle(e.target.value)}}/>
                                             </div>
                                             <div className="num">
-                                                <input type="text" defaultValue={isLogin && reservUserData.phone ? reservUserData.phone.substring(7): null} onChange={(e)=>{setReservPhoneLast(e.target.value)}}/>
+                                                <input type="text" maxLength={4} defaultValue={isLogin && reservUserData.phone ? reservUserData.phone.substring(7): null} onChange={(e)=>{setReservPhoneLast(e.target.value)}}/>
                                             </div>
                                         </div>
                                     </li>
