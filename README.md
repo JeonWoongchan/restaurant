@@ -2,7 +2,7 @@
 - 레스토랑에 대한 정보를 제공하고 예약이 가능한 사이트
 
 ## 배포
-restaurant-azure-sigma.vercel.app
+restaurant-azure-sigma.vercel.app(restaurant-azure-sigma.vercel.app)
 
 ## 프로젝트 설명
 
