@@ -19,7 +19,7 @@
 - back-end
     - 김규식
 
-⛏ Tools
+⛏ 기술 스택
   - React
   - Spring
   - MySQL
