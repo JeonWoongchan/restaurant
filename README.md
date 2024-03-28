@@ -40,9 +40,12 @@
     - 이메일 중복 확인 및 이메일, 전화번호 인증 진행 후 회원가입 진행
     - 이메일, 전화번호 인증은 구현 중에 있습니다.
       
-    ![ReactApp-Chrome2024-03-2811-32-42-ezgif com-crop](https://github.com/JeonWoongchan/restaurant/assets/124865284/2e29d67e-39ad-4a34-b9ec-7b5ed13be14f)
+    ![ReactApp-Chrome2024-03-2811-33-10-ezgif com-crop](https://github.com/JeonWoongchan/restaurant/assets/124865284/222d851b-1e06-4ad5-b589-1b6d82e0d5e6)
 
+    - 회원가입한 이메일로 로그인 후 사이드메뉴에 사용자 이름 표시
 
+    ![ReactApp-Chrome2024-03-2811-34-23-ezgif com-crop](https://github.com/JeonWoongchan/restaurant/assets/124865284/205e4a0d-4f70-4c7a-ae49-a62bf6559608)
+    
 5. 예약 페이지
 
     ![ReactApp-Chrome2024-03-2811-27-08-ezgif com-crop](https://github.com/JeonWoongchan/restaurant/assets/124865284/dbb9b6ef-6768-43ce-9c03-9bf906755231)
