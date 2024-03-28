@@ -47,9 +47,17 @@
     ![ReactApp-Chrome2024-03-2811-34-23-ezgif com-crop](https://github.com/JeonWoongchan/restaurant/assets/124865284/205e4a0d-4f70-4c7a-ae49-a62bf6559608)
     
 5. 예약 페이지
+   
+    - 회원 고객 예약
+    - 예약 페이지에 회원 정보가 자동으로 기입
+    - 
+    ![ReactApp-Chrome2024-03-2811-46-04-ezgif com-crop](https://github.com/JeonWoongchan/restaurant/assets/124865284/1b005320-e930-437f-86aa-485d9069b636)
 
+    - 비회원 고객 예약
+      
     ![ReactApp-Chrome2024-03-2811-27-08-ezgif com-crop](https://github.com/JeonWoongchan/restaurant/assets/124865284/dbb9b6ef-6768-43ce-9c03-9bf906755231)
 
-6. 예약 확인 페이지
+7. 예약 확인 페이지
 
    
+
