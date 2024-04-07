@@ -2,7 +2,7 @@
 - 레스토랑에 대한 정보를 제공하고 예약이 가능한 사이트
 
 ## 배포
-[Restaurant WooDy 배포 링크](https://restaurant-azure-sigma.vercel.app)
+[Restaurant WooDy 배포 링크](https://restaurant-8g5dio25h-jeon-woongchans-projects.vercel.app/)
 - 백엔드 기능이 제외된 프론트엔드 부분만 배포된 링크입니다.
 - 백엔드 기능이 동작하지 않아도 다른 페이지를 볼 수 있게 수정된 부분이 있습니다.
 - 백엔드 기능 동작은 <둘러보기>에서 보실 수 있습니다.
