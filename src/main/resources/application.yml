@@ -1,13 +1,12 @@
+server:
+  port: 8080
+
 coolsms:
   api:
     key: "NCSJC9B1CTYZFSM1"
     secret: "QHBMBQLX6BBX8V8FEYX1VWUDR7OK4OYW"
 
 spring:
-  sql:
-    init:
-      mode: always
-      data-locations: classpath:sql/schema2.sql
   devtools:
     livereload:
       enabled: true
@@ -20,7 +19,6 @@ spring:
     port: 587
     username: springtestgyutti28@gmail.com
     password: idxckqegnbdozicf
-
     properties:
       mail:
         smtp:
@@ -39,27 +37,21 @@ spring:
     username: root
     password: gyuja
 
-jpa:
-  open-in-view: true
-  hibernate:
-    #show_sql: true
-    #format_sql: true
-    ddl-auto: none
-    naming:
-      physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-  defer-datasource-initialization: true
-  properties:
-    hibernate.format_sql: true
-    dialect: org.hibernate.dialect.MySQL8InnoDBDialect
-
-
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
 
 logging:
   level:
     org.hibernate.SQL: debug
 
-
 jwt:
-    secretKey: secretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKey
-    accessTokenExpirationMinutes: 860000
-    refreshTokenExpirationMinutes: 1600000
+  secretKey: secretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKey
+  accessTokenExpirationMinutes: 860000
+  refreshTokenExpirationMinutes: 1600000

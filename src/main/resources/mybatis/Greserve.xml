@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.restaurant.mapper.GreserveMapper">
+
+    <!-- 변수 설정 SQL -->
+    <sql id="setVariables">
+    <![CDATA[
+        SET @startDate = #{reserveDate};
+        SET @endDate = DATE_ADD(@startDate, INTERVAL '59:59' MINUTE_SECOND);
+        ]]>
+  </sql>
+
+    <!-- 쿼리 실행 SQL -->
+    <select id="getcount" resultType="Integer">
+        <!-- 변수 설정 SQL 삽입 -->
+        <include refid="setVariables"/>
+
+        <![CDATA[
+      SELECT SUM(adults_count + children_count + infants_count) AS cnt
+      FROM greserve
+      WHERE reserve_date >= @startDate AND reserve_date <= @endDate;
+    ]]>
+    </select>
+
+</mapper>
