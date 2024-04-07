@@ -87,7 +87,7 @@ public class ReserveService {
 
   // 회원 예약 설정
   private HashMap <String,Integer> processCustomerReservation(ReserveAndGuestDTO dto, Customer customer) {
-    HashMap <String,Integer> save = new HashMap<String,Integer>()
+    HashMap <String,Integer> save = new HashMap<String,Integer>();
     dto.getReserve().setCustomer(customer);
     if (prepareReserveDetails(dto.getReserve())) {
       reserveRepository.save(dto.getReserve());
