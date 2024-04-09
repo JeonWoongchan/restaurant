@@ -15,10 +15,7 @@ export default function PaymentLogic() {
     const calendarData = JSON.parse(localStorage.getItem('calendar'))
 
     const paymentHandler = () => {
-        // console.log(calendarData.date.split(' ')[0].replaceAll('.', '-'))
-        // console.log(calendarData.time)
-        // console.log(personnelData.adult + personnelData.child + personnelData.baby)
-        // console.log(calendarData.date.split(' ')[0].replaceAll('.', '-') + ' ' + calendarData.time)
+
         axios
             .post("http://localhost:8080/reservation/payment", {
                 reserve_date: calendarData.date.split(' ')[0].replaceAll('.', '-') + ' ' + calendarData.time + ', ' + personnelData.adult + personnelData.child + personnelData.baby
