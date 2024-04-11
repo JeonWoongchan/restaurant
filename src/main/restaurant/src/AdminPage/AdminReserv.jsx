@@ -18,9 +18,9 @@ export default function AdminReserv() {
     const searchHandler = () => {
         const filters = {
             reservId: (v) => v.reservId == searchWord,
-            userId: (v) => v.userId.includes(searchWord),
-            regDate: (v) => v.regDate.includes(searchWord),
-            comment: (v) => v.comment.includes(searchWord)
+            userId: (v) => v.userId.toString().includes(searchWord),
+            regDate: (v) => v.regDate.toString().includes(searchWord),
+            comment: (v) => v.comment.toString().includes(searchWord)
         };
         
         setTableData(ReservData.filter(filters[searchFilter]));
