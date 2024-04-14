@@ -6,19 +6,21 @@ import { IoMdClose } from "react-icons/io";
 import useSelectBanner from '../Function/useSelectBanner'
 import useCalendar from '../Function/useCalendar';
 import CalendarTime from './CalendarTime';
+import GetReserveTime from '../backend/GetReserveTime';
 
 export default function Calendar() {
     const { selectedDate, selectedYear, selectedMonth, calendarDate, nowClickDate, changeMonth, dayStyle, clickDate, 
-            dropDownOn, setDropDownOn, dropDownYear, dropDownMonth, setDropDownYear, setDropDownMonth, chaneSelectMonth } = useCalendar()
+            dropDownOn, setDropDownOn, dropDownYear, dropDownMonth, setDropDownYear, setDropDownMonth, chaneSelectMonth } = useCalendar() // 캘린더 그리기
+
+    const { getReservTimeHandler } = GetReserveTime() // 예약 가능 시간대 받아오기
             
-    const [calendarHeight, setCalendarHeight] = useState(500)
+    const [calendarHeight, setCalendarHeight] = useState(500) // 캘린더 섹션 높이 설정
     const { selectorOn, setSelectorOn, innerHeight } = useSelectBanner(calendarHeight)
     const [selectedTime, setSelectedTime] = useState(null) // 선택된 예약 시간
 
     const YEAR_LIST = [2023, 2024, 2025, 2026, 2027]
     const MONTH_LIST = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
-    // 선택한 날짜와 시간 로컬 스토리지에 저장
     useEffect(() => {
         if (nowClickDate.length > 0) {
             setCalendarHeight(820)
@@ -28,11 +30,18 @@ export default function Calendar() {
     }, [nowClickDate])
 
     useEffect(()=>{
+        if(selectedDate != null){
+            // getReservTimeHandler(selectedDate)
+        }
+    },[selectedDate])
+
+    // 선택한 날짜와 시간 로컬 스토리지에 저장
+    useEffect(()=>{
         if(selectedTime != null){
             localStorage.setItem('calendar', JSON.stringify({'date': selectedDate,'time': selectedTime}))
             console.log(selectedDate)
         }
-    },[selectedDate, selectedTime])
+    },[selectedTime])
 
     return (
         <div id='calendar'>

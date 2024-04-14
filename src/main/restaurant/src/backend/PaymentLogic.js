@@ -42,10 +42,11 @@ export default function PaymentLogic() {
                 }
             })
             .then((res) => {
-
                 if (res.data.status === 1) {
-                    navigate('/my-page/reservation')
+                    alert('예약이 완료되었습니다.')
+                    navigate('/my-page/reservation')                  
                 } else if (res.data.status === 2) {
+                    alert('예약이 완료되었습니다.')
                     navigate('/')
                 }else {
                     alert('예약 오류')

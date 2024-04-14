@@ -23,13 +23,18 @@ export default function Payment() {
     const reservData = useSelector(state=>state.reservReducer.reservData)
 
     const { paymentHandler } = PaymentLogic()
+    const { loginCheckHandler } = IsLoginCheck()
 
     useEffect(() => {
         // 페이지 로드 후 스크롤을 맨 위로 이동
         window.scrollTo(0, 0);
     }, []);
 
-    
+    // 로그인 판별
+    useEffect(()=>{
+        loginCheckHandler() // 로그인 판별 함수
+    },[])
+
     useEffect(()=>{
         if(reservData != localStorage.getItem('reservData')){
             dispatch(setReservData(localStorage.getItem('reservData'))) // 예약정보 최신화
