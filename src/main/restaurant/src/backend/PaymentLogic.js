@@ -17,11 +17,8 @@ export default function PaymentLogic() {
     const reservUserData = useSelector(state=>state.reservReducer.reservUserData)
 
     const paymentHandler = () => {
-        // console.log(calendarData.date.split(' ')[0].replaceAll('.', '-'))
-        // console.log(calendarData.time)
-        // console.log(personnelData.adult + personnelData.child + personnelData.baby)
-        // console.log(calendarData.date.split(' ')[0].replaceAll('.', '-') + ' ' + calendarData.time)
-        axios 
+
+        axios
             .post("http://localhost:8080/reservation/payment", {
                 reserve: {
                     reserve_date: calendarData.date.split(' ')[0].replaceAll('.', '-') + ' ' + calendarData.time,
