@@ -19,7 +19,7 @@ public class CapacityService {
   @Autowired
   private GreserveMapper greserveMapper;
 
-  public Map<String, Integer> getAvailableSlots(String date) {
+  public Map<String, Integer> getAvailableSlots(String date,int total_count) {
     // capacity 데이터 가져오기
     List<Map<String, Object>> capacityList = capacityMapper.selectcapalist();
     // totalCount 데이터 가져오기
@@ -43,10 +43,10 @@ public class CapacityService {
       // 시간대를 기반으로 용량 확인
       if (capacityMap.containsKey(reserveDateTime)) {
         int capacity = capacityMap.get(reserveDateTime);
-        int remainingCapacity = capacity - reservedCount;
+        int remainingCapacity = capacity - reservedCount -total_count;
 
         // 잔여 용량이 0 이하이면 무시, 그렇지 않으면 예약 가능한 시간대로 추가
-        if (remainingCapacity > 0) {
+        if (remainingCapacity >= 0) {
           availableSlots.put(reserveDateTime, remainingCapacity);
         }
       }

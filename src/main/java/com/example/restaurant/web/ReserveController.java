@@ -49,7 +49,7 @@ public class ReserveController {
   }
 
   @PostMapping("/time")
-  public ResponseEntity<Map<String,Integer>> selectreserve(HttpSession session, @RequestBody String date) {
-    return ResponseEntity.ok(capacityService.getAvailableSlots(date));
+  public ResponseEntity<Map<String,Integer>> selectreserve(HttpSession session, @RequestBody String date,@RequestBody int total_count) {
+    return ResponseEntity.ok(capacityService.getAvailableSlots(date,total_count));
   }
 }
