@@ -1,5 +1,6 @@
 package com.example.restaurant.service;
 
+import com.example.restaurant.dto.RequestDataDTO;
 import com.example.restaurant.repository.mybatis.CapacityMapper;
 import com.example.restaurant.repository.mybatis.GreserveMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,11 @@ public class CapacityService {
   @Autowired
   private GreserveMapper greserveMapper;
 
-  public Map<String, Integer> getAvailableSlots(String date,int total_count) {
+  public Map<String, Integer> getAvailableSlots(RequestDataDTO dto) {
     // capacity 데이터 가져오기
     List<Map<String, Object>> capacityList = capacityMapper.selectcapalist();
     // totalCount 데이터 가져오기
-    List<HashMap<String, Object>> totalCountList = greserveMapper.selectTotalCountByHour(date);
+    List<HashMap<String, Object>> totalCountList = greserveMapper.selectTotalCountByHour(dto.getDate());
 
     // 시간대를 키로 하는 capacity 맵 생성
     Map<String, Integer> capacityMap = new HashMap<>();
@@ -43,7 +44,7 @@ public class CapacityService {
       // 시간대를 기반으로 용량 확인
       if (capacityMap.containsKey(reserveDateTime)) {
         int capacity = capacityMap.get(reserveDateTime);
-        int remainingCapacity = capacity - reservedCount -total_count;
+        int remainingCapacity = capacity - reservedCount - dto.getTotalCount();
 
         // 잔여 용량이 0 이하이면 무시, 그렇지 않으면 예약 가능한 시간대로 추가
         if (remainingCapacity >= 0) {
@@ -51,7 +52,6 @@ public class CapacityService {
         }
       }
     }
-
     return availableSlots;
   }
 }

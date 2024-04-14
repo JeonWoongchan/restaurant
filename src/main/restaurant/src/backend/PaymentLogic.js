@@ -41,8 +41,12 @@ export default function PaymentLogic() {
             .then((res) => {
                 if (res.data.status === 1) {
                     alert('예약이 완료되었습니다.')
+                    localStorage.removeItem('reservUserData')
+                    localStorage.removeItem('reservData')
                     navigate('/my-page/reservation')                  
                 } else if (res.data.status === 2) {
+                    localStorage.removeItem('reservUserData')
+                    localStorage.removeItem('reservData')
                     alert('예약이 완료되었습니다.')
                     navigate('/')
                 }else {

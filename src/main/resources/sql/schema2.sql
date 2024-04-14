@@ -56,6 +56,24 @@ CREATE TABLE IF NOT EXISTS GReserve (
     );
 -- 인원 분류 테이블
 
+CREATE TABLE IF NOT EXISTS  capacity (
+    id int not null primary key,
+    hour_time time not null,
+    capacity int not null
+);
+
+# INSERT INTO capacity (id, hour_time,capacity)
+# VALUES
+#     (1, '11:00',50),
+#     (2, '12:00',50),
+#     (3, '13:00',50),
+#     (4, '14:00',50),
+#     (5, '15:00',50),
+#     (6, '16:00',50),
+#     (7, '17:00',50),
+#     (8, '18:00',50),
+#     (9, '19:00',50),
+#     (10, '20:00',50);
 
 
 

@@ -13,12 +13,14 @@ export default function GetReserveTime() {
 
         axios
             .post("http://localhost:8080/reservation/time", {
-                total_count: personnel.adult + personnel.child + personnel.baby,
-                date : date 
+                requestData : {
+                    total_count: personnel.adult + personnel.child + personnel.baby,
+                    date : date 
+                }
             })
             .then((res) => {
                 console.log(res.data)
-                setReservTimeList(res.data)
+                // setReservTimeList(res.data)
             })
             .catch((error) => {
                 console.log(error)

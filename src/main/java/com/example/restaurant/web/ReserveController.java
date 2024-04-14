@@ -1,6 +1,7 @@
 package com.example.restaurant.web;
 
 import com.example.restaurant.dto.CustomerDto;
+import com.example.restaurant.dto.RequestDataDTO;
 import com.example.restaurant.dto.ReserveAndGuestDTO;
 
 import com.example.restaurant.repository.CustomerRepository;
@@ -49,7 +50,7 @@ public class ReserveController {
   }
 
   @PostMapping("/time")
-  public ResponseEntity<Map<String,Integer>> selectreserve(HttpSession session, @RequestBody String date,@RequestBody int total_count) {
-    return ResponseEntity.ok(capacityService.getAvailableSlots(date,total_count));
+  public ResponseEntity<Map<String,Integer>> selectreserve(HttpSession session, @RequestBody RequestDataDTO requestData) {
+    return ResponseEntity.ok(capacityService.getAvailableSlots(requestData));
   }
 }
