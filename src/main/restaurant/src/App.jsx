@@ -11,6 +11,7 @@ import About from './About/About';
 import Menu from './Menu/Menu'
 import Contact from './Contact/Contact'
 import Payment from './Reservation/Payment';
+import MyPage from './MyPage/MyPage'
 import AdminPage from './AdminPage/AdminPage';
 
 export default function App() {

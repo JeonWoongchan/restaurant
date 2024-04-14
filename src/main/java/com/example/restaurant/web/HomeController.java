@@ -21,7 +21,7 @@ import java.util.Map;
 public class HomeController   {
 
 
-    @GetMapping(value = {"", "/admin/", "/main", "/login/{value}" ,"/reservation" , "/payment" , "/about/{subMenu}" ,"/menu/{subMenu}" ,"/contact/{subMenu}", "/my-page/{subMenu}"})
+    @GetMapping(value = {"", "/admin/**", "/main", "/login/{value}" ,"/reservation" , "/payment" , "/about/{subMenu}" ,"/menu/{subMenu}" ,"/contact/{subMenu}", "/my-page/{subMenu}"})
     public String forward() {
         return "forward:/index.html";
     }

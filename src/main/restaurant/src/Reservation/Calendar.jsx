@@ -10,7 +10,7 @@ import GetReserveTime from '../backend/GetReserveTime';
 
 export default function Calendar() {
     const { selectedDate, selectedYear, selectedMonth, calendarDate, nowClickDate, changeMonth, dayStyle, clickDate, 
-            dropDownOn, setDropDownOn, dropDownYear, dropDownMonth, setDropDownYear, setDropDownMonth, chaneSelectMonth } = useCalendar() // 캘린더 그리기
+            dropDownOn, setDropDownOn, dropDownYear, dropDownMonth, setDropDownYear, setDropDownMonth, changeSelectMonth } = useCalendar() // 캘린더 그리기
 
     const { getReservTimeHandler } = GetReserveTime() // 예약 가능 시간대 받아오기
             
@@ -83,7 +83,7 @@ export default function Calendar() {
                                 MONTH_LIST.map((a, i) => {
                                     return (
                                         <option key={i} 
-                                        onClick={()=>{setDropDownMonth(a); chaneSelectMonth()}}
+                                        onClick={()=>{setDropDownMonth(a);}}
                                         style={{background : a === dropDownMonth ? 'rgb(194,122,52)' : ''}}>{a}월</option>
                                     )
                                 })
@@ -103,8 +103,21 @@ export default function Calendar() {
                 <ul className="calendar-day">
                     {calendarDate.map((a, i) => {
                         // calendarDate[i] === a의 형식 [날짜, 요일] -> 숫자로 표시됨 0 ~ 6 === 일 ~ 토
+
+                        const checkPersonnelSelect = (a)=>{
+                            const personnel = localStorage.getItem('personnel')
+                            if(personnel == null) {
+                                alert('예약 인원을 선택하세요')
+                            } else {
+                                clickDate(a); 
+                                setSelectedTime(null); 
+                                getReservTimeHandler(selectedDate.split(' ')[0])
+                            }
+                        }
+                        
                         return (
-                            <li className={`day ${nowClickDate == a && a[0] != null ? 'select' : ''}`} style={dayStyle(a)} key={i} onClick={() => { clickDate(a) }}>
+                            <li className={`day ${nowClickDate == a && a[0] != null ? 'select' : ''}`} 
+                                style={dayStyle(a)} key={i} onClick={() => {checkPersonnelSelect(a)}}>
                                 {a[0]}
                             </li>
                         )
