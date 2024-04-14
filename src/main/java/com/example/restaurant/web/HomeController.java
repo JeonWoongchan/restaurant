@@ -1,6 +1,7 @@
 package com.example.restaurant.web;
 
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,14 +21,20 @@ import java.util.Map;
 public class HomeController   {
 
 
-    @GetMapping(value = {"", "/main", "/login/{value}" ,"/reservation" , "/payment" , "/about/{subMenu}" ,"/menu/{subMenu}" ,"/contact/{subMenu}", "/my-page/{subMenu}"})
+    @GetMapping(value = {"", "/admin/", "/main", "/login/{value}" ,"/reservation" , "/payment" , "/about/{subMenu}" ,"/menu/{subMenu}" ,"/contact/{subMenu}", "/my-page/{subMenu}"})
     public String forward() {
         return "forward:/index.html";
     }
 
-    @GetMapping("/menu/{subMenu}")
-    public String menuPage(@PathVariable String subMenu) {
-        return "forward:/index.html";
+
+
+    @PostMapping("/logout")
+    public String logout(HttpSession session) {
+      String email = (String) session.getAttribute("email");
+        if (email != null) {
+            session.invalidate();
+        }
+        return "redirect:/user/logIn";
     }
 
 }

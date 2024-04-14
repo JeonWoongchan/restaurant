@@ -1,7 +1,7 @@
 package com.example.restaurant.web;
 
 import com.example.restaurant.dto.CustomerDto;
-import com.example.restaurant.dto.ReserveAndGusetDTO;
+import com.example.restaurant.dto.ReserveAndGuestDTO;
 
 import com.example.restaurant.repository.CustomerRepository;
 import com.example.restaurant.service.CustomerService;
@@ -39,7 +39,7 @@ public class ReserveController {
 
 
   @PostMapping("/payment")
-  public ResponseEntity<HashMap<String,Integer>> addreserveController(HttpSession session, @RequestBody ReserveAndGusetDTO dto) {
-    return ResponseEntity.ok(reserveService.addreserve(session, dto));
+  public ResponseEntity<HashMap<String,Integer>> addreserveController(HttpSession session, @RequestBody ReserveAndGuestDTO dto) {
+    return ResponseEntity.ok(reserveService.addReserve(session, dto));
   }
 }

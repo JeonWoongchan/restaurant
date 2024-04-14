@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.restaurant.repository.mybatis.GreserveMapper">
+    <select id="getcount" resultType="Integer">
+        <![CDATA[
+        SELECT SUM(cnt) AS total_cnt
+        FROM (
+                 SELECT SUM(adults_count + children_count + infants_count) AS cnt
+                 FROM greserve
+                 WHERE reserve_date >= #{reserveDate}
+                   AND reserve_date <= DATE_ADD(#{reserveDate}, INTERVAL '59:59' MINUTE_SECOND)
+
+                 UNION ALL
+
+                 SELECT SUM(adults_count + children_count + infants_count) AS cnt
+                 FROM reserve
+                 WHERE reserve_date >= #{reserveDate}
+                   AND reserve_date <= DATE_ADD(#{reserveDate}, INTERVAL '59:59' MINUTE_SECOND)
+             ) AS combined_data
+        ]]>
+
+    </select>
+
+
+    <select id="selectTotalCountByHour" resultType="Map">
+        SELECT
+            reserve_date,
+            SUM(total_count) AS total_count
+        FROM (
+                 SELECT
+                     DATE_FORMAT(reserve_date, '%Y-%m-%d %H:00:00') AS reserve_date,
+                     SUM(adults_count + children_count + infants_count) AS total_count
+                 FROM greserve
+                 WHERE reserve_date BETWEEN #{reserve_date} AND DATE_ADD(#{reserve_date}, INTERVAL 1 DAY) - INTERVAL '1' SECOND
+                 GROUP BY reserve_date
+
+                 UNION ALL
+
+                 SELECT
+                     DATE_FORMAT(reserve_date, '%Y-%m-%d %H:00:00') AS reserve_date,
+                     SUM(adults_count + children_count + infants_count) AS total_count
+                 FROM reserve
+                 WHERE reserve_date BETWEEN #{reserve_date} AND DATE_ADD(#{reserve_date}, INTERVAL 1 DAY) - INTERVAL '1' SECOND
+
+                 GROUP BY reserve_date
+             ) AS combined_data
+        GROUP BY reserve_date
+        ORDER BY reserve_date
+    </select>
+
+
+
+</mapper>
+
+
+
