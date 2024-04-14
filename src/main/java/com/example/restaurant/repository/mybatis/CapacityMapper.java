@@ -7,4 +7,6 @@ public interface CapacityMapper {
 
 
   int updateCapacities(List<Map<String, Object>> capacities);
+
+  List<Map<String,Object>> selectcapalist();
 }

@@ -12,4 +12,6 @@ public interface GreserveMapper {
 
    public List<HashMap<String,Object>> selectTotalCountByHour(String reserve_date);
 
+
+
 }

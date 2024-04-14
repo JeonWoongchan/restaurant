@@ -15,6 +15,12 @@
         </foreach>
     </update>
 
+    <select id="selectcapalist" resultType="Map">
 
+        select hour_time,capacity from
+        capacity;
+
+
+    </select>
 
 </mapper>
