@@ -29,7 +29,7 @@
             SUM(total_count) AS total_count
         FROM (
                  SELECT
-                     DATE_FORMAT(reserve_date, '%Y-%m-%d %H:00:00') AS reserve_date,
+                     DATE_FORMAT(reserve_date, '%H:00:00') AS reserve_date,
                      SUM(adults_count + children_count + infants_count) AS total_count
                  FROM greserve
                  WHERE reserve_date BETWEEN #{reserve_date} AND DATE_ADD(#{reserve_date}, INTERVAL 1 DAY) - INTERVAL '1' SECOND
@@ -38,7 +38,7 @@
                  UNION ALL
 
                  SELECT
-                     DATE_FORMAT(reserve_date, '%Y-%m-%d %H:00:00') AS reserve_date,
+                     DATE_FORMAT(reserve_date, ' %H:00:00') AS reserve_date,
                      SUM(adults_count + children_count + infants_count) AS total_count
                  FROM reserve
                  WHERE reserve_date BETWEEN #{reserve_date} AND DATE_ADD(#{reserve_date}, INTERVAL 1 DAY) - INTERVAL '1' SECOND

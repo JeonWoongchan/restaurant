@@ -1,34 +1,31 @@
-package com.example.restaurant.repository.mybatis;
+package com.example.restaurant.service;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-
+import com.example.restaurant.repository.mybatis.CapacityMapper;
+import com.example.restaurant.repository.mybatis.GreserveMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
-class GreserveMapperTest {
-
-  @Autowired
-  private GreserveMapper greserveMapper;
+@Service
+public class CapacityService {
 
   @Autowired
   private CapacityMapper capacityMapper;
 
-  @Test
-  public void Test() {
-    List<Map<String, Object>> capacityList = capacityMapper.selectcapalist();
-    List<HashMap<String, Object>> totalCountList = greserveMapper.selectTotalCountByHour("2024-04-03");
+  @Autowired
+  private GreserveMapper greserveMapper;
 
-    // 용량 정보를 키로 하는 맵 생성
+  public Map<String, Integer> getAvailableSlots(String date) {
+    // capacity 데이터 가져오기
+    List<Map<String, Object>> capacityList = capacityMapper.selectcapalist();
+    // totalCount 데이터 가져오기
+    List<HashMap<String, Object>> totalCountList = greserveMapper.selectTotalCountByHour(date);
+
+    // 시간대를 키로 하는 capacity 맵 생성
     Map<String, Integer> capacityMap = new HashMap<>();
     for (Map<String, Object> data : capacityList) {
       String hourTime = data.get("hour_time").toString(); // hour_time을 문자열로 변환
@@ -36,14 +33,14 @@ class GreserveMapperTest {
       capacityMap.put(hourTime, capacity);
     }
 
-    // 예약 가능 여부 확인
+    // 예약 가능한 시간대와 잔여 용량 계산
     Map<String, Integer> availableSlots = new HashMap<>();
     for (Map<String, Object> data : totalCountList) {
       String reserveDateTime = data.get("reserve_date").toString(); // reserve_date를 문자열로 변환
       BigDecimal totalCount = (BigDecimal) data.get("total_count");
       int reservedCount = totalCount.intValue(); // 총 예약 수를 정수로 변환
 
-      // 시간대를 기반으로 용량을 확인
+      // 시간대를 기반으로 용량 확인
       if (capacityMap.containsKey(reserveDateTime)) {
         int capacity = capacityMap.get(reserveDateTime);
         int remainingCapacity = capacity - reservedCount;
@@ -55,10 +52,6 @@ class GreserveMapperTest {
       }
     }
 
-    // 예약 가능한 시간대와 잔여 용량 출력
-    for (Map.Entry<String, Integer> entry : availableSlots.entrySet()) {
-      System.out.println("Time: " + entry.getKey() + ", Remaining capacity: " + entry.getValue());
-    }
+    return availableSlots;
   }
 }
-

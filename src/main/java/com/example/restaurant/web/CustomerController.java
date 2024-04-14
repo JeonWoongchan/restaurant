@@ -26,7 +26,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CustomerController {
 
-    @Autowired  CustomerRepository customerRepository;
+
 
     @Autowired private final CustomerService customerService;
 
