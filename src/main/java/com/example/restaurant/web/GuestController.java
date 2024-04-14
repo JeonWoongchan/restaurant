@@ -37,13 +37,17 @@ public class GuestController {
   private ReserveService reserveService;
 
 
+  //비회원 예약 조회
   @PostMapping("/reservGuest")
-  public ResponseEntity<List<GReserveDTO>>getGuestsByGuestId(@RequestBody Guest guest) {
+  public ResponseEntity<Page<GReserveDTO>>getGuestsByGuestId(@RequestBody Guest guest,@RequestParam(defaultValue = "0") int page,
+                                                             @RequestParam(defaultValue = "10") int size) {
     String phone = guest.getPhone();
-    List<GReserveDTO> selectinfo = guestService.selectinfo(phone);
+    Page<GReserveDTO> selectinfo = guestService.selectinfo(phone,page,size);
     return new ResponseEntity<>(selectinfo, HttpStatus.OK);
   }
 
+
+  //예약 조회
   @PostMapping("/reserve")
   public ResponseEntity<List<ReserveDTO>> reserveController(HttpSession session) {
 

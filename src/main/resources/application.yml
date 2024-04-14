@@ -1,3 +1,12 @@
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml
+
+  type-aliases-package: com.example.restaurant.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+
 server:
   port: 8080
 
@@ -55,3 +64,7 @@ jwt:
   secretKey: secretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKey
   accessTokenExpirationMinutes: 860000
   refreshTokenExpirationMinutes: 1600000
+
+
+
+

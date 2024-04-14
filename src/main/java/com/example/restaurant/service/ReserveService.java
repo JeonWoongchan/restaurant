@@ -241,7 +241,7 @@ public class ReserveService {
     HashMap<String, Integer> capacity = new HashMap<String, Integer>();
 
     // 시간별 인원 추가
-    String[] hours = {"11", "12", "13", "14", "15", "16", "17", "18", "19", "20"};
+    String[] hours = {"11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"};
     Integer[] capacities = {20, 30, 50, 40, 25, 75, 35, 32, 40, 40};
 
     // 시간별 인원 일괄 추가
