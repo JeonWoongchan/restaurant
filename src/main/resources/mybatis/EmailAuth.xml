@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.restaurant.repository.mybatis.AuthMapper">
+    <insert id="insert">
+        INSERT into emailverity (email,auth)
+        values (#{email}, #{auth})
+
+    </insert>
+
+
+
+    <delete id="deleteExpiredAuthCodes">
+        delete from emailverity        
+
+
+    </delete>
+</mapper>

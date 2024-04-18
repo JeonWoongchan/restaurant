@@ -8,15 +8,18 @@ import { setReservTimeList } from '../store/reservStore';
 export default function GetReserveTime() {
     const navigate = useNavigate()
 
+
     const getReservTimeHandler = (date) => {
         const personnel = JSON.parse(localStorage.getItem('personnel'))
-
+        console.log(date);
         axios
             .post("http://localhost:8080/reservation/time", {
-                requestData : {
+
                     total_count: personnel.adult + personnel.child + personnel.baby,
-                    date : date 
-                }
+                    reserve_date : date
+
+
+
             })
             .then((res) => {
                 console.log(res.data)

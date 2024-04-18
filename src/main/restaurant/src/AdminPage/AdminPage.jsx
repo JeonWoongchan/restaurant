@@ -4,6 +4,7 @@ import AdminUser from './AdminUser'
 import AdminReserv from './AdminReserv'
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
+
 export default function AdminPage() {
     const location = useLocation();
     const subMenu = location.pathname.split('/').pop();
