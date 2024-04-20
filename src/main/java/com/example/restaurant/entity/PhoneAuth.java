@@ -9,13 +9,13 @@ import lombok.Setter;
 @Table(name = "Emailverity")
 @Getter
 @Setter
-public class PhoneVerity {
+public class PhoneAuth {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   @Column(nullable = false)
-  private String email;
+  private String phone;
 
   @Column(nullable = false)
   private String auth;

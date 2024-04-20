@@ -6,10 +6,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Emailverity")
+@Table(name = "EmailAuth")
 @Getter
 @Setter
-public class Emailverity {
+public class EmailAuth {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,6 +4,7 @@ import com.example.restaurant.dto.CustomerDto;
 import com.example.restaurant.dto.RequestDataDTO;
 import com.example.restaurant.dto.ReserveAndGuestDTO;
 
+import com.example.restaurant.entity.Reserve;
 import com.example.restaurant.repository.CustomerRepository;
 import com.example.restaurant.service.CapacityService;
 import com.example.restaurant.service.CustomerService;
@@ -50,7 +51,12 @@ public class ReserveController {
   }
 
   @PostMapping("/time")
-  public ResponseEntity<Map<String,Integer>> selectreserve(HttpSession session, @RequestBody RequestDataDTO requestData) {
+  public ResponseEntity<Map<String,Object>> selectreserve(HttpSession session, @RequestBody RequestDataDTO requestData) {
     return ResponseEntity.ok(capacityService.getAvailableSlots(requestData));
+  }
+
+  @PostMapping("/delete_reserve")
+  public ResponseEntity<Map<String,Object>> deleteReserve(HttpSession session, @RequestBody Reserve reserve) {
+    return ResponseEntity.ok(reserveService.deleteReserve(reserve.getReserve_id()));
   }
 }

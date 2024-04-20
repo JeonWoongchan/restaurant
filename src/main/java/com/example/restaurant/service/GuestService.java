@@ -30,7 +30,7 @@ public class GuestService {
 
   public Page<GReserveDTO>  selectinfo(String phone,@RequestParam(defaultValue = "0") int page,
                                        @RequestParam(defaultValue = "10") int size) {
-    Optional <Guest> guestOptional = guestRepository.findByID(phone);
+    Optional<Guest> guestOptional = guestRepository.findByID(phone);
 
     if (guestOptional.isPresent()) {
 
@@ -46,8 +46,27 @@ public class GuestService {
     } else {
       return null;
     }
-
-
-
   }
+
+    public List<GReserveDTO> selectinfos(String phone) {
+      Optional <Guest> guestOptional = guestRepository.findByID(phone);
+
+      if (guestOptional.isPresent()) {
+
+        Long id = guestOptional.get().getGuest_id();
+
+
+
+
+        List<GReserveDTO> guests = greserveRepository.info(id);
+
+        return guests;
+
+      } else {
+        return null;
+      }
+
+
+
+    }
 }

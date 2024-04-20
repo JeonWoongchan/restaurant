@@ -16,7 +16,7 @@ export default function LoginModal(props) {
     console.log(props.type);
     try {
       // 요청할 URL을 인증 타입에 따라 다르게 설정합니다.
-      const url = props.type === '이메일' ? '/login/verify-check-email' : '/login/verify-check-phone';
+      const url = props.type === '이메일' ? '/auth/verify-check-email' : '/auth/verify-check-phone';
 
       // 요청에 사용할 데이터 (email 또는 phone 및 입력된 인증번호)
       const requestData = {

@@ -29,7 +29,7 @@ public class RestaurantApplication {
 	@Bean
 	public CommandLineRunner smsRunner(SmsService smsService) {
 		return args -> {
-//			smsService.message("010893294818");
+//			smsService.send_message("01022222222");
 		};
 	}
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.restaurant.repository.mybatis.AdminMapper">
+    <!-- 회원 조회 페이징   -->
+    <select id="selectuserpaging" resultType="com.example.restaurant.dto.CustomerDTO2">
+
+
+                <!-- 전체 결과를 가져오는 쿼리 -->
+                SELECT customer_id as id, email, password, phone, point, username
+                FROM customer
+                ORDER BY customer_id ASC
+                LIMIT  #{start_num}, #{record_per_page}
+
+
+    </select>
+    <!--   총 인원 체크 -->
+    <select id="listSearchCount" resultType="int">
+
+            <!-- 전체 결과를 카운트하는 쿼리 -->
+            SELECT count(*) as cnt
+            FROM customer
+
+
+    </select>
+
+</mapper>

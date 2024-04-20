@@ -4,18 +4,43 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.HashMap;
 
-public interface EmailAuthMapper {
+public interface PhoneAuthMapper {
 
-  int insert(@Param("email") String email,   @Param("auth") String auth);
+  /**
+   *  인증 번호 생성 메서드
+   * @param phone 폰 번호
+   * @param auth  인증번호
+   * @return
+   */
+  int insertPhoneAuth(@Param("phone") String phone,   @Param("auth") String auth);
+  /**
+   *  인증 번호 만료 메서드
+   * @param phone 폰 번호
+   * @param auth  인증번호
+   * @return
+   */
+  int deleteExpiredAuthCodes(@Param("phone") String phone, @Param("auth") String auth);
 
-  int deleteExpiredAuthCodes(@Param("email") String email, @Param("auth") String auth);
+  /**
+   * 폰 인증 번호 개수 출력 메서드
+   * @param phone
+   * @return
+   */
+  int phonecount(@Param("phone") String phone);
+
+  /**
+   *  폰 번호 지우는 메서드
+   * @param phone
+   * @return
+   */
+  int deleteauth(@Param("phone") String phone);
 
 
-  int emailcount(@Param("email") String email);
-
-
-  int deleteauth(@Param("email") String email);
-
+  /**
+   * 인증 로직 메소드
+   * @param map 폰 번호  , 인증 번호 맵
+   * @return
+   */
   int findAuthCodeByEmail(HashMap<String,Object> map);
 
 

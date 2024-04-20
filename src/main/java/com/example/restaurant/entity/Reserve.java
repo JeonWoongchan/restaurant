@@ -31,6 +31,8 @@ public class Reserve {
   private int infants_count;
   private String comment;
 
+
+
   public Reserve(Customer customer, String reg_date, String reserve_date, String end_date, String comment) {
     this.customer = customer;
     this.reg_date = reg_date;

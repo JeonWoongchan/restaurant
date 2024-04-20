@@ -7,7 +7,7 @@ import com.example.restaurant.entity.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.*;
 
 import com.example.restaurant.repository.CustomerRepository;
 import com.example.restaurant.repository.GreserveRepository;
@@ -20,15 +20,12 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDateTime;
-
-import java.util.HashMap;
-
-import java.util.Objects;
-import java.util.Optional;
 
 
 @Slf4j
@@ -61,7 +58,7 @@ public class ReserveService {
     Optional<Customer> optionalCustomer = customerService.findByIdMembmer(session);
     if (optionalCustomer.isPresent()) {
       if (isReservationAvailable(optionalCustomer.get())) {
-        return  processCustomerReservation(dto, optionalCustomer.get());
+        return processCustomerReservation(dto, optionalCustomer.get());
 
       } else {
         save.put("status", -1);
@@ -74,7 +71,7 @@ public class ReserveService {
 
   private boolean isReservationAvailable(Customer customer) {
     LocalDate timenow = ReservationUtils.convertToDatetime(ReservationUtils.formatDate(LocalDateTime.now()));
-    List<ReserveDTO> reserveDTOS = reserveRepository.selectReserve(customer.getId());
+    List<ReserveDTO> reserveDTOS = reserveRepository.selectReserve(customer.getCustomer_id());
     for (ReserveDTO reserveDTO : reserveDTOS) {
       LocalDate enddate = ReservationUtils.convertToDatetime(reserveDTO.getEnd_date());
       if (timenow.isBefore(enddate)) {
@@ -86,8 +83,8 @@ public class ReserveService {
 
 
   // 회원 예약 설정
-  private HashMap <String,Integer> processCustomerReservation(ReserveAndGuestDTO dto, Customer customer) {
-    HashMap <String,Integer> save = new HashMap<String,Integer>();
+  private HashMap<String, Integer> processCustomerReservation(ReserveAndGuestDTO dto, Customer customer) {
+    HashMap<String, Integer> save = new HashMap<String, Integer>();
     dto.getReserve().setCustomer(customer);
     if (prepareReserveDetails(dto.getReserve())) {
       reserveRepository.save(dto.getReserve());
@@ -95,7 +92,7 @@ public class ReserveService {
     } else {
       save.put("status", -11);
     }
-    return  save;
+    return save;
   }
 
   // db  id 랜덤 생성 중복 방지
@@ -161,68 +158,111 @@ public class ReserveService {
   private Boolean prepareReserveDetails(Reserve reserve) {
     String reserve_date = ReservationUtils.addLeadingZeroIfNeeded(reserve.getReserve_date());
     Integer getcount = greserveMapper.getcount(reserve_date);
-    String  extractingTime = ReservationUtils.extractTimeFromString(reserve_date);
-    HashMap<String,Integer> capacity = capacityGreserve();
 
-    Integer capacityValue = capacity.get(extractingTime);
 
-    Integer nowcount = reserve.getAdults_count() + reserve.getChildren_count() + reserve.getInfants_count() ;
+    reserve.setReserve_date(reserve_date);
+    reserve.setReg_date(ReservationUtils.formatDateTime(LocalDateTime.now()));
+    reserve.setEnd_date(ReservationUtils.calculateEndDateTime(reserve.getReserve_date()));
+    return true;
 
-    if ( capacityValue <  nowcount + getcount ) {
-      return false;
-    } else {
-      reserve.setReserve_date(reserve_date);
-      reserve.setReg_date(ReservationUtils.formatDateTime(LocalDateTime.now()));
-      reserve.setEnd_date(ReservationUtils.calculateEndDateTime(reserve.getReserve_date()));
-      return true;
-    }
 
   }
 
   private Boolean prepareGReserveTimeDetails(GReserve gReserve) {
     String reserve_date = ReservationUtils.addLeadingZeroIfNeeded(gReserve.getReserve_date());
 
-    Integer getcount = greserveMapper.getcount(reserve_date);
-    String  extractingTime = ReservationUtils.extractTimeFromString(reserve_date);
-    HashMap<String,Integer> capacity = capacityGreserve();
 
-    Integer capacityValue = capacity.get(extractingTime);
+    gReserve.setReserve_date(reserve_date);
 
-    Integer nowcount = gReserve.getAdults_count() + gReserve.getChildren_count() + gReserve.getInfants_count() ;
+    System.out.println(ReservationUtils.formatDateTime(LocalDateTime.now()));
+    gReserve.setReg_date(ReservationUtils.formatDateTime(LocalDateTime.now()));
+    gReserve.setEnd_date(ReservationUtils.calculateEndDateTime(gReserve.getReserve_date()));
+    return true;
 
-    if ( capacityValue <  nowcount + getcount ) {
-      return false;
-    } else {
-      gReserve.setReserve_date(reserve_date);
-
-      System.out.println(ReservationUtils.formatDateTime(LocalDateTime.now()));
-      gReserve.setReg_date(ReservationUtils.formatDateTime(LocalDateTime.now()));
-      gReserve.setEnd_date(ReservationUtils.calculateEndDateTime(gReserve.getReserve_date()));
-      return true;
-    }
 
   }
 
-  public List<ReserveDTO> selectReserve(HttpSession session) {
+  public ResponseEntity<Map<String,Object>> selectReserve(HttpSession session, Long reserve_id) {
+    // 세션에서 사용자의 ID를 찾습니다.
 
+    Optional<Customer> customerOptional = customerService.findByIdMembmer(session);
+    Map<String, Object> response = new HashMap<>();
+    // 고객 정보가 존재하는지 확인합니다.
+    if (customerOptional.isPresent()) {
+      Long customerId = customerOptional.get().getCustomer_id();
 
+      // 예약 정보를 찾습니다.
+      Optional<ReserveDTO> reserveDTOOptional = reserveRepository.selectReserveandreserveid(customerId, reserve_id);
+
+      // 예약 정보가 존재하면 해당 정보를 반환합니다.
+      if (reserveDTOOptional.isPresent()) {
+        response.put("status", 1);
+        response.put("reserveDTO", reserveDTOOptional.get());
+
+        return ResponseEntity.ok(response);
+      } else {
+        // 예약 정보가 존재하지 않는 경우: 상태 코드 -1을 포함한 응답 본문을 반환합니다.
+
+        response.put("status", -1);
+        return ResponseEntity.ok(response);
+      }
+    } else {
+      // 고객 정보가 존재하지 않는 경우: 상태 코드 -2를 포함한 응답 본문을 반환합니다.
+
+      response.put("status", -2);
+      return ResponseEntity.ok(response);
+    }
+  }
+
+  public ResponseEntity<Map<String, Object>> selectLongListReserve(HttpSession session) {
+    // 응답 맵 객체를 생성합니다.
+    Map<String, Object> response = new HashMap<>();
+
+    // id를 가져옵니다.
     Optional<Customer> id = customerService.findByIdMembmer(session);
 
-
     if (id.isPresent()) {
-      return reserveRepository.selectReserve(id.get().getId());
+      // customer_id를 가져옵니다.
+      Long customerId = id.get().getCustomer_id();
+
+      // reserveIds 리스트를 가져옵니다.
+      List<Long> reserveIds = reserveRepository.SelectreserveId(customerId);
+
+      // reserveIds 리스트가 비어있는지 확인합니다.
+      if (reserveIds.isEmpty()) {
+        // reserveIds 리스트가 비어있다면 "stat" : -2를 반환합니다.
+        response.put("status", -2);
+      } else {
+        // reserveIds 리스트가 비어있지 않다면 각 요소를 맵에 추가합니다.
+        List<Long> reserveIdList = new ArrayList<>();
+        for (Long reserveId : reserveIds) {
+          reserveIdList.add(reserveId);
+        }
+        // reserve_id 배열을 response에 추가합니다.
+        response.put("reserve_id", reserveIdList);
+        // reserveIds 리스트의 크기를 "size"로 추가합니다.
+
+        // "status"를 1로 반환합니다.
+
+        response.put("size", reserveIds.size());
+        response.put("status", 1);
+      }
     } else {
-      return null;
+      // id가 존재하지 않는 경우 "stat" : -1을 반환합니다.
+      response.put("status", -1);
     }
 
+    // 생성된 응답 맵을 HTTP 상태 코드와 함께 반환합니다.
+    return new ResponseEntity<>(response, HttpStatus.OK);
   }
+
   public List<ReserveDTO> selectrinfo(HttpSession session) {
 
 
     Optional<Customer> customerOptional = customerService.selectMember2(session);
 
     if (customerOptional.isPresent()) {
-      Long id = customerOptional.get().getId();
+      Long id = customerOptional.get().getCustomer_id();
 
       List<ReserveDTO> customerPage = reserveRepository.selectReserve(id);
       return customerPage;
@@ -232,23 +272,28 @@ public class ReserveService {
   }
 
 
+  public HashMap<String, Object> deleteReserve(Long reserve_id) {
+    HashMap<String, Object> stat = new HashMap<String, Object>();
+    System.out.println("reserve_id->" + reserve_id);
+    Optional<Integer> selectdelete = reserveRepository.selectdelete(reserve_id);
 
 
+    if (selectdelete.isPresent()) {
+      int deleteisreserveid = reserveRepository.deleteisreserveid(reserve_id);
+
+      if (deleteisreserveid >= 1) {
+        System.out.println(deleteisreserveid);
+        stat.put("success", 1);
+      } else {
+        stat.put("success", 2);
+      }
 
 
-  public  HashMap<String,Integer> capacityGreserve() {
-
-    HashMap<String, Integer> capacity = new HashMap<String, Integer>();
-
-    // 시간별 인원 추가
-    String[] hours = {"11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"};
-    Integer[] capacities = {20, 30, 50, 40, 25, 75, 35, 32, 40, 40};
-
-    // 시간별 인원 일괄 추가
-    for (int i = 0; i < hours.length; i++) {
-      capacity.put(hours[i], capacities[i]);
+    } else {
+      stat.put("success", -1);
     }
-    return  capacity;
+
+    return stat;
   }
 
 

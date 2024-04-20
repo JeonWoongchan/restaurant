@@ -1,5 +1,6 @@
 package com.example.restaurant.repository.mybatis;
 
+import com.example.restaurant.dto.RequestDataDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;

@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.restaurant.repository.mybatis.CapacityMapper">
+    <!-- 인원 관리    -->
     <update id="updateCapacities" parameterType="java.util.List">
         UPDATE capacity
         SET capacity = CASE id
@@ -14,7 +15,7 @@
             #{item.id}
         </foreach>
     </update>
-
+    <!--  인원 조회  -->
     <select id="selectcapalist" resultType="Map">
 
         select hour_time,capacity from

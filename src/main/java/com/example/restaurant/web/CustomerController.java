@@ -3,21 +3,24 @@ package com.example.restaurant.web;
 
 import com.example.restaurant.dto.CustomerDto;
 import com.example.restaurant.entity.Customer;
-import com.example.restaurant.repository.CustomerRepository;
 //import com.example.restaurant.service.CustomerService;
+import com.example.restaurant.entity.EmailAuth;
+import com.example.restaurant.entity.PhoneAuth;
 import com.example.restaurant.service.AuthService;
 import com.example.restaurant.service.CustomerService;
+import com.example.restaurant.service.EmailService;
+import com.example.restaurant.service.SmsService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @CrossOrigin(origins = "*")
 
@@ -32,6 +35,7 @@ public class CustomerController {
 
     @Autowired
     AuthService authService;
+
 
 
     // 로그인
@@ -64,6 +68,8 @@ public class CustomerController {
 
     }
 
+
+
     @PostMapping("/sign-up/duplicate")
     public ResponseEntity<Boolean> duplicate(@RequestBody CustomerDto dto) throws Exception {
 
@@ -73,14 +79,20 @@ public class CustomerController {
 
     @PostMapping("/login-check")
     public String myEndpoint(@RequestHeader("Authorization") String authorizationHeader,
-                             @RequestHeader("Content-Type") String contentTypeHeader) {
+                             @RequestHeader("Content-Type") String contentTypeHeader, HttpSession session) {
         // 헤더 값에 따라 다른 작업을 수행할 수 있습니다.
-
+        String email = (String) session.getAttribute("email");
+        System.out.println(email);
         if(authorizationHeader.equals("Bearer null") || authorizationHeader.equals("Bearer undefined")){
             return "-1";
         }else{
-            return "Received Authorization header: " + authorizationHeader +
-                    ", Content-Type header: " + contentTypeHeader;
+            if (email != null) {
+                return "Received Authorization header: " + authorizationHeader +
+                  ", Content-Type header: " + contentTypeHeader;
+            } else  {
+                return "-1";
+            }
+
         }
 
     }
