@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!-- resultMap에서 카멜케이스 사용을 위한 설정 -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!-- 데이터베이스 연결 설정 등 다른 설정들 -->
+
+</configuration>

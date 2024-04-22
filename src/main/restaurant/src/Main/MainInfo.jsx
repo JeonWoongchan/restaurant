@@ -40,11 +40,11 @@ export default function MainInfo() {
                             <h5>운영시간</h5>
                             <div className="box">
                                 <p>Open ~ Close</p>
-                                <p>AM11:30 ~ PM9:30</p>
+                                <p>AM11:00 ~ PM10:00</p>
                             </div>
                             <div className="box">
                                 <p>Break Time</p>
-                                <p>PM3:30 ~ PM5:30</p>
+                                <p>PM3:30 ~ PM5:00</p>
                             </div>
                             <p>매주 월요일 휴무</p>
                         </div>

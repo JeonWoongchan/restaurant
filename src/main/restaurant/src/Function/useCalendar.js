@@ -29,15 +29,21 @@ export default function useCalendar() {
     const [dropDownMonth, setDropDownMonth] = useState()
 
     // 년, 월 선택 드롭다운 현재 선택 년, 월에 적용
-    const chaneSelectMonth = ()=>{
+    const changeSelectMonth = ()=>{
+        
+    }
+
+    // 년, 월 선택 드롭다운 현재 선택 년, 월에 적용
+    useEffect(()=>{
         if (dropDownMonth < currentMonth) { // 이전 달
             alert('예약 기간이 지난 날짜입니다.')
+            setDropDownMonth(currentMonth)
         }else{
             setSelectedYear(dropDownYear)
             setSelectedMonth(dropDownMonth)
             setDropDownOn(false)
         }
-    }
+    },[dropDownMonth])
 
 
     // 요일 한글표시에 사용
@@ -144,7 +150,7 @@ export default function useCalendar() {
 
             setSelectedDate(`${year}.${month}.${day} ${DOW}`)
         } else {
-            setSelectedDate([])
+            setSelectedDate('')
         }
     }, [nowClickDate])
 
@@ -164,7 +170,7 @@ export default function useCalendar() {
             return
         } else {
             if (nowClickDate === a) {
-                setNowClickDate([])
+                setNowClickDate('')
             } else {
                 setNowClickDate(a)
             }
@@ -187,7 +193,7 @@ export default function useCalendar() {
         dropDownMonth,
         setDropDownYear,
         setDropDownMonth,
-        chaneSelectMonth
+        changeSelectMonth
     }
 }
 

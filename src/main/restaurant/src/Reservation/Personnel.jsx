@@ -4,7 +4,6 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { useDispatch, useSelector } from 'react-redux';
 import useSelectBanner from '../Function/useSelectBanner'
-import { setPersonnelSlice } from '../store/reservStore';
 
 export default function Personnel() {
     const dispatch = useDispatch()

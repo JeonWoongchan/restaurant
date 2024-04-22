@@ -35,15 +35,8 @@ export default function AdminUser() {
 
   // 검색 처리 함수
   const searchHandler = () => {
-    const filters = {
-      id: (v) => v.id == searchWord,
-      email: (v) => v.email.includes(searchWord),
-      name: (v) => v.name.includes(searchWord),
-      phone: (v) => v.phone.includes(searchWord)
-    };
-
-    setTableData(tableData.filter(filters[searchFilter]));
     setCurrentPage(1); // 검색할 때 페이지를 1로 리셋
+    fetchData();
   };
 
   // 페이지 변경 처리 함수
@@ -70,32 +63,32 @@ export default function AdminUser() {
       </div>
       <table className="admin-user-list">
         <thead>
-          <tr className="admin-header">
-            <th>고객ID</th>
-            <th>이메일</th>
-            <th>비밀번호</th>
-            <th>이름</th>
-            <th>전화번호</th>
-            <th>포인트</th>
-          </tr>
+        <tr className="admin-header">
+          <th>고객ID</th>
+          <th>이메일</th>
+          <th>비밀번호</th>
+          <th>이름</th>
+          <th>전화번호</th>
+          <th>포인트</th>
+        </tr>
         </thead>
         <tbody>
-          {tableData.length > 0 ? (
-            tableData.map((a) => (
-              <tr className="admin-data" key={a.id}>
-                <td>{a.id}</td>
-                <td>{a.email}</td>
-                <td>{a.password}</td>
-                <td>{a.username}</td>
-                <td>{a.phone}</td>
-                <td>{a.point}</td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="6">데이터가 없습니다.</td>
+        {tableData.length > 0 ? (
+          tableData.map((user) => (
+            <tr className="admin-data" key={user.id}>
+              <td>{user.id}</td>
+              <td>{user.email}</td>
+              <td>{user.password}</td>
+              <td>{user.username}</td>
+              <td>{user.phone}</td>
+              <td>{user.point}</td>
             </tr>
-          )}
+          ))
+        ) : (
+          <tr>
+            <td colSpan="6">데이터가 없습니다.</td>
+          </tr>
+        )}
         </tbody>
       </table>
       <div className="pagination-container">

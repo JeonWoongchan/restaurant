@@ -25,9 +25,9 @@ CREATE TABLE IF NOT EXISTS Customer (
 CREATE TABLE IF NOT EXISTS reserve (
     reserve_id INT PRIMARY KEY auto_increment,
     customer_id INT,
-    reg_date DATE,
-    reserve_date DATE,
-    end_date DATE,
+    reg_date DATETIME,
+    reserve_date DATETIME,
+    end_date DATETIME,
     adults_count INT,
     children_count INT,
     infants_count INT,
@@ -46,9 +46,9 @@ CREATE TABLE IF NOT EXISTS Guest (
 CREATE TABLE IF NOT EXISTS GReserve (
     reserve_guest_id INT PRIMARY KEY auto_increment,
     guest_id INT,
-    reg_date DATE,
-    reserve_date DATE,
-    end_date DATE,
+    reg_date DATETIME,
+    reserve_date DATETIME,
+    end_date DATETIME,
     adults_count INT,
     children_count INT,
     infants_count INT,
@@ -56,6 +56,24 @@ CREATE TABLE IF NOT EXISTS GReserve (
     );
 -- 인원 분류 테이블
 
+CREATE TABLE IF NOT EXISTS  capacity (
+    id int not null primary key,
+    hour_time time not null,
+    capacity int not null
+);
+
+# INSERT INTO capacity (id, hour_time,capacity)
+# VALUES
+#     (1, '11:00',50),
+#     (2, '12:00',50),
+#     (3, '13:00',50),
+#     (4, '14:00',50),
+#     (5, '15:00',50),
+#     (6, '16:00',50),
+#     (7, '17:00',50),
+#     (8, '18:00',50),
+#     (9, '19:00',50),
+#     (10, '20:00',50);
 
 
 

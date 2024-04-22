@@ -1,9 +1,12 @@
 package com.example.restaurant.web;
 
 import com.example.restaurant.dto.CustomerDto;
-import com.example.restaurant.dto.ReserveAndGusetDTO;
+import com.example.restaurant.dto.RequestDataDTO;
+import com.example.restaurant.dto.ReserveAndGuestDTO;
 
+import com.example.restaurant.entity.Reserve;
 import com.example.restaurant.repository.CustomerRepository;
+import com.example.restaurant.service.CapacityService;
 import com.example.restaurant.service.CustomerService;
 import com.example.restaurant.service.ReserveService;
 import jakarta.servlet.http.HttpSession;
@@ -14,6 +17,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +35,9 @@ public class ReserveController {
   @Autowired
   ReserveService reserveService;
 
+  @Autowired
+  CapacityService capacityService;
+
   @PostMapping("/user-data")
   @ResponseBody
   public ResponseEntity<Optional<CustomerDto>> reserve(HttpSession session) {
@@ -39,7 +46,17 @@ public class ReserveController {
 
 
   @PostMapping("/payment")
-  public ResponseEntity<HashMap<String,Integer>> addreserveController(HttpSession session, @RequestBody ReserveAndGusetDTO dto) {
-    return ResponseEntity.ok(reserveService.addreserve(session, dto));
+  public ResponseEntity<HashMap<String,Integer>> addreserveController(HttpSession session, @RequestBody ReserveAndGuestDTO dto) {
+    return ResponseEntity.ok(reserveService.addReserve(session, dto));
+  }
+
+  @PostMapping("/time")
+  public ResponseEntity<Map<String,Object>> selectreserve(HttpSession session, @RequestBody RequestDataDTO requestData) {
+    return ResponseEntity.ok(capacityService.getAvailableSlots(requestData));
+  }
+
+  @PostMapping("/delete_reserve")
+  public ResponseEntity<Map<String,Object>> deleteReserve(HttpSession session, @RequestBody Reserve reserve) {
+    return ResponseEntity.ok(reserveService.deleteReserve(reserve.getReserve_id()));
   }
 }

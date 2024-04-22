@@ -48,11 +48,26 @@ const guestReservConfirm = createSlice({
 
 export const { setGuestReservConfirm } = guestReservConfirm.actions;
 
+// 날짜별 예약 가능 시간을 담은 배열
+const reservTimeList = createSlice({
+    name: 'reservTimeList',
+    initialState: ["11:00"],
+    reducers: {
+        setReservTimeList(state, action) {
+            return action.payload; 
+        }
+    }
+});
+
+export const { setReservTimeList } = reservTimeList.actions;
+
+
 const reservReducer = combineReducers({
     reservUserData: reservUserData.reducer,
     reservData: reservData.reducer,
     guestPhone: guestPhone.reducer,
     guestReservConfirm: guestReservConfirm.reducer,
+    reservTimeList: reservTimeList.reducer,
 });
 
 export default reservReducer;

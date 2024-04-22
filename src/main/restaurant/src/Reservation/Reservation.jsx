@@ -19,6 +19,7 @@ export default function Reservation() {
     // 예약 페이지 접속 시 로컬스토리지 초기화
     useEffect(()=>{
         if(isLogin){
+            
             getUserData() // 유저 데이터 요청
         }
 

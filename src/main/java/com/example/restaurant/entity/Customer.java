@@ -12,13 +12,13 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = { "id", "email", "password", "username", "phone", "point" })
+@ToString(of = { "customer_id", "email", "password", "username", "phone", "point" })
 public class Customer {
 
     @Column(name = "customer_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long customer_id;
 
     @Column(name = "email")
     private String email;
@@ -43,14 +43,7 @@ public class Customer {
         this.username = username;
     }
 
-    public Customer(String username, String password, String email, String phone, int point) {
 
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.phone = phone;
-        this.point = point;
-    }
 
     public Customer(String username, int point) {
         this.username = username;
@@ -66,7 +59,16 @@ public class Customer {
         this.point = point;
     }
 
-    public Customer(Long id) {
-        this.id = id;
+    public Customer(Long customer_id, String email, String password, String username, String phone, int point) {
+        this.customer_id = customer_id;
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.phone = phone;
+        this.point = point;
+    }
+
+    public Customer(Long customer_id) {
+        this.customer_id = customer_id;
     }
 }

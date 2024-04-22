@@ -36,10 +36,19 @@ public class CustomerService {
 
   // 회원 가입
   public Integer joinCustomer(Customer customer) throws Exception {
-    customerRepository.save(customer);
+    // 고객 객체를 저장합니다.
+
+
+    // `password`, `email`, `username` 속성 중 하나라도 `null`이면 `0` 반환
+    if (customer.getPassword() == null || customer.getEmail() == null || customer.getUsername() == null || customer.getPhone() == null) {
+      return 0;
+    } else if (customer.getPassword() != null && customer.getEmail() != null && customer.getUsername() != null && customer.getPhone() != null){
+      Customer save = customerRepository.save(customer);
+    }
+
+    // 모두 `null`이 아니라면 `1` 반환
     return 1;
   }
-
   // 중복 체크
   public boolean duplicateCustomer(String email) {
     Optional<CustomerDto> customer = customerRepository.findE(email);
@@ -73,6 +82,8 @@ public class CustomerService {
 
     log.put("status", Optional.of("1"));
     session.setAttribute("email", email);
+    String pritnemail = (String) session.getAttribute("email");
+    System.out.println(pritnemail);
     Optional<String> name = customerRepository.findByname(email);
     name.ifPresent(n -> log.put("name", name)); // 이름 추가
 
@@ -141,6 +152,7 @@ public class CustomerService {
       String email = authService.extractEmailFromToken(refreshToken);
       if (email != null) {
         // 새로운 액세스 토큰 발급
+        session.setMaxInactiveInterval(1800);
         return issueTokens(email, session);
       } else {
         log.put("status", Optional.of("-1"));
