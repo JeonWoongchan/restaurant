@@ -192,7 +192,7 @@ public class ReserveService {
       Long customerId = customerOptional.get().getCustomer_id();
 
       // 예약 정보를 찾습니다.
-      Optional<ReserveDTO> reserveDTOOptional = reserveRepository.selectReserveandreserveid(customerId, reserve_id);
+      Optional<ReserveDTO> reserveDTOOptional = reserveRepository.selectReserveandreserveid(customerId);
 
       // 예약 정보가 존재하면 해당 정보를 반환합니다.
       if (reserveDTOOptional.isPresent()) {

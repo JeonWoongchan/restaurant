@@ -16,7 +16,7 @@ export default function MyReserv() {
         if (!isLogin) {
             navigate('/my-page/reservGuest');
         } else {
-            confirmHandler(currentIndex);
+            confirmHandler();
         }
     }, []);
 

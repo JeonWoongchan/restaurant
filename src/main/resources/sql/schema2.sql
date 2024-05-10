@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS GReserve (
     children_count INT,
     infants_count INT,
     comment VARCHAR(4000)
+    FOREIGN KEY (guest_id) REFERENCES guest (guest_id)
     );
 -- 인원 분류 테이블
 

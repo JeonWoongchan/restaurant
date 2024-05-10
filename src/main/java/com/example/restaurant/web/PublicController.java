@@ -43,12 +43,7 @@ public class PublicController {
     return new ResponseEntity<>(selectinfo, HttpStatus.OK);
   }
 
-  @PostMapping("/reserve_id")
-  public ResponseEntity<Map<String,Object>> reserveIdListController(HttpSession session) {
-
-
-    return reserveService.selectLongListReserve(session);
-  }
+ 
   //예약 조회
   @PostMapping("/reserve")
   public  ResponseEntity<Map<String,Object>> reserveController(HttpSession session,@RequestBody ReserveDTO reserveDTO) {

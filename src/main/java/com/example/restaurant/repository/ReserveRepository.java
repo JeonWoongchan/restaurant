@@ -18,8 +18,8 @@ public interface ReserveRepository extends JpaRepository<Reserve,Long> {
    @Query("select new com.example.restaurant.dto.ReserveDTO(r.reserve_id, r.reg_date,r.reserve_date,r.end_date,r.adults_count,r.children_count,r.infants_count, customer.username, customer.phone)  FROM Reserve r INNER JOIN r.customer customer  WHERE customer.customer_id = :id")
    List<ReserveDTO> selectReserve(Long id);
 
-   @Query("select new com.example.restaurant.dto.ReserveDTO(r.reserve_id, r.reg_date,r.reserve_date,r.end_date,r.adults_count,r.children_count,r.infants_count, customer.username, customer.phone)  FROM Reserve r INNER JOIN r.customer customer  WHERE customer.customer_id = :id  AND r.reserve_id = :reserve_id")
-   Optional<ReserveDTO> selectReserveandreserveid(Long id,Long reserve_id);
+   @Query("select new com.example.restaurant.dto.ReserveDTO(r.reserve_id, r.reg_date,r.reserve_date,r.end_date,r.adults_count,r.children_count,r.infants_count, customer.username, customer.phone)  FROM Reserve r INNER JOIN r.customer customer  WHERE customer.customer_id = :id")
+   Optional<ReserveDTO> selectReserveandreserveid(Long id);
 
 
    @Query("select r.reserve_id  FROM Reserve r INNER JOIN r.customer customer  WHERE customer.customer_id = :id ")
