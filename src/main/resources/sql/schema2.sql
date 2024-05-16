@@ -52,7 +52,8 @@ CREATE TABLE IF NOT EXISTS GReserve (
     adults_count INT,
     children_count INT,
     infants_count INT,
-    comment VARCHAR(4000)
+    comment VARCHAR(400git rm src/main/resources/application.yml
+    0)
     FOREIGN KEY (guest_id) REFERENCES guest (guest_id)
     );
 -- 인원 분류 테이블
